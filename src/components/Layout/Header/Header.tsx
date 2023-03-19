@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom'
 import logo from 'src/assets/logo.svg'
-import SwitchThemeButton from '../SwitchThemeButton'
+import SwitchThemeButton from '../../SwitchThemeButton'
 
 export default function Header() {
   return (
-    <div className='shadow-md'>
+    <div className='hidden shadow-md md:block'>
       <header className='py-6'>
         <div className='container'>
           <div className='flex items-center justify-between'>
@@ -28,7 +28,7 @@ export default function Header() {
               Contact
             </Link>
             <Link className='nav-link-hover-effect mr-12 hover:text-primary-377DFF' to='/faq'>
-              FAQ
+              FAQs
             </Link>
           </div>
           <form>
