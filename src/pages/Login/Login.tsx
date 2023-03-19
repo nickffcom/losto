@@ -2,10 +2,10 @@ import { Link } from 'react-router-dom'
 
 export default function Login() {
   return (
-    <>
-      <h1 className='text-center text-5xl font-bold text-primary-377DFF'>Sign In</h1>
-      <p className='mt-2 mb-7 text-center text-sm font-medium text-gray-500'>Welcome back, you&apos;ve been missed!</p>
-      <div className='b-sd rounded-8 p-6 md:p-10'>
+    <div className='b-sd rounded-8 dark:bg-dark-secondary'>
+      <h1 className='mt-8 text-center text-5xl font-bold text-primary-377DFF dark:text-white'>Sign In</h1>
+      <p className='mt-2 text-center text-sm font-medium text-gray-500'>Welcome back, you&apos;ve been missed!</p>
+      <div className='p-6 md:p-10'>
         <div className='flex flex-col justify-between gap-5 md:flex-row'>
           <button className='flex h-12 items-center justify-center rounded-8 bg-gray-200 px-10 duration-200 hover:bg-gray-300'>
             <span className='text-gray text-base font-medium'>Log in with Google</span>
@@ -40,10 +40,10 @@ export default function Login() {
           </button>
         </form>
         <Link to='/register' className='mt-5 flex items-center justify-center text-base font-medium'>
-          <span className='text-gray'>You haven&apos;t any account?</span>
+          <span className='text-gray dark:text-gray-500'>You haven&apos;t any account?</span>
           <span className='ml-2 text-primary-377DFF hover:text-secondary-1D6AF9'>Sign Up</span>
         </Link>
       </div>
-    </>
+    </div>
   )
 }

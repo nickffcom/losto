@@ -4,6 +4,7 @@ const plugin = require('tailwindcss/plugin')
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   corePlugins: {
     container: false
@@ -15,7 +16,9 @@ module.exports = {
         'primary-38CB89': '#38CB89',
         'primary-1A162E': '#1A162E',
         'secondary-1D6AF9': '#1D6AF9',
-        'secondary-26B374': '#26B374'
+        'secondary-26B374': '#26B374',
+        'dark-primary': '#191C21',
+        'dark-secondary': '#212833'
       },
       backgroundColor: {
         FAFAFD: '#FAFAFD',
