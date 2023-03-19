@@ -14,17 +14,18 @@ export default function Login() {
             <span className='text-gray text-base font-medium'>Log in with Apple</span>
           </button>
         </div>
-        <div className='my-7 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-gray-300 after:mt-0.5 after:flex-1 after:border-t after:border-gray-300'>
+        <div className='my-3 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-gray-300 after:mt-0.5 after:flex-1 after:border-t after:border-gray-300'>
           <p className='mx-4 mb-0 text-center font-semibold'>Or</p>
         </div>
         <form>
-          <div className='relative my-2'>
-            <input type='email' className='h-12 w-full rounded-lg border px-10' placeholder='Input Email' />
+          <div className='relative'>
+            <input name='email' className='h-12 w-full rounded-lg border px-10' placeholder='Email' />
           </div>
-          <div className='relative my-5'>
-            <input className='h-12 w-full rounded-lg border px-10' placeholder='Input Password' />
+          <div className='min-h-[1rem]text-sm mt-3 text-red-600'> Email không hợp lệ</div>
+          <div className='relative mt-3'>
+            <input className='h-12 w-full rounded-lg border px-10' name='password' placeholder='Password' />
           </div>
-          <div className='flex flex-col items-center justify-between lg:flex-row'>
+          <div className='mt-3 flex flex-col items-center justify-between lg:flex-row'>
             <div className='flex cursor-pointer items-center gap-2'>
               <input type='checkbox' className='rounded-lg border ' />
               <p className='font-medium text-gray-500'>Remember me</p>
