@@ -3,7 +3,7 @@ import logo from 'src/assets/logo.svg'
 
 export default function Footer() {
   return (
-    <footer className='mt-20 bg-FAFAFD py-5 font-brave-ecom dark:bg-dark-primary'>
+    <footer className='mt-20 py-5 font-lotso-ecom'>
       <div className='container'>
         <div className='mb-2 flex items-center justify-center lg:mb-4'>
           <Link to='/'>

@@ -14,7 +14,7 @@ module.exports = {
       colors: {
         'primary-377DFF': '#377DFF',
         'primary-38CB89': '#38CB89',
-        'primary-1A162E': '#1A162E',
+        'primary-3B3A3C': '#3B3A3C',
         'secondary-1D6AF9': '#1D6AF9',
         'secondary-26B374': '#26B374',
         'dark-primary': '#191C21',
@@ -30,11 +30,12 @@ module.exports = {
         20: '20px',
         16: '16px',
         10: '10px',
-        8: '8px'
+        8: '8px',
+        4: '4px'
       }
     },
     fontFamily: {
-      'brave-ecom': 'Source Sans Pro, Arial, sans-serif'
+      'lotso-ecom': 'Montserrat, Arial, sans-serif'
     },
     screens: {
       xsm: '420px',

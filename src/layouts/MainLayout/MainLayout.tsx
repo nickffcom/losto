@@ -6,7 +6,7 @@ interface Props {
 }
 export default function MainLayout({ children }: Props) {
   return (
-    <div className='dark:bg-dark-primary'>
+    <div className='font-lotso-ecom text-primary-3B3A3C dark:bg-gradient-to-b dark:from-neutral-900 dark:via-zinc-800 dark:to-neutral-900 dark:text-white'>
       <Header />
       <div className='container mx-auto mt-7 flex flex-col items-center justify-center'>{children}</div>
       <Footer />

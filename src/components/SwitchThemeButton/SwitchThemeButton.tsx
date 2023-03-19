@@ -12,7 +12,7 @@ export default function SwitchThemeButton() {
 
   return (
     <>
-      <DarkModeSwitch checked={darkMode} onChange={toggleDarkMode} size={30} />
+      <DarkModeSwitch checked={darkMode} onChange={toggleDarkMode} size={30} color='white' />
     </>
   )
 }
