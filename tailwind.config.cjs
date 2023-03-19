@@ -11,17 +11,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'primary-F94545': '#F94545',
-        'primary-67B044': '#67B044',
-        'primary-0071DC': '#0071DC',
-        'primary-7644E1': '#7644E1',
-        'primary-FFB700': '#FFB700',
+        'primary-377DFF': '#377DFF',
+        'primary-38CB89': '#38CB89',
         'primary-1A162E': '#1A162E',
-        'secondary-77DAE6': '#77DAE6',
-        'secondary-9E9DA8': '#9E9DA8',
-        'secondary-D2D1D6': '#D2D1D6',
-        'secondary-EDEDF6': '#EDEDF6',
-        'secondary-F8F8FB': '#F8F8FB'
+        'secondary-1D6AF9': '#1D6AF9',
+        'secondary-26B374': '#26B374'
       },
       backgroundColor: {
         FAFAFD: '#FAFAFD',
@@ -59,7 +53,8 @@ module.exports = {
           paddingRight: theme('spacing.4')
         },
         '.b-sd': {
-          boxShadow: '0px 20px 60px 10px rgba(237, 237, 246, 0.2)'
+          boxShadow:
+            '0 11px 15px -7px rgb(0 0 0 / 20%), 0 24px 38px 3px rgb(0 0 0 / 14%), 0 9px 46px 8px rgb(0 0 0 / 12%)'
         },
         '.fs-30': {
           fontSize: '30px',

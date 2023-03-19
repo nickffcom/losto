@@ -1,3 +1,3 @@
 export default function Register() {
-  return <div className='Register'>Register Component</div>
+  return <div className='root'></div>
 }
