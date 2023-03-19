@@ -1,6 +1,15 @@
 import { Link } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
 
 export default function Login() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm()
+  const onSubmit = handleSubmit((data) => {
+    console.log(data)
+  })
   return (
     <div className='b-sd rounded-8 dark:bg-dark-secondary'>
       <h1 className='mt-8 text-center text-5xl font-bold text-primary-377DFF dark:text-white'>Sign In</h1>
@@ -17,13 +26,18 @@ export default function Login() {
         <div className='my-3 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-gray-300 after:mt-0.5 after:flex-1 after:border-t after:border-gray-300'>
           <p className='mx-4 mb-0 text-center font-semibold'>Or</p>
         </div>
-        <form>
+        <form onSubmit={onSubmit}>
           <div className='relative'>
             <input name='email' className='h-12 w-full rounded-lg border px-10' placeholder='Email' />
           </div>
           <div className='min-h-[1rem]text-sm mt-3 text-red-600'> Email không hợp lệ</div>
           <div className='relative mt-3'>
-            <input className='h-12 w-full rounded-lg border px-10' name='password' placeholder='Password' />
+            <input
+              className='h-12 w-full rounded-lg border px-10'
+              type='password'
+              name='password'
+              placeholder='Password'
+            />
           </div>
           <div className='mt-3 flex flex-col items-center justify-between lg:flex-row'>
             <div className='flex cursor-pointer items-center gap-2'>

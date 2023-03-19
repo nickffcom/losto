@@ -1,6 +1,22 @@
 import { Link } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
+import { rules } from 'src/components/utils/rules'
+
+interface FormData {
+  email: string
+  password: string
+  confirm_password: string
+}
 
 export default function Register() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<FormData>()
+  const onSubmit = handleSubmit((data) => {
+    console.log(data)
+  })
   return (
     <div className='b-sd rounded-8 dark:bg-dark-secondary'>
       <h1 className='mt-8 text-center text-5xl font-bold text-primary-377DFF dark:text-white'>Getting Started</h1>
@@ -17,24 +33,37 @@ export default function Register() {
         <div className='my-3 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-gray-300 after:mt-0.5 after:flex-1 after:border-t after:border-gray-300'>
           <p className='mx-4 mb-0 text-center font-semibold dark:text-white'>Or</p>
         </div>
-        <form>
+        <form onSubmit={onSubmit} noValidate>
           <div className='relative'>
-            <input name='email' className='h-12 w-full rounded-lg border px-10' placeholder='Email' />
-          </div>
-          <div className='min-h-[1rem]text-sm mt-3 text-red-600'> Email không hợp lệ</div>
-          <div className='relative mt-3'>
-            <input className='h-12 w-full rounded-lg border px-10' name='password' placeholder='Password' />
-          </div>
-          <div className='relative mt-3'>
             <input
               className='h-12 w-full rounded-lg border px-10'
-              name='confirm_password'
-              placeholder='Confirm Password'
+              placeholder='Email'
+              type='email'
+              {...register('email', rules.email)}
             />
           </div>
+          <div className='mt-1 min-h-[1.5rem] text-sm text-red-600 '>{errors.email?.message}</div>
+          <div className='relative'>
+            <input
+              className='h-12 w-full rounded-lg border px-10'
+              placeholder='Password'
+              type='password'
+              {...register('password', rules.password)}
+            />
+          </div>
+          <div className='mt-1 min-h-[1.5rem] text-sm text-red-600 '>{errors.password?.message}</div>
+          <div className='relative'>
+            <input
+              className='h-12 w-full rounded-lg border px-10'
+              type='password'
+              placeholder='Confirm Password'
+              {...register('confirm_password', rules.confirm_password)}
+            />
+          </div>
+          <div className='mt-1 min-h-[1.5rem] text-sm text-red-600 '>{errors.confirm_password?.message}</div>
           <button
             type='submit'
-            className='mt-5 h-12 w-full rounded-8 bg-primary-377DFF font-medium text-white duration-200 hover:bg-secondary-1D6AF9'
+            className='h-12 w-full rounded-8 bg-primary-377DFF font-medium text-white duration-200 hover:bg-secondary-1D6AF9'
           >
             Sign In
           </button>

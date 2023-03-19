@@ -41,3 +41,7 @@ body {
 .nav-link-hover-effect:hover::before {
   width: 100%;
 }
+
+input:focus {
+  outline: 1px solid #377DFF;
+}

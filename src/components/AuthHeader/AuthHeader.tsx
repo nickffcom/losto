@@ -3,7 +3,7 @@ import logo from 'src/assets/logo.svg'
 import SwitchThemeButton from '../SwitchThemeButton'
 export default function AuthHeader() {
   return (
-    <header className='py-6 text-primary-3B3A3C dark:text-white'>
+    <header className=' py-6'>
       <div className='container'>
         <div className='flex items-center justify-between'>
           <Link to='/'>
