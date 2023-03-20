@@ -77,7 +77,7 @@ input:focus {
   right: 0;
   transform: translate(-30%, 50%);
   background-image: radial-gradient(#4E5D78, #000000);
-  opacity: 0.9;
+  opacity: 0.97;
   z-index: 1000;
   transition: transform 0.5s cubic-bezier(0.86, 0, 0.07, 1);
 }
