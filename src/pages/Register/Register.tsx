@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { rules } from 'src/components/utils/rules'
+import { rules } from 'src/utils/rules'
 
 interface FormData {
   email: string

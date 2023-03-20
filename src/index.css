@@ -45,3 +45,129 @@ body {
 input:focus {
   outline: 1px solid #377DFF;
 }
+
+
+/* Hamburger menu */
+.nav-toggle-checkbox {
+  display: none;
+}
+
+.nav-toggle-button {
+  position: relative;
+  background-color: white;
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  transform: translate(-30%, 50%);
+  z-index: 2000;
+  box-shadow: 0 10px 24px -10px black;
+  text-align: center;
+  cursor: pointer;
+}
+
+.background {
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  transform: translate(-30%, 50%);
+  background-image: radial-gradient(#4E5D78, #000000);
+  opacity: 0.9;
+  z-index: 1000;
+  transition: transform 0.5s cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+.nav-toggle {
+  display: block;
+}
+
+@media screen and (min-width: 768px) {
+  .nav-toggle {
+    display: none;
+  }
+}
+
+.nav-list-mobile {
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: -20%;
+  z-index: 1500;
+  opacity: 0;
+  width: 0;
+  transition: all 0.5s;
+}
+
+/* functionality */
+.nav-toggle-checkbox:checked~.background {
+  transform: scale(125);
+}
+
+.nav-toggle-checkbox:checked~.nav-list-mobile {
+  opacity: 1;
+  width: 100%;
+  right: 0;
+}
+
+/*  */
+/* styling hamb ICON */
+.horizontal-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.horizontal-icon,
+.horizontal-icon::before,
+.horizontal-icon::after {
+  width: 1.5rem;
+  height: 2px;
+  background-color: gray;
+  display: inline-block;
+}
+
+.horizontal-icon::before,
+.horizontal-icon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  transition: all 0.2s;
+}
+
+.horizontal-icon::before {
+  top: -0.5rem;
+}
+
+.horizontal-icon::after {
+  top: 0.5rem;
+}
+
+.nav-toggle-button:hover icon:before {
+  top: -1rem;
+}
+
+.nav-toggle-button:hover icon::after {
+  top: 1rem;
+}
+
+.nav-toggle-checkbox:checked+.nav-toggle-button .icon {
+  background-color: transparent;
+}
+
+.nav-toggle-checkbox:checked+.nav-toggle-button .icon::before {
+  top: 0;
+  transform: rotate(135deg);
+}
+
+.nav-toggle-checkbox:checked+.nav-toggle-button .icon::after {
+  top: 0;
+  transform: rotate(-135deg);
+}
+
+/* End hambuger menu */
