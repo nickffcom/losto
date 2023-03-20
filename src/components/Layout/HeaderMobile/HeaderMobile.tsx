@@ -4,7 +4,6 @@ import logo from 'src/assets/logo.svg'
 import NavToggle from './NavToggle'
 
 export default function HeaderMobile() {
-  const [isOpen, setIsOpen] = useState(false)
   return (
     <div className='flex items-center justify-between py-4 md:hidden'>
       <Link to='/'>

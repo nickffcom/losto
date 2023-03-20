@@ -156,16 +156,16 @@ input:focus {
   top: 1rem;
 }
 
-.nav-toggle-checkbox:checked+.nav-toggle-button .icon {
+.nav-toggle-checkbox:checked+.nav-toggle-button .horizontal-icon {
   background-color: transparent;
 }
 
-.nav-toggle-checkbox:checked+.nav-toggle-button .icon::before {
+.nav-toggle-checkbox:checked+.nav-toggle-button .horizontal-icon::before {
   top: 0;
   transform: rotate(135deg);
 }
 
-.nav-toggle-checkbox:checked+.nav-toggle-button .icon::after {
+.nav-toggle-checkbox:checked+.nav-toggle-button .horizontal-icon::after {
   top: 0;
   transform: rotate(-135deg);
 }
