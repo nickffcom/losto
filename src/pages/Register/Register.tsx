@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { rules } from 'src/utils/rules'
+import { getRules } from 'src/utils/rules'
+import Input from 'src/components/Input'
 
 interface FormData {
   email: string
@@ -12,11 +13,19 @@ export default function Register() {
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors }
   } = useForm<FormData>()
-  const onSubmit = handleSubmit((data) => {
-    console.log(data)
-  })
+  const rules = getRules(getValues)
+  const onSubmit = handleSubmit(
+    (data) => {
+      // console.log(data)
+    },
+    (data) => {
+      const password = getValues('password')
+      // console.log(password)
+    }
+  )
   return (
     <div className='b-sd rounded-8 dark:bg-dark-secondary'>
       <h1 className='mt-8 text-center text-5xl font-bold text-primary-377DFF dark:text-white'>Getting Started</h1>
@@ -34,33 +43,35 @@ export default function Register() {
           <p className='mx-4 mb-0 text-center font-semibold dark:text-white'>Or</p>
         </div>
         <form onSubmit={onSubmit} noValidate>
-          <div className='relative'>
-            <input
-              className='h-12 w-full rounded-lg border px-10'
-              placeholder='Email'
-              type='email'
-              {...register('email', rules.email)}
-            />
-          </div>
-          <div className='mt-1 min-h-[1.5rem] text-sm text-red-600 '>{errors.email?.message}</div>
-          <div className='relative'>
-            <input
-              className='h-12 w-full rounded-lg border px-10'
-              placeholder='Password'
-              type='password'
-              {...register('password', rules.password)}
-            />
-          </div>
-          <div className='mt-1 min-h-[1.5rem] text-sm text-red-600 '>{errors.password?.message}</div>
-          <div className='relative'>
-            <input
-              className='h-12 w-full rounded-lg border px-10'
-              type='password'
-              placeholder='Confirm Password'
-              {...register('confirm_password', rules.confirm_password)}
-            />
-          </div>
-          <div className='mt-1 min-h-[1.5rem] text-sm text-red-600 '>{errors.confirm_password?.message}</div>
+          <Input
+            className='relative'
+            name='email'
+            type='email'
+            placeholder='Email'
+            register={register}
+            errorMessage={errors.email?.message}
+            rules={rules.email}
+          />
+          <Input
+            className='relative'
+            name='password'
+            type='password'
+            placeholder='Password'
+            register={register}
+            errorMessage={errors.password?.message}
+            rules={rules.password}
+            autoComplete='on'
+          />
+          <Input
+            className='relative'
+            name='confirm_password'
+            type='password'
+            placeholder='Confirm Password'
+            register={register}
+            errorMessage={errors.confirm_password?.message}
+            rules={rules.confirm_password}
+            autoComplete='on'
+          />
           <button
             type='submit'
             className='h-12 w-full rounded-8 bg-primary-377DFF font-medium text-white duration-200 hover:bg-secondary-1D6AF9'

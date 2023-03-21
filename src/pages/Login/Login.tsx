@@ -36,6 +36,7 @@ export default function Login() {
               className='h-12 w-full rounded-lg border px-10'
               type='password'
               name='password'
+              autoComplete='on'
               placeholder='Password'
             />
           </div>
