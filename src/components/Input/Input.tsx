@@ -18,7 +18,6 @@ export default function Input({
   className,
   name,
   register,
-  rules,
   autoComplete
 }: InputProps) {
   return (
@@ -28,7 +27,7 @@ export default function Input({
           className='h-12 w-full rounded-lg border px-10'
           placeholder={placeholder}
           type={type}
-          {...register(name, rules)}
+          {...register(name)}
           autoComplete={autoComplete}
         />
       </div>

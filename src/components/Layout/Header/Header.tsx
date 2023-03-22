@@ -11,7 +11,21 @@ export default function Header() {
             <Link to='/'>
               <img src={logo} alt='logo' />
             </Link>
-            <SwitchThemeButton />
+            <div className='flex items-center gap-5'>
+              <SwitchThemeButton />
+              <Link
+                to='/login'
+                className='hover:bg- fs-14 flex h-10 items-center justify-center rounded-4 bg-primary-377DFF px-5 text-white duration-200 hover:bg-secondary-1D6AF9'
+              >
+                <span>Login</span>
+              </Link>
+              <Link
+                to='/register'
+                className='hover:bg- fs-14 flex h-10 items-center justify-center rounded-4 bg-primary-377DFF px-5 text-white duration-200 hover:bg-secondary-1D6AF9'
+              >
+                <span>Register</span>
+              </Link>
+            </div>
           </div>
         </div>
       </header>
@@ -20,6 +34,9 @@ export default function Header() {
           <div className='fs-16 font-semibold dark:text-white'>
             <Link className='nav-link-hover-effect mr-12 hover:text-primary-377DFF' to='/' aria-current='page'>
               Home
+            </Link>
+            <Link className='nav-link-hover-effect mr-12 hover:text-primary-377DFF' to='/productlist'>
+              Shop
             </Link>
             <Link className='nav-link-hover-effect mr-12 hover:text-primary-377DFF' to='/about'>
               About

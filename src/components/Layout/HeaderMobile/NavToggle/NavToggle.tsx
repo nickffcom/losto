@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import SwitchThemeButton from 'src/components/SwitchThemeButton'
 
 export default function NavToggle() {
   return (
@@ -11,9 +10,6 @@ export default function NavToggle() {
       <div className='background'>&nbsp;</div>
       <nav className='nav-list-mobile'>
         <div className='mx-4'>
-          <div className='mt-7'>
-            <SwitchThemeButton />
-          </div>
           <ul className='mt-4 w-full list-none text-white'>
             <li className='my-3 text-2xl'>
               <Link to='/' className='nav-link-hover-effect duration-200'>

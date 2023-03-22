@@ -1,15 +1,53 @@
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import { useMutation } from '@tanstack/react-query'
+import { login } from 'src/apis/auth.api'
+import { Schema, schema } from 'src/utils/rules'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { omit } from 'lodash'
+import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
+import { ResponseApi } from 'src/types/utils.type'
+import Input from 'src/components/Input'
+
+type FormData = Omit<Schema, 'confirm_password'>
+
+const loginSchema = schema.omit(['confirm_password'])
 
 export default function Login() {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors }
-  } = useForm()
-  const onSubmit = handleSubmit((data) => {
-    console.log(data)
+  } = useForm<FormData>({
+    resolver: yupResolver(loginSchema)
   })
+
+  const loginMutation = useMutation({
+    mutationFn: (body: FormData) => login(body)
+  })
+
+  const onSubmit = handleSubmit((data) => {
+    loginMutation.mutate(data, {
+      onSuccess: (data) => {
+        // console.log(data)
+      },
+      onError: (error) => {
+        if (isAxiosUnprocessableEntityError<ResponseApi<FormData>>(error)) {
+          const formError = error.response?.data.data
+          if (formError) {
+            Object.keys(formError).forEach((key) => {
+              setError(key as keyof FormData, {
+                message: formError[key as keyof FormData],
+                type: 'Server'
+              })
+            })
+          }
+        }
+      }
+    })
+  })
+
   return (
     <div className='b-sd rounded-8 dark:bg-dark-secondary'>
       <h1 className='mt-8 text-center text-5xl font-bold text-primary-377DFF dark:text-white'>Sign In</h1>
@@ -26,20 +64,24 @@ export default function Login() {
         <div className='my-3 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-gray-300 after:mt-0.5 after:flex-1 after:border-t after:border-gray-300'>
           <p className='mx-4 mb-0 text-center font-semibold'>Or</p>
         </div>
-        <form onSubmit={onSubmit}>
-          <div className='relative'>
-            <input name='email' className='h-12 w-full rounded-lg border px-10' placeholder='Email' />
-          </div>
-          <div className='min-h-[1rem]text-sm mt-3 text-red-600'> Email không hợp lệ</div>
-          <div className='relative mt-3'>
-            <input
-              className='h-12 w-full rounded-lg border px-10'
-              type='password'
-              name='password'
-              autoComplete='on'
-              placeholder='Password'
-            />
-          </div>
+        <form onSubmit={onSubmit} noValidate>
+          <Input
+            className='relative'
+            name='email'
+            type='email'
+            placeholder='Email'
+            register={register}
+            errorMessage={errors.email?.message}
+          />
+          <Input
+            className='relative'
+            name='password'
+            type='password'
+            placeholder='Password'
+            register={register}
+            errorMessage={errors.password?.message}
+            autoComplete='on'
+          />
           <div className='mt-3 flex flex-col items-center justify-between lg:flex-row'>
             <div className='flex cursor-pointer items-center gap-2'>
               <input type='checkbox' className='rounded-lg border ' />

@@ -24,6 +24,7 @@
     "react-hook-form": "^7.43.7",
     "react-lottie": "^1.2.3",
     "react-router-dom": "^6.9.0",
+    "react-toastify": "^9.1.2",
     "react-toggle-dark-mode": "^1.1.1",
     "yup": "^1.0.2"
   },

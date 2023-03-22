@@ -46,20 +46,20 @@ export default function Register() {
               })
             })
           }
-          if (formError?.email) {
-            setError('email', {
-              message: formError.email,
-              type: 'Server'
-            })
-          }
-          if (formError?.password) {
-            setError('password', {
-              message: formError.password,
-              type: 'Server'
-            })
-          }
+          //cach handle error 2
+          // if (formError?.email) {
+          //   setError('email', {
+          //     message: formError.email,
+          //     type: 'Server'
+          //   })
+          // }
+          // if (formError?.password) {
+          //   setError('password', {
+          //     message: formError.password,
+          //     type: 'Server'
+          //   })
+          // }
         }
-        console.log(error)
       }
     })
   })
@@ -111,7 +111,7 @@ export default function Register() {
             type='submit'
             className='h-12 w-full rounded-8 bg-primary-377DFF font-medium text-white duration-200 hover:bg-secondary-1D6AF9'
           >
-            Sign In
+            Sign Up
           </button>
         </form>
         <Link to='/login' className='mt-5 flex items-center justify-center text-base font-medium'>
