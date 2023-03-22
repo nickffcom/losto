@@ -1,28 +1,40 @@
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useMutation } from '@tanstack/react-query'
+
 import { schema, Schema } from 'src/utils/rules'
 import Input from 'src/components/Input'
-import { yupResolver } from '@hookform/resolvers/yup'
+import { registerAccount } from 'src/apis/auth.api'
+import { omit } from 'lodash'
+
 type FormData = Schema
 
 export default function Register() {
+  /* Form register */
   const {
     register,
     handleSubmit,
-    getValues,
     formState: { errors }
   } = useForm<FormData>({
     resolver: yupResolver(schema)
   })
-  const onSubmit = handleSubmit(
-    (data) => {
-      // console.log(data)
-    },
-    (data) => {
-      const password = getValues('password')
-      // console.log(password)
-    }
-  )
+
+  /* Handle call api */
+  const registerAccoutnMutation = useMutation({
+    mutationFn: (body: Omit<FormData, 'confirm_password'>) => registerAccount(body)
+  })
+
+  /* Handle form register */
+  const onSubmit = handleSubmit((data) => {
+    const body = omit(data, ['confirm_password'])
+    registerAccoutnMutation.mutate(body, {
+      onSuccess: (data) => {
+        console.log(data)
+      }
+    })
+  })
+
   return (
     <div className='b-sd rounded-8 dark:bg-dark-secondary'>
       <h1 className='mt-8 text-center text-5xl font-bold text-primary-377DFF dark:text-white'>Getting Started</h1>
@@ -75,7 +87,7 @@ export default function Register() {
         </form>
         <Link to='/login' className='mt-5 flex items-center justify-center text-base font-medium'>
           <span className='text-gray dark:text-gray-500'>Already have an account? </span>
-          <span className='ml-2 text-primary-377DFF hover:text-secondary-1D6AF9'>Sign In</span>
+          <span className='ml-2 text-primary-377DFF hover:text-secondary-1D6AF9'>Sign Up</span>
         </Link>
       </div>
     </div>
