@@ -27,7 +27,7 @@ export default function Header() {
         <div className='container'>
           <div className='flex items-center justify-between'>
             <Link to='/'>
-              <img src={logo} alt='logo' />
+              <img src={logo} alt='logo' width='166' height='51'/>
             </Link>
             <div className='flex items-center gap-5'>
               <SwitchThemeButton />

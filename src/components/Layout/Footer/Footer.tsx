@@ -7,10 +7,10 @@ export default function Footer() {
       <div className='container'>
         <div className='mb-2 flex items-center justify-center lg:mb-4'>
           <Link to='/'>
-            <img src={logo} alt='logo' />
+            <img src={logo} alt='logo' width='166' height='51' />
           </Link>
         </div>
-        <p className='fs-14 text-center text-primary-1A162E lg:fs-16 dark:text-white'>©2023 - Copyrights Trung</p>
+        <p className='text-primary-1A162E fs-14 text-center lg:fs-16 dark:text-white'>©2023 - Copyrights Trung</p>
       </div>
     </footer>
   )

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { useForm, UseFormSetError } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation } from '@tanstack/react-query'
 import { useContext } from 'react'
@@ -119,7 +119,7 @@ export default function Register() {
         </form>
         <Link to='/login' className='mt-5 flex items-center justify-center text-base font-medium'>
           <span className='text-gray dark:text-gray-500'>Already have an account? </span>
-          <span className='ml-2 text-primary-377DFF hover:text-secondary-1D6AF9'>Sign Up</span>
+          <span className='ml-2 text-primary-377DFF hover:text-secondary-1D6AF9'>Sign Ip</span>
         </Link>
       </div>
     </div>
