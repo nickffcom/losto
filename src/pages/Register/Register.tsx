@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useForm, UseFormSetError } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation } from '@tanstack/react-query'
+import { useContext } from 'react'
 
 import { schema, Schema } from 'src/utils/rules'
 import Input from 'src/components/Input'
@@ -9,10 +10,12 @@ import { registerAccount } from 'src/apis/auth.api'
 import { omit } from 'lodash'
 import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
 import { ErrorResponse } from 'src/types/utils.type'
+import { AppContext } from 'src/contexts/app.context'
 
 type FormData = Schema
 
 export default function Register() {
+  const { setIsAuthenticated } = useContext(AppContext)
   /* Form register */
   const {
     register,
@@ -32,8 +35,8 @@ export default function Register() {
   const onSubmit = handleSubmit((data) => {
     const body = omit(data, ['confirm_password'])
     registerAccoutnMutation.mutate(body, {
-      onSuccess: (data) => {
-        // console.log(data)
+      onSuccess: () => {
+        setIsAuthenticated(true)
       },
       onError: (error) => {
         if (isAxiosUnprocessableEntityError<ErrorResponse<Omit<FormData, 'confirm_password'>>>(error)) {

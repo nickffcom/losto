@@ -31,7 +31,7 @@ export default function Login() {
 
   const onSubmit = handleSubmit((data) => {
     loginMutation.mutate(data, {
-      onSuccess: (data) => {
+      onSuccess: () => {
         setIsAuthenticated(true)
       },
       onError: (error) => {
