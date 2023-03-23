@@ -4,9 +4,8 @@ import { useMutation } from '@tanstack/react-query'
 import { login } from 'src/apis/auth.api'
 import { Schema, schema } from 'src/utils/rules'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { omit } from 'lodash'
 import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
-import { ResponseApi } from 'src/types/utils.type'
+import { ErrorResponse } from 'src/types/utils.type'
 import Input from 'src/components/Input'
 
 type FormData = Omit<Schema, 'confirm_password'>
@@ -33,7 +32,7 @@ export default function Login() {
         // console.log(data)
       },
       onError: (error) => {
-        if (isAxiosUnprocessableEntityError<ResponseApi<FormData>>(error)) {
+        if (isAxiosUnprocessableEntityError<ErrorResponse<FormData>>(error)) {
           const formError = error.response?.data.data
           if (formError) {
             Object.keys(formError).forEach((key) => {
