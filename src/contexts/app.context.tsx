@@ -7,7 +7,7 @@ interface AppContextInterface {
 }
 
 const initialAppContext: AppContextInterface = {
-  isAuthenticated: Boolean(getAccessTokenFromLS),
+  isAuthenticated: Boolean(getAccessTokenFromLS()),
   setIsAuthenticated: () => null
 }
 

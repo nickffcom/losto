@@ -23,8 +23,8 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <AppProvider>
           <App />
         </AppProvider>
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
-      <ReactQueryDevtools initialIsOpen={false} />
     </BrowserRouter>
   </React.StrictMode>
 )

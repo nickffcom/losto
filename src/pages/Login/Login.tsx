@@ -7,12 +7,15 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
 import { ErrorResponse } from 'src/types/utils.type'
 import Input from 'src/components/Input'
+import { useContext } from 'react'
+import { AppContext } from 'src/contexts/app.context'
 
 type FormData = Omit<Schema, 'confirm_password'>
 
 const loginSchema = schema.omit(['confirm_password'])
 
 export default function Login() {
+  const { setIsAuthenticated } = useContext(AppContext)
   const {
     register,
     handleSubmit,
@@ -29,7 +32,7 @@ export default function Login() {
   const onSubmit = handleSubmit((data) => {
     loginMutation.mutate(data, {
       onSuccess: (data) => {
-        // console.log(data)
+        setIsAuthenticated(true)
       },
       onError: (error) => {
         if (isAxiosUnprocessableEntityError<ErrorResponse<FormData>>(error)) {

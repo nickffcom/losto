@@ -11,7 +11,7 @@ class Http {
     //bien accessToken goi tren ram nhanh hon khi goi trong file nen dat vao contructor
     this.accessToken = getAccessTokenFromLS()
     this.instance = axios.create({
-      baseURL: 'https://api-lotso-ecommerce.cyclic.app/',
+      baseURL: 'https://api-lotso-ecommerce.onrender.com',
       timeout: 10000,
       headers: {
         'Content-Type': 'application/json'
