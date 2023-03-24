@@ -171,3 +171,52 @@ input:focus {
 }
 
 /* End hambuger menu */
+
+
+/* Button primary */
+.button-primary {
+  padding: 0 20px;
+  height: 40px;
+  line-height: 2.5em;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #377DFF;
+  transition: color .5s;
+  z-index: 1;
+  font-size: 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  color: #377DFF;
+}
+
+.button-primary:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  background: #377DFF;
+  height: 150px;
+  width: 200px;
+  border-radius: 50%;
+}
+
+.button-primary:hover {
+  color: #fff;
+}
+
+.button-primary:before {
+  top: 100%;
+  left: 100%;
+  transition: all .7s;
+}
+
+.button-primary:hover:before {
+  top: -30px;
+  left: -30px;
+}
+
+.button-primary:active:before {
+  background: #3a0ca3;
+  transition: background 0s;
+}
+
+/* End button primary */

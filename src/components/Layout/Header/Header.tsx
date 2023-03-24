@@ -27,7 +27,7 @@ export default function Header() {
         <div className='container'>
           <div className='flex items-center justify-between'>
             <Link to='/'>
-              <img src={logo} alt='logo' width='166' height='51'/>
+              <img src={logo} alt='logo' width='166' height='51' />
             </Link>
             <div className='flex items-center gap-5'>
               <SwitchThemeButton />
@@ -139,16 +139,10 @@ export default function Header() {
               )}
               {!isAuthenticated && (
                 <>
-                  <Link
-                    to='/login'
-                    className='fs-14 flex h-10 items-center justify-center rounded-8 bg-primary-377DFF px-5 font-semibold text-white duration-200 hover:bg-secondary-1D6AF9'
-                  >
+                  <Link to='/login' className='button-primary'>
                     <span>Login</span>
                   </Link>
-                  <Link
-                    to='/register'
-                    className='fs-14 flex h-10 items-center justify-center rounded-8 bg-primary-377DFF px-5 font-semibold text-white duration-200 hover:bg-secondary-1D6AF9'
-                  >
+                  <Link to='/register' className='button-primary'>
                     <span>Register</span>
                   </Link>
                 </>
