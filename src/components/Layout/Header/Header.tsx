@@ -1,15 +1,16 @@
 import { useMutation } from '@tanstack/react-query'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { logout } from 'src/apis/auth.api'
 
 import logo from 'src/assets/logo.svg'
 import Popover from 'src/components/Popover'
+import path from 'src/constants/path'
 import { AppContext } from 'src/contexts/app.context'
 import SwitchThemeButton from '../../SwitchThemeButton'
 
 export default function Header() {
-  const { setIsAuthenticated, isAuthenticated } = useContext(AppContext)
+  const { setIsAuthenticated, isAuthenticated, setProfile, profile } = useContext(AppContext)
   const logoutMutation = useMutation({
     mutationFn: logout,
     onSuccess: () => {
@@ -19,7 +20,11 @@ export default function Header() {
 
   const handleLogout = () => {
     logoutMutation.mutate()
+    setProfile(null)
   }
+
+  const text = profile?.name
+  const nameAvatar = text?.split(' ').map((word) => word.charAt(0))
 
   return (
     <div className='hidden shadow-md md:block'>
@@ -64,7 +69,7 @@ export default function Header() {
                     <div className='rounded-4 border border-gray-200 bg-white shadow-md'>
                       <div className='fs-14 flex flex-col items-start'>
                         <Link
-                          to='/profile'
+                          to={path.profile}
                           className='w-full py-3 px-5 text-left hover:bg-FAFAFD hover:text-secondary-1D6AF9'
                         >
                           <svg
@@ -129,20 +134,20 @@ export default function Header() {
                     </div>
                   }
                 >
-                  <Link to='/profile' className='fs-14 font-semibold'>
-                    <span>Hoàng Trung</span>
+                  <Link to={path.profile} className='fs-14 font-semibold'>
+                    <span>{profile?.email}</span>
                   </Link>
                   <div className='relative inline-flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-gray-200 dark:bg-gray-600'>
-                    <span className='fs-14 font-medium text-gray-600 dark:text-gray-300'>HT</span>
+                    <span className='fs-14 font-medium text-gray-600 dark:text-gray-300'>{nameAvatar}</span>
                   </div>
                 </Popover>
               )}
               {!isAuthenticated && (
                 <>
-                  <Link to='/login' className='button-primary'>
+                  <Link to={path.login} className='button-primary'>
                     <span>Login</span>
                   </Link>
-                  <Link to='/register' className='button-primary'>
+                  <Link to={path.register} className='button-primary'>
                     <span>Register</span>
                   </Link>
                 </>

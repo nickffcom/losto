@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import { Navigate, Outlet, useRoutes } from 'react-router-dom'
 import Profile from './components/Profile'
+import path from './constants/path'
 import { AppContext } from './contexts/app.context'
 import AuthLayout from './layouts/AuthLayout'
 import MainLayout from './layouts/MainLayout'
@@ -34,7 +35,7 @@ export default function useRouteElements() {
       element: <ProtectedRoute />,
       children: [
         {
-          path: 'profile',
+          path: path.profile,
           element: (
             <MainLayout>
               <Profile />
@@ -48,7 +49,7 @@ export default function useRouteElements() {
       element: <RejectedRoute />,
       children: [
         {
-          path: 'login',
+          path: path.login,
           element: (
             <AuthLayout>
               <Login />
@@ -56,7 +57,7 @@ export default function useRouteElements() {
           )
         },
         {
-          path: 'register',
+          path: path.register,
           element: (
             <AuthLayout>
               <Register />

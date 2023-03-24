@@ -9,13 +9,15 @@ import { ErrorResponse } from 'src/types/utils.type'
 import Input from 'src/components/Input'
 import { useContext } from 'react'
 import { AppContext } from 'src/contexts/app.context'
+import Button from 'src/components/Button'
+import path from 'src/constants/path'
 
 type FormData = Omit<Schema, 'confirm_password'>
 
 const loginSchema = schema.omit(['confirm_password'])
 
 export default function Login() {
-  const { setIsAuthenticated } = useContext(AppContext)
+  const { setIsAuthenticated, setProfile } = useContext(AppContext)
   const {
     register,
     handleSubmit,
@@ -31,8 +33,9 @@ export default function Login() {
 
   const onSubmit = handleSubmit((data) => {
     loginMutation.mutate(data, {
-      onSuccess: () => {
+      onSuccess: (data) => {
         setIsAuthenticated(true)
+        setProfile(data.data.data.user)
       },
       onError: (error) => {
         if (isAxiosUnprocessableEntityError<ErrorResponse<FormData>>(error)) {
@@ -91,14 +94,16 @@ export default function Login() {
             </div>
             <p className='cursor-pointer font-medium text-gray-500'>Forgot Password?</p>
           </div>
-          <button
+          <Button
             type='submit'
             className='mt-5 h-12 w-full rounded-8 bg-primary-377DFF font-medium text-white duration-200 hover:bg-secondary-1D6AF9'
+            isLoading={loginMutation.isLoading}
+            disabled={loginMutation.isLoading}
           >
             Sign In
-          </button>
+          </Button>
         </form>
-        <Link to='/register' className='mt-5 flex items-center justify-center text-base font-medium'>
+        <Link to={path.register} className='mt-5 flex items-center justify-center text-base font-medium'>
           <span className='text-gray dark:text-gray-500'>You haven&apos;t any account?</span>
           <span className='ml-2 text-primary-377DFF hover:text-secondary-1D6AF9'>Sign Up</span>
         </Link>

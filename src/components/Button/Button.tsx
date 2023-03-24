@@ -9,11 +9,12 @@ export default function Button(props: ButtonProps) {
   const newClassName = disabled ? className + ' cursor-not-allowed' : className
   return (
     <button className={newClassName} disabled={disabled} {...restParams}>
+      <span>{children}</span>
       {isLoading && (
         <svg
           aria-hidden='true'
           role='status'
-          className='mr-3 inline h-4 w-4 animate-spin fill-white'
+          className='mr-3 ml-2 inline h-4 w-4 animate-spin fill-white'
           viewBox='0 0 100 101'
           fill='none'
           xmlns='http://www.w3.org/2000/svg'
@@ -28,7 +29,6 @@ export default function Button(props: ButtonProps) {
           />
         </svg>
       )}
-      <span>{children}</span>
     </button>
   )
 }
