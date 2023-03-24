@@ -185,7 +185,7 @@ export default function Header() {
                   placeholder='Search by products, categories'
                   className='h-10 rounded-8 border border-gray-900 pl-3 pr-9 text-black placeholder:text-xs focus:outline-none'
                 />
-                <button type='submit' className='absolute top-1/2 right-0 mr-2 -translate-y-1/2'>
+                <button type='submit' className='absolute top-1/2 right-0 mr-2 -translate-y-1/2' aria-label='search'>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
                     fill='none'
