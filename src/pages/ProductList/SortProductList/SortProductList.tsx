@@ -44,7 +44,10 @@ export default function SortProductList() {
         </div>
 
         <div className='flex items-center gap-1'>
-          <Button className='fs-14 flex h-10 items-center justify-center rounded-8 border border-gray-700 px-2 font-semibold duration-200 hover:border-secondary-26B374 hover:bg-secondary-26B374 hover:text-white'>
+          <Button
+            aria-label='prev-page'
+            className='fs-14 flex h-10 items-center justify-center rounded-8 border border-gray-700 px-2 font-semibold duration-200 hover:border-secondary-26B374 hover:bg-secondary-26B374 hover:text-white'
+          >
             <svg
               xmlns='http://www.w3.org/2000/svg'
               fill='none'
@@ -56,7 +59,10 @@ export default function SortProductList() {
               <path strokeLinecap='round' strokeLinejoin='round' d='M15.75 19.5L8.25 12l7.5-7.5' />
             </svg>
           </Button>
-          <Button className='fs-14 flex h-10 items-center justify-center rounded-8 border border-gray-700 px-2 font-semibold duration-200 hover:border-secondary-26B374 hover:bg-secondary-26B374 hover:text-white'>
+          <Button
+            aria-label='next-page'
+            className='fs-14 flex h-10 items-center justify-center rounded-8 border border-gray-700 px-2 font-semibold duration-200 hover:border-secondary-26B374 hover:bg-secondary-26B374 hover:text-white'
+          >
             <svg
               xmlns='http://www.w3.org/2000/svg'
               fill='none'
