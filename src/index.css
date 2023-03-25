@@ -43,7 +43,7 @@ body {
 }
 
 input:focus {
-  outline: 1px solid #377DFF;
+  border: 1px solid #377DFF;
 }
 
 

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-export default function Card() {
+export default function Product() {
   return (
     <div>
       <div className='card bg-gray-200 dark:border dark:border-gray-600 dark:bg-transparent'>

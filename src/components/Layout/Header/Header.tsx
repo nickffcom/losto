@@ -216,7 +216,7 @@ export default function Header() {
                     <Link to='' className='flex w-full items-center justify-between py-2 px-4'>
                       <div className='flex items-center gap-2'>
                         <div className='relative inline-flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-gray-200 dark:bg-gray-600'>
-                          <span className='fs-14 font-medium text-gray-600 dark:text-gray-300'>IP</span>
+                          <span className='fs-14 font-medium text-gray-600 dark:text-gray-700'>IP</span>
                         </div>
                         <span className='line-clamp-1'>Iphone 14 Pro Max 256GB</span>
                       </div>
