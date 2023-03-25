@@ -5,15 +5,18 @@ export default function Card() {
     <div>
       <div className='card bg-gray-200 dark:border dark:border-gray-600 dark:bg-transparent'>
         <div className='relative overflow-hidden'>
-          <Link to=''>
+          <Link to='' title='Samsung S23 Ultra 256GB' aria-label='Samsung S23 Ultra 256GB'>
             <img
               src='https://ik.imagekit.io/fh01eqtgh/SmartPhone/Samsung/samsung-s23-ultra-5.png?updatedAt=1679563988920'
-              alt=''
+              width='294'
+              height='294'
+              alt='Samsung S23 Ultra 256GB'
+              title='Samsung S23 Ultra 256GB'
             />
           </Link>
 
           <div className='card-content hidden bg-white opacity-90 dark:bg-gray-500 md:block'>
-            <Link to='/'>
+            <Link to='/' title='Samsung S23 Ultra 256GB' aria-label='Samsung S23 Ultra 256GB'>
               <p className='card-button flex items-center justify-center gap-6'>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
@@ -79,11 +82,11 @@ export default function Card() {
             </div>
           </div>
         </div>
-        <Link to=''>
+        <Link to='' title='Samsung S23 Ultra 256GB' aria-label='Samsung S23 Ultra 256GB'>
           <div className='bg-white p-4 dark:bg-transparent'>
             <h3 className='fs-16 font-semibold line-clamp-2 hover:text-secondary-1D6AF9'>Samsung S23 Ultra 256GB</h3>
             <div className='mt-2 flex items-center mlg:mt-3'>
-              <p className='fs-14 max-w-[50%] truncate font-semibold text-red-400 line-through'>
+              <p className='fs-14 max-w-[50%] truncate font-semibold text-red-700 line-through'>
                 <span>₫</span>
                 <span>3.990.000</span>
               </p>
@@ -101,7 +104,7 @@ export default function Card() {
                       viewBox='0 0 24 24'
                       x={0}
                       y={0}
-                      className='fill-primary-FFB700 text-primary-FFB700 h-4 w-4'
+                      className='h-4 w-4 fill-primary-FFB700 text-primary-FFB700'
                     >
                       <path
                         id='Stroke 1'
@@ -136,7 +139,7 @@ export default function Card() {
                       viewBox='0 0 24 24'
                       x={0}
                       y={0}
-                      className='fill-primary-FFB700 text-primary-FFB700 h-4 w-4'
+                      className='h-4 w-4 fill-primary-FFB700 text-primary-FFB700'
                     >
                       <path
                         id='Stroke 1'
@@ -171,7 +174,7 @@ export default function Card() {
                       viewBox='0 0 24 24'
                       x={0}
                       y={0}
-                      className='fill-primary-FFB700 text-primary-FFB700 h-4 w-4'
+                      className='h-4 w-4 fill-primary-FFB700 text-primary-FFB700'
                     >
                       <path
                         id='Stroke 1'
@@ -206,7 +209,7 @@ export default function Card() {
                       viewBox='0 0 24 24'
                       x={0}
                       y={0}
-                      className='fill-primary-FFB700 text-primary-FFB700 h-4 w-4'
+                      className='h-4 w-4 fill-primary-FFB700 text-primary-FFB700'
                     >
                       <path
                         id='Stroke 1'
@@ -241,7 +244,7 @@ export default function Card() {
                       viewBox='0 0 24 24'
                       x={0}
                       y={0}
-                      className='fill-primary-FFB700 text-primary-FFB700 h-4 w-4'
+                      className='h-4 w-4 fill-primary-FFB700 text-primary-FFB700'
                     >
                       <path
                         id='Stroke 1'
