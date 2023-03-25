@@ -5,7 +5,7 @@ export default function Card() {
     <div>
       <div className='card bg-gray-200 dark:border dark:border-gray-600 dark:bg-transparent'>
         <div className='relative overflow-hidden'>
-          <Link to='' title='Samsung S23 Ultra 256GB' aria-label='Samsung S23 Ultra 256GB'>
+          <Link to='' title='Samsung S23 Ultra 256GB'>
             <img
               src='https://ik.imagekit.io/fh01eqtgh/SmartPhone/Samsung/samsung-s23-ultra-5.png?updatedAt=1679563988920'
               width='294'
@@ -16,7 +16,7 @@ export default function Card() {
           </Link>
 
           <div className='card-content hidden bg-white opacity-90 dark:bg-gray-500 md:block'>
-            <Link to='/' title='Samsung S23 Ultra 256GB' aria-label='Samsung S23 Ultra 256GB'>
+            <Link to='/' title='Samsung S23 Ultra 256GB'>
               <p className='card-button flex items-center justify-center gap-6'>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
@@ -82,7 +82,7 @@ export default function Card() {
             </div>
           </div>
         </div>
-        <Link to='' title='Samsung S23 Ultra 256GB' aria-label='Samsung S23 Ultra 256GB'>
+        <Link to='' title='Samsung S23 Ultra 256GB'>
           <div className='bg-white p-4 dark:bg-transparent'>
             <h3 className='fs-16 font-semibold line-clamp-2 hover:text-secondary-1D6AF9'>Samsung S23 Ultra 256GB</h3>
             <div className='mt-2 flex items-center mlg:mt-3'>
