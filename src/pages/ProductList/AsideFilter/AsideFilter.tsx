@@ -4,7 +4,7 @@ import path from 'src/constants/path'
 
 export default function AsideFilter() {
   return (
-    <div className='rounded-8 px-3 py-2 opacity-80 dark:bg-white lg:p-4'>
+    <div className='rounded-8 px-3 py-2 dark:bg-white lg:p-4'>
       <Link
         to={path.home}
         title='All Categories'
@@ -27,17 +27,17 @@ export default function AsideFilter() {
         <span>All Categories</span>
       </Link>
       <ul className='mt-3 pl-4'>
-        <li className='fs-14 py-1 font-medium duration-200 md:fs-16 hover:text-primary-377DFF md:py-2'>
+        <li className='fs-14 py-1 font-medium text-black duration-200 md:fs-16 hover:text-primary-377DFF md:py-2'>
           <Link to='/' title='Smart Phone'>
             Smart Phone
           </Link>
         </li>
-        <li className='fs-14 py-1 font-medium duration-200 md:fs-16 hover:text-primary-377DFF md:py-2'>
+        <li className='fs-14 py-1 font-medium text-black duration-200 md:fs-16 hover:text-primary-377DFF md:py-2'>
           <Link to='/' title='Smart Phone'>
             Smart Phone
           </Link>
         </li>
-        <li className='fs-14 py-1 font-medium duration-200 md:fs-16 hover:text-primary-377DFF md:py-2'>
+        <li className='fs-14 py-1 font-medium text-black duration-200 md:fs-16 hover:text-primary-377DFF md:py-2'>
           <Link to='/' title='Smart Phone'>
             Smart Phone
           </Link>
@@ -66,19 +66,19 @@ export default function AsideFilter() {
         <div className='flex items-start'>
           <Input
             className='grow'
-            classNameInput='w-full rounded-8 border bg-white py-2 px-3 outline-none transition-colors placeholder:fs-14 placeholder:capitalize'
+            classNameInput='w-full rounded-8 border border-gray-900 bg-white py-2 px-3 outline-none bg-white placeholder:fs-14 placeholder:capitalize'
             placeholder='From'
             name='price_min'
           />
           <div className='mx-2 mt-2 shrink-0'>-</div>
           <Input
             className='grow'
-            classNameInput='w-full rounded-8 border bg-white py-2 px-3 outline-none transition-colors placeholder:fs-14 placeholder:capitalize'
+            classNameInput='w-full rounded-8 border border-gray-900 bg-white py-2 px-3 outline-none bg-white placeholder:fs-14 placeholder:capitalize'
             placeholder='To'
             name='price_max'
           />
         </div>
-        <button className='fs-16 flex w-full items-center justify-center rounded-8 bg-primary-377DFF py-2 px-5 uppercase text-white transition-colors hover:bg-secondary-1D6AF9 mmd:p-2'>
+        <button className='button-primary w-full before:w-[350px]'>
           <span>Apply</span>
         </button>
       </form>
