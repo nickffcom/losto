@@ -24,7 +24,7 @@ export default function ProductList() {
         </div>
         <div className='mmd:col-span-9'>
           <SortProductList />
-          <div className='mt-5 grid grid-cols-1 gap-5 xsm:grid-cols-2 sm:grid-cols-3 lg:mt-6 lg:gap-6'>
+          <div className='mt-5 grid gap-5 xsm:grid-cols-2 sm:grid-cols-3 lg:mt-6 lg:gap-6'>
             {data &&
               data.data.data.products.map((product) => (
                 <Fragment key={product._id}>
