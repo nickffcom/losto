@@ -26,7 +26,7 @@ export default function AsideFilter() {
         </svg>
         <span>All Categories</span>
       </Link>
-      <ul className='mt-3 pl-4'>
+      <ul className='mt-3 list-disc pl-4'>
         <li className='fs-14 py-1 font-medium text-black duration-200 md:fs-16 hover:text-primary-377DFF md:py-2'>
           <Link to='/' title='Smart Phone'>
             Smart Phone

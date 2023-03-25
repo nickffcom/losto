@@ -1,22 +1,20 @@
 import { Link } from 'react-router-dom'
+import { Product as ProductType } from 'src/types/product.type'
 
-export default function Product() {
+interface ProductProps {
+  product: ProductType
+}
+
+export default function Product({ product }: ProductProps) {
   return (
     <div>
       <div className='card bg-gray-200 dark:border dark:border-gray-600 dark:bg-transparent'>
         <div className='relative overflow-hidden'>
-          <Link to='' title='Samsung S23 Ultra 256GB'>
-            <img
-              src='https://ik.imagekit.io/fh01eqtgh/SmartPhone/Samsung/samsung-s23-ultra-5.png?updatedAt=1679563988920'
-              width='294'
-              height='294'
-              alt='Samsung S23 Ultra 256GB'
-              title='Samsung S23 Ultra 256GB'
-            />
+          <Link to='' title={product.name}>
+            <img src={product.image} width='294' height='294' alt={product.name} title={product.name} />
           </Link>
-
           <div className='card-content hidden bg-white opacity-90 dark:bg-gray-500 md:block'>
-            <Link to='/' title='Samsung S23 Ultra 256GB'>
+            <Link to='/' title={product.name}>
               <p className='card-button flex items-center justify-center gap-6'>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
@@ -84,15 +82,15 @@ export default function Product() {
         </div>
         <Link to='' title='Samsung S23 Ultra 256GB'>
           <div className='bg-white p-4 dark:bg-transparent'>
-            <h3 className='fs-16 font-semibold line-clamp-2 hover:text-secondary-1D6AF9'>Samsung S23 Ultra 256GB</h3>
+            <h3 className='fs-16 font-semibold line-clamp-2 hover:text-secondary-1D6AF9'>{product.name}</h3>
             <div className='mt-2 flex items-center mlg:mt-3'>
               <p className='fs-14 max-w-[50%] truncate font-semibold text-red-700 line-through'>
                 <span>₫</span>
-                <span>3.990.000</span>
+                <span>{product.price_before_discount}</span>
               </p>
               <p className='text-primary-1A162E fs-14 ml-2 max-w-[50%] truncate font-semibold'>
                 <span>₫</span>
-                <span>3.190.000</span>
+                <span>{product.price}</span>
               </p>
             </div>
             <div className='mt-2 flex flex-wrap items-center justify-between mlg:mt-3 mlg:justify-end'>
@@ -274,7 +272,7 @@ export default function Product() {
                 </div>
               </div>
               <p className='text-primary-1A162E fs-14 font-semibold mlg:ml-2'>
-                <span>6,8k</span>
+                <span>{product.sold}</span>
                 <span className='ml-1'>Sold</span>
               </p>
             </div>

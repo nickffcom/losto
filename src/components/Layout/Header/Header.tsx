@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query'
 import { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { logout } from 'src/apis/auth.api'
+import authApi from 'src/apis/auth.api'
 
 import logo from 'src/assets/logo.svg'
 import Popover from 'src/components/Popover'
@@ -12,7 +12,7 @@ import SwitchThemeButton from '../../SwitchThemeButton'
 export default function Header() {
   const { setIsAuthenticated, isAuthenticated, setProfile, profile } = useContext(AppContext)
   const logoutMutation = useMutation({
-    mutationFn: logout,
+    mutationFn: authApi.logout,
     onSuccess: () => {
       setIsAuthenticated(false)
     }
