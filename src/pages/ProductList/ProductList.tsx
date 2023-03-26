@@ -34,7 +34,7 @@ export default function ProductList() {
             <AsideFilter />
           </div>
           <div className='mmd:col-span-9'>
-            <SortProductList />
+            <SortProductList queryConfig={queryConfig} pageSize={productsData.data.data.pagination.page_size} />
             <div className='mt-5 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:mt-6 lg:gap-6'>
               {productsData.data.data.products.map((product) => (
                 <Fragment key={product._id}>

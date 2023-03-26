@@ -83,21 +83,21 @@ export default function Product({ product }: ProductProps) {
           </div>
         </div>
         <Link to='' title='Samsung S23 Ultra 256GB'>
-          <div className='bg-white p-4 dark:bg-transparent'>
-            <h3 className='fs-16 min-h-[50px] font-semibold line-clamp-2 hover:text-secondary-1D6AF9'>
+          <div className='bg-white p-2 dark:bg-transparent xsm:p-4'>
+            <h3 className='fs-14 min-h-[44px] font-semibold line-clamp-2 xsm:fs-16 hover:text-secondary-1D6AF9 xsm:min-h-[48px]'>
               {product.name}
             </h3>
-            <div className='mt-2 flex items-center mlg:mt-3'>
-              <p className='fs-14 max-w-[50%] truncate font-semibold text-red-700 line-through'>
+            <div className='mt-1 flex items-center mlg:mt-2'>
+              <p className='fs-10 max-w-[45%] truncate font-semibold text-red-700 line-through xsm:fs-12'>
                 <span>₫</span>
                 <span>{formatCurrency(product.price_before_discount)}</span>
               </p>
-              <p className='text-primary-1A162E fs-14 ml-2 max-w-[50%] truncate font-semibold'>
+              <p className='text-primary-1A162E fs-14 ml-2 max-w-[55%] truncate font-semibold'>
                 <span>₫</span>
                 <span>{formatCurrency(product.price)}</span>
               </p>
             </div>
-            <div className='mt-2 flex flex-wrap items-center justify-between mlg:mt-3 mlg:justify-end'>
+            <div className='mt-1 flex flex-wrap items-center justify-between mlg:mt-2 mlg:justify-end'>
               <ProductRating rating={product.rating} />
               <p className='text-primary-1A162E fs-14 font-semibold mlg:ml-2'>
                 <span>{formatNumberToSocialStyle(product.sold)}</span>
