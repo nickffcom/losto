@@ -84,7 +84,9 @@ export default function Product({ product }: ProductProps) {
         </div>
         <Link to='' title='Samsung S23 Ultra 256GB'>
           <div className='bg-white p-4 dark:bg-transparent'>
-            <h3 className='fs-16 font-semibold line-clamp-2 hover:text-secondary-1D6AF9'>{product.name}</h3>
+            <h3 className='fs-16 min-h-[50px] font-semibold line-clamp-2 hover:text-secondary-1D6AF9'>
+              {product.name}
+            </h3>
             <div className='mt-2 flex items-center mlg:mt-3'>
               <p className='fs-14 max-w-[50%] truncate font-semibold text-red-700 line-through'>
                 <span>₫</span>
