@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import path from 'src/constants/path'
 
 export default function NavToggle() {
   return (
@@ -10,10 +11,15 @@ export default function NavToggle() {
       <div className='background'>&nbsp;</div>
       <nav className='nav-list-mobile'>
         <div className='mx-4'>
-          <ul className='mt-4 w-full list-none text-white'>
+          <ul className='mt-20 w-full list-none text-right text-white'>
             <li className='my-3 text-2xl'>
-              <Link to='/' className='nav-link-hover-effect duration-200'>
+              <Link to={path.home} className='nav-link-hover-effect duration-200'>
                 Home
+              </Link>
+            </li>
+            <li className='my-3 text-2xl'>
+              <Link to={path.productlist} className='nav-link-hover-effect duration-200'>
+                Shop
               </Link>
             </li>
             <li className='my-3 text-2xl'>

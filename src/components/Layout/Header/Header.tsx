@@ -9,8 +9,11 @@ import path from 'src/constants/path'
 import { AppContext } from 'src/contexts/app.context'
 import SwitchThemeButton from '../../SwitchThemeButton'
 
+const HEADER_HEIGHT = 99
+
 export default function Header() {
   const { setIsAuthenticated, isAuthenticated, setProfile, profile } = useContext(AppContext)
+  const [isFixedHeader, setIsFixedHeader] = useState(false)
   const logoutMutation = useMutation({
     mutationFn: authApi.logout,
     onSuccess: () => {
@@ -21,6 +24,13 @@ export default function Header() {
   const handleLogout = () => {
     logoutMutation.mutate()
     setProfile(null)
+  }
+
+  useEffect(() => {
+    window.scrollY > HEADER_HEIGHT ? setIsFixedHeader(true) : setIsFixedHeader(false)
+  }, [])
+  window.onscroll = () => {
+    window.scrollY > HEADER_HEIGHT ? setIsFixedHeader(true) : setIsFixedHeader(false)
   }
 
   const text = profile?.name
@@ -157,6 +167,98 @@ export default function Header() {
         </div>
       </header>
       <div className='border-t-2 dark:border-t-neutral-800'>
+        <div className='container mx-auto flex h-16 items-center justify-between'>
+          <div className='fs-16 font-semibold dark:text-white'>
+            <Link className='nav-link-hover-effect mr-12 hover:text-primary-377DFF' to='/' aria-current='page'>
+              Home
+            </Link>
+            <Link className='nav-link-hover-effect mr-12 hover:text-primary-377DFF' to='/productlist'>
+              Shop
+            </Link>
+            <Link className='nav-link-hover-effect mr-12 hover:text-primary-377DFF' to='/about'>
+              About
+            </Link>
+            <Link className='nav-link-hover-effect mr-12 hover:text-primary-377DFF' to='/contact'>
+              Contact
+            </Link>
+            <Link className='nav-link-hover-effect mr-12 hover:text-primary-377DFF' to='/faq'>
+              FAQs
+            </Link>
+          </div>
+          <div className='flex items-center gap-5'>
+            <form>
+              <div className='relative'>
+                <input
+                  type='text'
+                  name='search'
+                  placeholder='Search by products, categories'
+                  className='h-10 rounded-8 border border-gray-900 pl-3 pr-9 text-black placeholder:text-xs focus:outline-none'
+                />
+                <button type='submit' className='absolute top-1/2 right-0 mr-2 -translate-y-1/2' aria-label='search'>
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    fill='none'
+                    viewBox='0 0 24 24'
+                    strokeWidth={1.5}
+                    stroke='currentColor'
+                    className='h-6 w-6 duration-200 hover:text-secondary-1D6AF9 dark:text-black dark:hover:text-secondary-1D6AF9'
+                  >
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      d='M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z'
+                    />
+                  </svg>
+                </button>
+              </div>
+            </form>
+            <Popover
+              className='class=" flex h-10 cursor-pointer flex-col justify-center rounded-8 border border-gray-400 px-2 duration-200 hover:border-primary-377DFF'
+              renderPopover={
+                <div className='rounded-4 border border-gray-200 bg-white shadow-md'>
+                  <div className='fs-14 flex  w-72 flex-col items-start md:w-[400px] '>
+                    <div className='flex w-full items-center justify-between border-b border-gray-200 py-2 px-4'>
+                      <p className='font-semibold'>New Products Added</p>{' '}
+                      <Link to='' className='font-semibold text-primary-377DFF hover:text-secondary-1D6AF9'>
+                        <span>View cart</span>
+                      </Link>
+                    </div>
+                    <Link to='' className='flex w-full items-center justify-between py-2 px-4'>
+                      <div className='flex items-center gap-2'>
+                        <div className='relative inline-flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-gray-200 dark:bg-gray-600'>
+                          <span className='fs-14 font-medium text-gray-600 dark:text-gray-700'>IP</span>
+                        </div>
+                        <span className='line-clamp-1'>Iphone 14 Pro Max 256GB</span>
+                      </div>
+                      <span className='text-red-500'>19.999.000 VNĐ</span>
+                    </Link>
+                  </div>
+                </div>
+              }
+            >
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                fill='none'
+                viewBox='0 0 24 24'
+                strokeWidth={1.5}
+                stroke='currentColor'
+                className='text-primary-1A162E h-5 w-5 lg:h-6 lg:w-6'
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  d='M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z'
+                />
+              </svg>
+            </Popover>
+          </div>
+        </div>
+      </div>
+      <div
+        className={`fixed ${
+          isFixedHeader ? 'top-0' : 'top-[-64px]'
+        } left-0 right-0 z-50 border-t-2 bg-gray-200 transition-all dark:border-t-neutral-800 dark:bg-neutral-800`}
+      >
         <div className='container mx-auto flex h-16 items-center justify-between'>
           <div className='fs-16 font-semibold dark:text-white'>
             <Link className='nav-link-hover-effect mr-12 hover:text-primary-377DFF' to='/' aria-current='page'>
