@@ -8,6 +8,9 @@ import { QueryConfig } from '../ProductList'
 import { Schema, schema } from 'src/utils/rules'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { NoUndefinedField } from 'src/types/utils.type'
+import RatingStar from 'src/components/RatingStar'
+import Button from 'src/components/Button'
+import { omit } from 'lodash'
 interface Props {
   queryConfig: QueryConfig
   categories: Category[]
@@ -23,6 +26,7 @@ export default function AsideFilter({ queryConfig, categories }: Props) {
     control,
     handleSubmit,
     trigger,
+    reset,
     formState: { errors }
   } = useForm<FormData>({
     defaultValues: {
@@ -44,6 +48,14 @@ export default function AsideFilter({ queryConfig, categories }: Props) {
       }).toString()
     })
   })
+
+  const handleRemoveAll = () => {
+    reset()
+    navigate({
+      pathname: path.productlist,
+      search: createSearchParams(omit(queryConfig, ['price_min', 'price_max', 'rating_filter', 'category'])).toString()
+    })
+  }
 
   return (
     <div className='rounded-8 px-3 py-2 dark:bg-white lg:p-4'>
@@ -159,11 +171,15 @@ export default function AsideFilter({ queryConfig, categories }: Props) {
           />
         </div>
         <div className='fs-12 mt-1 min-h-[1.2rem] text-center text-red-600'>{errors.price_min?.message}</div>
-        <button type='submit' className='button-primary w-full before:w-[350px]'>
+        <Button type='submit' className='button-primary w-full before:w-[350px]'>
           <span>Apply</span>
-        </button>
+        </Button>
       </form>
       <p className='fs-14 mt-3 font-medium text-black'>Feedback</p>
+      <RatingStar queryConfig={queryConfig} />
+      <Button onClick={handleRemoveAll} className='button-secondary w-full  before:w-[350px]'>
+        Xóa tất cả
+      </Button>
     </div>
   )
 }

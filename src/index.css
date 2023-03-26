@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,7 +9,7 @@ html {
 }
 
 body {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 400;
 }
 
@@ -219,6 +220,53 @@ input:focus {
 }
 
 /* End button primary */
+
+/* Button secondary */
+.button-secondary {
+  padding: 0 20px;
+  height: 40px;
+  line-height: 2.5em;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #26b374;
+  transition: color .5s;
+  z-index: 1;
+  font-size: 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  color: #26b374;
+}
+
+.button-secondary:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  background: #26b374;
+  height: 150px;
+  width: 200px;
+  border-radius: 50%;
+}
+
+.button-secondary:hover {
+  color: #fff;
+}
+
+.button-secondary:before {
+  top: 100%;
+  left: 100%;
+  transition: all .7s;
+}
+
+.button-secondary:hover:before {
+  top: -30px;
+  left: -30px;
+}
+
+.button-secondary:active:before {
+  background: #3a0ca3;
+}
+
+/* End button secondary */
 
 /* Card */
 .card {
