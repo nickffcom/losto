@@ -1,8 +1,17 @@
-import { Link } from 'react-router-dom'
+import classNames from 'classnames'
+import { createSearchParams, Link } from 'react-router-dom'
 import Input from 'src/components/Input'
 import path from 'src/constants/path'
+import { Category } from 'src/types/category.type'
+import { QueryConfig } from '../ProductList'
 
-export default function AsideFilter() {
+interface Props {
+  queryConfig: QueryConfig
+  categories: Category[]
+}
+
+export default function AsideFilter({ queryConfig, categories }: Props) {
+  const { category } = queryConfig
   return (
     <div className='rounded-8 px-3 py-2 dark:bg-white lg:p-4'>
       <Link
@@ -27,21 +36,33 @@ export default function AsideFilter() {
         <span>All Categories</span>
       </Link>
       <ul className='mt-3 list-disc pl-4'>
-        <li className='fs-14 py-1 font-medium text-black duration-200 md:fs-16 hover:text-primary-377DFF md:py-2'>
-          <Link to='/' title='Smart Phone'>
-            Smart Phone
-          </Link>
-        </li>
-        <li className='fs-14 py-1 font-medium text-black duration-200 md:fs-16 hover:text-primary-377DFF md:py-2'>
-          <Link to='/' title='Smart Phone'>
-            Smart Phone
-          </Link>
-        </li>
-        <li className='fs-14 py-1 font-medium text-black duration-200 md:fs-16 hover:text-primary-377DFF md:py-2'>
-          <Link to='/' title='Smart Phone'>
-            Smart Phone
-          </Link>
-        </li>
+        {categories.map((categoryItem) => {
+          const isActive = category === categoryItem._id
+          return (
+            <li
+              key={categoryItem._id}
+              className={classNames(
+                'fs-14 py-1 font-medium text-black duration-200 md:fs-16 hover:text-primary-377DFF md:py-2',
+                {
+                  'text-primary-377DFF': isActive
+                }
+              )}
+            >
+              <Link
+                to={{
+                  pathname: path.productlist,
+                  search: createSearchParams({
+                    ...queryConfig,
+                    category: categoryItem._id
+                  }).toString()
+                }}
+                title='Smart Phone'
+              >
+                {categoryItem.name}
+              </Link>
+            </li>
+          )
+        })}
       </ul>
       <div className='fs-18 mt-3 flex items-center gap-2 border-b border-black pb-2 font-semibold uppercase text-black'>
         <svg

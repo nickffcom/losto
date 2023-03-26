@@ -1,14 +1,13 @@
 import { useQuery } from '@tanstack/react-query'
-import { Fragment, useState } from 'react'
+import { Fragment } from 'react'
 import productApi from 'src/apis/product.api'
 import Pagination from 'src/components/Pagination'
 import Product from 'src/components/Product'
-import useQueryParams from 'src/hooks/useQueryParams'
 import { ProductListConfig } from 'src/types/product.type'
 import AsideFilter from './AsideFilter'
 import SortProductList from './SortProductList'
-import { omitBy, isUndefined } from 'lodash'
 import useQueryConfig from 'src/hooks/useQueryConfig'
+import categoryApi from 'src/apis/category.api'
 
 export type QueryConfig = {
   [key in keyof ProductListConfig]: string
@@ -26,12 +25,19 @@ export default function ProductList() {
     staleTime: 3 * 60 * 1000
   })
 
+  const { data: categoriesData } = useQuery({
+    queryKey: ['categories'],
+    queryFn: () => {
+      return categoryApi.getCategories()
+    }
+  })
+
   return (
     <>
       {productsData && (
         <div className='grid grid-cols-1 gap-5 mmd:grid-cols-12 lg:gap-6'>
           <div className='mmd:col-span-3'>
-            <AsideFilter />
+            <AsideFilter categories={categoriesData?.data.data || []} queryConfig={queryConfig} />
           </div>
           <div className='mmd:col-span-9'>
             <SortProductList queryConfig={queryConfig} pageSize={productsData.data.data.pagination.page_size} />
