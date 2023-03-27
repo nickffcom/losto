@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import productApi from 'src/apis/product.api'
 import ProductRating from 'src/components/ProductRating'
 import { calculateRateSale, formatCurrency, formatNumberToSocialStyle } from 'src/utils/utils'
-import QuantityController from 'src/components/QuantityController'
+// import QuantityController from 'src/components/QuantityController'
 import DOMPurify from 'dompurify'
 import { Product } from 'src/types/product.type'
 
