@@ -7,6 +7,7 @@ import AuthLayout from './layouts/AuthLayout'
 import MainLayout from './layouts/MainLayout'
 import HomePage from './pages/HomePage'
 import Login from './pages/Login'
+import ProductDetail from './pages/ProductDetail'
 import ProductList from './pages/ProductList'
 import Register from './pages/Register'
 
@@ -67,11 +68,20 @@ export default function useRouteElements() {
       ]
     },
     {
-      path: '/productlist',
+      path: path.productlist,
       index: true,
       element: (
         <MainLayout>
           <ProductList />
+        </MainLayout>
+      )
+    },
+    {
+      path: path.productDetail,
+      index: true,
+      element: (
+        <MainLayout>
+          <ProductDetail />
         </MainLayout>
       )
     }

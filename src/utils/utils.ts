@@ -23,3 +23,7 @@ export function formatNumberToSocialStyle(value: number) {
     .format(value)
     .toLocaleLowerCase()
 }
+
+export function calculateRateSale(original: number, sale: number) {
+  return Math.round(((original - sale) / original) * 100) + '%'
+}
