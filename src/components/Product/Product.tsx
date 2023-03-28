@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import path from 'src/constants/path'
 import { Product as ProductType } from 'src/types/product.type'
-import { formatCurrency, formatNumberToSocialStyle } from 'src/utils/utils'
+import { formatCurrency, formatNumberToSocialStyle, generateNameId } from 'src/utils/utils'
 import ProductRating from '../ProductRating'
 
 interface ProductProps {
@@ -13,11 +13,11 @@ export default function Product({ product }: ProductProps) {
     <div>
       <div className='card bg-gray-200 dark:border dark:border-gray-600 dark:bg-transparent'>
         <div className='relative overflow-hidden'>
-          <Link to={`${path.home}${product._id}`} title={product.name}>
+          <Link to={`${path.home}${generateNameId({ name: product.name, id: product._id })}`} title={product.name}>
             <img src={product.image} width='294' height='294' alt={product.name} title={product.name} />
           </Link>
           <div className='card-content hidden bg-white opacity-90 dark:bg-gray-500 md:block'>
-            <Link to={`${path.home}${product._id}`} title={product.name}>
+            <Link to={`${path.home}${generateNameId({ name: product.name, id: product._id })}`} title={product.name}>
               <p className='card-button flex items-center justify-center gap-6'>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
@@ -83,7 +83,10 @@ export default function Product({ product }: ProductProps) {
             </div>
           </div>
         </div>
-        <Link to={`${path.home}${product._id}`} title='Samsung S23 Ultra 256GB'>
+        <Link
+          to={`${path.home}${generateNameId({ name: product.name, id: product._id })}`}
+          title='Samsung S23 Ultra 256GB'
+        >
           <div className='bg-white p-2 dark:bg-transparent xsm:p-4'>
             <h3 className='fs-14 min-h-[44px] font-semibold line-clamp-2 xsm:fs-16 hover:text-secondary-1D6AF9 xsm:min-h-[48px]'>
               {product.name}
