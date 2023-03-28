@@ -31,76 +31,44 @@ export default function RatingStars({ queryConfig }: Props) {
 
   return (
     <ul className='my-3'>
-      {Array(5)
-        .fill(0)
-        .map((_, index) => (
-          <li className='py-1 pl-2' key={index}>
-            <div
-              className='flex items-center text-sm'
-              role='button'
-              aria-labelledby='labeldiv'
-              tabIndex={0}
-              onClick={() => handleFilterStar(5 - index)}
-              onKeyUp={(event) => {
-                if (event.key === 'Enter' || event.keyCode === 13) {
-                  handleFilterStar(5 - index)
-                }
-              }}
-            >
-              {Array(5)
-                .fill(0)
-                .map((_, indexStar) => {
-                  if (indexStar < 5 - index) {
-                    return (
-                      <svg viewBox='0 0 9.5 8' className='mr-1 h-4 w-4' key={indexStar}>
-                        <defs>
-                          <linearGradient id='ratingStarGradient' x1='50%' x2='50%' y1='0%' y2='100%'>
-                            <stop offset={0} stopColor='#ffca11' />
-                            <stop offset={1} stopColor='#ffad27' />
-                          </linearGradient>
-                          <polygon
-                            id='ratingStar'
-                            points='14.910357 6.35294118 12.4209136 7.66171903 12.896355 4.88968305 10.8823529 2.92651626 13.6656353 2.52208166 14.910357 0 16.1550787 2.52208166 18.9383611 2.92651626 16.924359 4.88968305 17.3998004 7.66171903'
-                          />
-                        </defs>
-                        <g fill='url(#ratingStarGradient)' fillRule='evenodd' stroke='none' strokeWidth={1}>
-                          <g transform='translate(-876 -1270)'>
-                            <g transform='translate(155 992)'>
-                              <g transform='translate(600 29)'>
-                                <g transform='translate(10 239)'>
-                                  <g transform='translate(101 10)'>
-                                    <use stroke='#ffa727' strokeWidth='.5' xlinkHref='#ratingStar' />
-                                  </g>
-                                </g>
-                              </g>
-                            </g>
-                          </g>
-                        </g>
-                      </svg>
-                    )
-                  }
-                  return (
-                    <svg viewBox='0 0 30 30' className='mr-1 h-4 w-4' key={indexStar}>
-                      <defs>
-                        <linearGradient id='star__hollow' x1='50%' x2='50%' y1='0%' y2='99.0177926%'>
-                          <stop offset='0%' stopColor='#FFD211' />
-                          <stop offset='100%' stopColor='#FFAD27' />
-                        </linearGradient>
-                      </defs>
-                      <path
-                        fill='none'
-                        fillRule='evenodd'
-                        stroke='url(#star__hollow)'
-                        strokeWidth={2}
-                        d='M23.226809 28.390899l-1.543364-9.5505903 6.600997-6.8291523-9.116272-1.4059447-4.01304-8.63019038-4.013041 8.63019038-9.116271 1.4059447 6.600997 6.8291523-1.543364 9.5505903 8.071679-4.5038874 8.071679 4.5038874z'
-                      />
-                    </svg>
-                  )
-                })}
-              {index !== 0 && <span className='fs-14 ml-2'>Above</span>}
-            </div>
-          </li>
-        ))}
+      {[...Array(5)].map((_, index) => (
+        <li className='py-1 pl-2' key={index}>
+          <div
+            className='flex items-center text-sm'
+            role='button'
+            aria-label='star'
+            tabIndex={0}
+            onClick={() => handleFilterStar(5 - index)}
+            onKeyUp={(event) => {
+              if (event.key === 'Enter' || index === 13) {
+                handleFilterStar(5 - index)
+              }
+            }}
+          >
+            {[...Array(5)].map((_, index2) => (
+              <svg
+                key={index2}
+                enableBackground='new 0 0 24 24'
+                viewBox='0 0 24 24'
+                x={0}
+                y={0}
+                className={`mr-1 h-4 w-4 cursor-pointer fill-slate-300 ${
+                  index2 >= 5 - index ? 'selected' : 'unselected'
+                }`}
+              >
+                <path
+                  id='Stroke 1'
+                  fillRule='evenodd'
+                  clipRule='evenodd'
+                  d='M13.1043 4.17701L14.9317 7.82776C15.1108 8.18616 15.4565 8.43467 15.8573 8.49218L19.9453 9.08062C20.9554 9.22644 21.3573 10.4505 20.6263 11.1519L17.6702 13.9924C17.3797 14.2718 17.2474 14.6733 17.3162 15.0676L18.0138 19.0778C18.1856 20.0698 17.1298 20.8267 16.227 20.3574L12.5732 18.4627C12.215 18.2768 11.786 18.2768 11.4268 18.4627L7.773 20.3574C6.87023 20.8267 5.81439 20.0698 5.98724 19.0778L6.68385 15.0676C6.75257 14.6733 6.62033 14.2718 6.32982 13.9924L3.37368 11.1519C2.64272 10.4505 3.04464 9.22644 4.05466 9.08062L8.14265 8.49218C8.54354 8.43467 8.89028 8.18616 9.06937 7.82776L10.8957 4.17701C11.3477 3.27433 12.6523 3.27433 13.1043 4.17701Z'
+                />
+              </svg>
+            ))}
+
+            <span>({5 - index})</span>
+          </div>
+        </li>
+      ))}
     </ul>
   )
 }

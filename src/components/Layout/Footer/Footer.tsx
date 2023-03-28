@@ -10,7 +10,9 @@ export default function Footer() {
             <img src={logo} alt='logo' width='166' height='51' />
           </Link>
         </div>
-        <p className='text-primary-1A162E fs-14 text-center lg:fs-16 dark:text-white'>©2023 - Copyrights Trung</p>
+        <p className='text-primary-1A162E text-center font-semibold dark:text-white lg:text-lg'>
+          ©2023 - Trung. All rights reserved.
+        </p>
       </div>
     </footer>
   )
