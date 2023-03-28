@@ -38,6 +38,7 @@ export default function RatingStars({ queryConfig }: Props) {
             <div
               className='flex items-center text-sm'
               role='button'
+              aria-labelledby='labeldiv'
               tabIndex={0}
               onClick={() => handleFilterStar(5 - index)}
               onKeyUp={(event) => {

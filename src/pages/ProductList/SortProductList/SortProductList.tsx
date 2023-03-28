@@ -56,8 +56,8 @@ export default function SortProductList({ queryConfig, pageSize }: PaginationPro
               className={classNames(
                 'fs-14 flex h-10 items-center justify-center rounded-8 border border-gray-700 px-5 font-semibold duration-200',
                 {
-                  'border-secondary-26B374 bg-secondary-26B374 text-white': isActiveSortBy(sortBy.view),
-                  'hover:border-secondary-26B374 hover:bg-secondary-26B374 hover:text-white': !isActiveSortBy(
+                  'border-secondary-26B374 bg-secondary-26B374 text-black': isActiveSortBy(sortBy.view),
+                  'hover:border-secondary-26B374 hover:bg-secondary-26B374 hover:text-black': !isActiveSortBy(
                     sortBy.view
                   )
                 }
@@ -70,8 +70,8 @@ export default function SortProductList({ queryConfig, pageSize }: PaginationPro
               className={classNames(
                 'fs-14 flex h-10 items-center justify-center rounded-8 border border-gray-700 px-5 font-semibold duration-200',
                 {
-                  'border-secondary-26B374 bg-secondary-26B374 text-white': isActiveSortBy(sortBy.createdAt),
-                  'hover:border-secondary-26B374 hover:bg-secondary-26B374 hover:text-white': !isActiveSortBy(
+                  'border-secondary-26B374 bg-secondary-26B374 text-black': isActiveSortBy(sortBy.createdAt),
+                  'hover:border-secondary-26B374 hover:bg-secondary-26B374 hover:text-black': !isActiveSortBy(
                     sortBy.createdAt
                   )
                 }
@@ -84,8 +84,8 @@ export default function SortProductList({ queryConfig, pageSize }: PaginationPro
               className={classNames(
                 'fs-14 flex h-10 items-center justify-center rounded-8 border border-gray-700 px-5 font-semibold duration-200',
                 {
-                  'border-secondary-26B374 bg-secondary-26B374 text-white': isActiveSortBy(sortBy.sold),
-                  'hover:border-secondary-26B374 hover:bg-secondary-26B374 hover:text-white': !isActiveSortBy(
+                  'border-secondary-26B374 bg-secondary-26B374 text-black': isActiveSortBy(sortBy.sold),
+                  'hover:border-secondary-26B374 hover:bg-secondary-26B374 hover:text-black': !isActiveSortBy(
                     sortBy.sold
                   )
                 }

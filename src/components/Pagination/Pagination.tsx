@@ -111,6 +111,7 @@ export default function Pagination({ queryConfig, pageSize }: PaginationProps) {
                 page: (page - 1).toString()
               }).toString()
             }}
+            aria-label='prev'
             className='b-sd flex h-7 w-7 cursor-pointer items-center justify-center rounded-8 border p-1 lg:h-8 lg:w-8 lg:p-2'
           >
             <svg
@@ -151,6 +152,7 @@ export default function Pagination({ queryConfig, pageSize }: PaginationProps) {
                 page: (page + 1).toString()
               }).toString()
             }}
+            aria-label='next'
             className=' b-sd flex h-7 w-7 cursor-pointer items-center justify-center rounded-8 border bg-transparent p-1 transition-colors lg:h-8 lg:w-8 lg:p-2'
           >
             <svg

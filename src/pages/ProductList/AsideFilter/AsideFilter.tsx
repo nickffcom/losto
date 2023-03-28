@@ -177,7 +177,7 @@ export default function AsideFilter({ queryConfig, categories }: Props) {
       </form>
       <p className='fs-14 mt-3 font-medium text-black'>Feedback</p>
       <RatingStar queryConfig={queryConfig} />
-      <Button onClick={handleRemoveAll} className='button-secondary w-full  before:w-[350px]'>
+      <Button onClick={handleRemoveAll} className='button-secondary w-full  before:w-[350px] hover:text-black'>
         Xóa tất cả
       </Button>
     </div>
