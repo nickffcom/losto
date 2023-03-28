@@ -33,7 +33,7 @@ export default function ProductList() {
   })
 
   return (
-    <div className='container mx-auto mt-7 flex flex-col items-center justify-center'>
+    <div className='container mx-auto mt-4 flex flex-col items-center justify-center xsm:mt-7'>
       {productsData && (
         <div className='grid grid-cols-1 gap-5 mmd:grid-cols-12 lg:gap-6'>
           <div className='mmd:col-span-3'>

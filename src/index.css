@@ -321,10 +321,6 @@ i {
 /* End slider home */
 
 /* Scroll */
-input:focus {
-  border: border;
-  outline: 1px solid #0154b8;
-}
 body::-webkit-scrollbar {
   width: 13px;
 }
@@ -334,10 +330,13 @@ body::-webkit-scrollbar-thumb {
   border-radius: 20px;
   border: 3px solid #f2f2f2;
 }
+
 body::-webkit-scrollbar-track {
   background: #f2f2f2;
 }
+
 /* End scroll */
 .unselected {
-  fill: #ffca11; /* hoặc một màu xám khác */
+  fill: #ffca11;
+  /* hoặc một màu xám khác */
 }

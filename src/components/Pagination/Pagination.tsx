@@ -21,7 +21,7 @@ export default function Pagination({ queryConfig, pageSize }: PaginationProps) {
         return (
           <span
             key={index}
-            className='b-sd flex h-7 w-7 items-center justify-center rounded-8 bg-transparent p-1 transition-colors lg:h-8 lg:w-8 lg:p-2'
+            className='b-sd-1 flex h-7 w-7 items-center justify-center rounded-8 bg-transparent p-1 transition-colors lg:h-8 lg:w-8 lg:p-2'
           >
             ...
           </span>
@@ -34,7 +34,7 @@ export default function Pagination({ queryConfig, pageSize }: PaginationProps) {
         return (
           <span
             key={index}
-            className='b-sd flex h-7 w-7 items-center justify-center rounded-8 bg-transparent p-1 transition-colors lg:h-8 lg:w-8 lg:p-2'
+            className='b-sd-1 flex h-7 w-7 items-center justify-center rounded-8 bg-transparent p-1 transition-colors lg:h-8 lg:w-8 lg:p-2'
           >
             ...
           </span>
@@ -73,7 +73,7 @@ export default function Pagination({ queryConfig, pageSize }: PaginationProps) {
             }}
             key={index}
             className={classNames(
-              'b-sd flex h-7 w-7 items-center justify-center rounded-8 border bg-transparent p-1 transition-colors lg:h-8 lg:w-8 lg:p-2',
+              'b-sd-1 flex h-7 w-7 items-center justify-center rounded-8 border bg-transparent p-1 transition-colors lg:h-8 lg:w-8 lg:p-2',
               {
                 'border-primary-377DFF': pageNumber === page,
                 '': pageNumber !== page
@@ -89,7 +89,7 @@ export default function Pagination({ queryConfig, pageSize }: PaginationProps) {
     <div>
       <div className='mt-5 flex flex-wrap justify-center gap-3 lg:mt-6'>
         {page === 1 ? (
-          <span className='b-sd flex h-7 w-7 cursor-not-allowed items-center justify-center rounded-8 border p-1 lg:h-8 lg:w-8 lg:p-2'>
+          <span className='b-sd-1 flex h-7 w-7 cursor-not-allowed items-center justify-center rounded-8 border p-1 lg:h-8 lg:w-8 lg:p-2'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               fill='none'
@@ -112,7 +112,7 @@ export default function Pagination({ queryConfig, pageSize }: PaginationProps) {
               }).toString()
             }}
             aria-label='prev'
-            className='b-sd flex h-7 w-7 cursor-pointer items-center justify-center rounded-8 border p-1 lg:h-8 lg:w-8 lg:p-2'
+            className='b-sd-1 flex h-7 w-7 cursor-pointer items-center justify-center rounded-8 border p-1 lg:h-8 lg:w-8 lg:p-2'
           >
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -130,7 +130,7 @@ export default function Pagination({ queryConfig, pageSize }: PaginationProps) {
 
         {renderPagination()}
         {page === pageSize ? (
-          <span className='b-sd flex h-7 w-7 cursor-not-allowed items-center justify-center rounded-8 border bg-transparent p-1 transition-colors lg:h-8 lg:w-8 lg:p-2'>
+          <span className='b-sd-1 flex h-7 w-7 cursor-not-allowed items-center justify-center rounded-8 border bg-transparent p-1 transition-colors lg:h-8 lg:w-8 lg:p-2'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               fill='none'
@@ -153,7 +153,7 @@ export default function Pagination({ queryConfig, pageSize }: PaginationProps) {
               }).toString()
             }}
             aria-label='next'
-            className=' b-sd flex h-7 w-7 cursor-pointer items-center justify-center rounded-8 border bg-transparent p-1 transition-colors lg:h-8 lg:w-8 lg:p-2'
+            className=' b-sd-1 flex h-7 w-7 cursor-pointer items-center justify-center rounded-8 border bg-transparent p-1 transition-colors lg:h-8 lg:w-8 lg:p-2'
           >
             <svg
               xmlns='http://www.w3.org/2000/svg'

@@ -37,7 +37,7 @@ export default function Header() {
   const nameAvatar = text?.split(' ').map((word) => word.charAt(0))
 
   return (
-    <div className='hidden bg-F8F8FB shadow-md dark:bg-transparent md:block'>
+    <div className='bg-F8F8FB shadow-md dark:bg-transparent'>
       <header className='py-6'>
         <div className='container'>
           <div className='flex items-center justify-between'>
