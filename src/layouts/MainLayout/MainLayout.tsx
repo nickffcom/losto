@@ -1,7 +1,7 @@
 import Footer from 'src/components/Layout/Footer'
 import Header from 'src/components/Layout/Header'
 import HeaderMobile from 'src/components/Layout/HeaderMobile'
-import getDeviceType from 'src/hooks/getDeviceType'
+import { getDeviceType } from 'src/utils/utils'
 
 interface Props {
   children?: React.ReactNode

@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query'
 import { useContext, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { createSearchParams, Link, useNavigate } from 'react-router-dom'
 import authApi from 'src/apis/auth.api'
 
 import logo from 'src/assets/logo.svg'
@@ -8,12 +8,31 @@ import Popover from 'src/components/Popover'
 import path from 'src/constants/path'
 import { AppContext } from 'src/contexts/app.context'
 import SwitchThemeButton from '../../SwitchThemeButton'
+import useQueryConfig from 'src/hooks/useQueryConfig'
+import { useForm } from 'react-hook-form'
+import { schema, Schema } from 'src/utils/rules'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { omit } from 'lodash'
 
 const HEADER_HEIGHT = 99
+
+type FormData = Pick<Schema, 'name'>
+
+const nameSchema = schema.pick(['name'])
 
 export default function Header() {
   const { setIsAuthenticated, isAuthenticated, setProfile, profile } = useContext(AppContext)
   const [isFixedHeader, setIsFixedHeader] = useState(false)
+  const queryConfig = useQueryConfig()
+  const navigate = useNavigate()
+
+  const { register, handleSubmit } = useForm<FormData>({
+    defaultValues: {
+      name: ''
+    },
+    resolver: yupResolver(nameSchema)
+  })
+
   const logoutMutation = useMutation({
     mutationFn: authApi.logout,
     onSuccess: () => {
@@ -35,6 +54,25 @@ export default function Header() {
 
   const text = profile?.name
   const nameAvatar = text?.split(' ').map((word) => word.charAt(0))
+
+  const onSubmitSearch = handleSubmit((data) => {
+    const config = queryConfig.order
+      ? omit(
+          {
+            ...queryConfig,
+            name: data.name
+          },
+          ['order', 'sort_by']
+        )
+      : {
+          ...queryConfig,
+          name: data.name
+        }
+    navigate({
+      pathname: path.productlist,
+      search: createSearchParams(config).toString()
+    })
+  })
 
   return (
     <div className='bg-F8F8FB shadow-md dark:bg-transparent'>
@@ -186,13 +224,13 @@ export default function Header() {
             </Link>
           </div>
           <div className='flex items-center gap-5'>
-            <form>
+            <form onSubmit={onSubmitSearch}>
               <div className='relative'>
                 <input
                   type='text'
-                  name='search'
                   placeholder='Search by products, categories'
                   className='h-10 rounded-8 border border-gray-900 pl-3 pr-9 text-black placeholder:text-xs focus:outline-none'
+                  {...register('name')}
                 />
                 <button type='submit' className='absolute top-1/2 right-0 mr-2 -translate-y-1/2' aria-label='search'>
                   <svg
@@ -278,13 +316,13 @@ export default function Header() {
             </Link>
           </div>
           <div className='flex items-center gap-5'>
-            <form>
+            <form onSubmit={onSubmitSearch}>
               <div className='relative'>
                 <input
                   type='text'
-                  name='search'
                   placeholder='Search by products, categories'
                   className='h-10 rounded-8 border border-gray-900 pl-3 pr-9 text-black placeholder:text-xs focus:outline-none'
+                  {...register('name')}
                 />
                 <button type='submit' className='absolute top-1/2 right-0 mr-2 -translate-y-1/2' aria-label='search'>
                   <svg

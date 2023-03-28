@@ -1,5 +1,7 @@
 import axios, { AxiosError } from 'axios'
 import HttpStatusCode from 'src/constants/httpStatusCode.enum'
+import useWindowDimensions from 'src/hooks/useWindowDimensions'
+import { DeviceType } from 'src/types/utils.type'
 
 export function isAxiosError<T>(error: unknown): error is AxiosError<T> {
   // eslint-disable-next-line import/no-named-as-default-member
@@ -39,4 +41,19 @@ export const generateNameId = ({ name, id }: { name: string; id: string }) => {
 export const getIdFromNameId = (nameId: string) => {
   const arr = nameId.split('-i-')
   return arr[arr.length - 1]
+}
+
+export const getDeviceType = (): DeviceType => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { width } = useWindowDimensions()
+  if (width && width < 768) {
+    // Thiết bị có chiều rộng nhỏ hơn 768px được xem là mobile
+    return 'mobile'
+  } else if (width && width < 992) {
+    // Thiết bị có chiều rộng từ 768px đến 991px được xem là tablet
+    return 'tablet'
+  } else {
+    // Thiết bị có chiều rộng lớn hơn hoặc bằng 992px được xem là desktop
+    return 'desktop'
+  }
 }

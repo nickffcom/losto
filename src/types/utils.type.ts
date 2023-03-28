@@ -12,3 +12,5 @@ export interface SuccessResponse<Data> {
 export type NoUndefinedField<T> = {
   [P in keyof T]-?: NoUndefinedField<NonNullable<T[P]>>
 }
+
+export type DeviceType = 'mobile' | 'tablet' | 'desktop'
