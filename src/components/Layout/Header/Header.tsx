@@ -316,13 +316,13 @@ export default function Header() {
             </Link>
           </div>
           <div className='flex items-center gap-5'>
-            <form onSubmit={onSubmitSearch}>
+            <form>
               <div className='relative'>
                 <input
                   type='text'
                   placeholder='Search by products, categories'
                   className='h-10 rounded-8 border border-gray-900 pl-3 pr-9 text-black placeholder:text-xs focus:outline-none'
-                  {...register('name')}
+                  // {...register('name')}
                 />
                 <button type='submit' className='absolute top-1/2 right-0 mr-2 -translate-y-1/2' aria-label='search'>
                   <svg
