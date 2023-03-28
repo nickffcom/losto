@@ -1,13 +1,11 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
-import reactRefresh from '@vitejs/plugin-react-refresh'
 import compression from 'vite-plugin-compression'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
-    reactRefresh(),
     compression({
       ext: '.gz', // Phần mở rộng của các tệp nén
       threshold: 1024, // Kích thước tệp tối thiểu được nén, tính bằng byte
