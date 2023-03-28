@@ -152,6 +152,7 @@ export default function SortProductList({ queryConfig, pageSize }: PaginationPro
                   page: (page - 1).toString()
                 }).toString()
               }}
+              aria-label='prev'
               className='fs-14 flex h-10 items-center justify-center rounded-8 border border-gray-700 px-2 font-semibold duration-200 hover:border-secondary-26B374 hover:bg-secondary-26B374 hover:text-white'
             >
               <svg
@@ -188,6 +189,7 @@ export default function SortProductList({ queryConfig, pageSize }: PaginationPro
                   page: (page + 1).toString()
                 }).toString()
               }}
+              aria-label='next'
               className='fs-14 flex h-10 items-center justify-center rounded-8 border border-gray-700 px-2 font-semibold duration-200 hover:border-secondary-26B374 hover:bg-secondary-26B374 hover:text-white'
             >
               <svg

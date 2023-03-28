@@ -36,11 +36,15 @@ export default function RatingStars({ queryConfig }: Props) {
         .map((_, index) => (
           <li className='py-1 pl-2' key={index}>
             <div
-              className='flex cursor-pointer items-center text-sm'
-              onClick={() => handleFilterStar(5 - index)}
-              tabIndex={0}
+              className='flex items-center text-sm'
               role='button'
-              aria-hidden='true'
+              tabIndex={0}
+              onClick={() => handleFilterStar(5 - index)}
+              onKeyUp={(event) => {
+                if (event.key === 'Enter' || event.keyCode === 13) {
+                  handleFilterStar(5 - index)
+                }
+              }}
             >
               {Array(5)
                 .fill(0)
