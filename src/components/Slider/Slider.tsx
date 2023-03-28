@@ -38,6 +38,7 @@ const Slider = () => {
         delay: 5000,
         disableOnInteraction: false
       }}
+      loop
       modules={[Navigation, EffectCreative, Autoplay]}
       onSlideChangeTransitionStart={handleSlideChangeStart}
       onSlideChangeTransitionEnd={handleSlideChangeEnd}
