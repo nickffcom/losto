@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useMemo, useState } from 'react'
+import { Fragment, useEffect, useMemo, useRef, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
 import productApi from 'src/apis/product.api'
@@ -12,6 +12,7 @@ export default function ProductDetail() {
   const { id } = useParams()
   const [currentIndexImages, setCurrentIndexImages] = useState([0, 5])
   const [activeImage, setActiveImage] = useState('')
+  const imageRef = useRef<HTMLImageElement>(null)
 
   const { data: ProductDetailData } = useQuery({
     queryKey: ['product', id],
@@ -24,7 +25,7 @@ export default function ProductDetail() {
   //handle current image
   const currentImages = useMemo(
     () => (productDetail ? productDetail.images.slice(...currentIndexImages) : []),
-    [productDetail, currentIndexImages]
+    [currentIndexImages, productDetail]
   )
 
   //handle active image
@@ -50,6 +51,29 @@ export default function ProductDetail() {
     setActiveImage(img)
   }
 
+  const handleZoom = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const rect = event.currentTarget.getBoundingClientRect()
+    const img = imageRef.current as HTMLImageElement
+    const { naturalHeight, naturalWidth } = img
+    //cach 1
+    const { offsetY, offsetX } = event.nativeEvent
+    //cach 2:
+    // const offsetX = event.pageX - (rect.x + window.screenX)
+    // const offsetY = event.pageY - (rect.y + window.screenY)
+
+    const top = offsetY * (1 - naturalHeight / rect.height)
+    const left = offsetX * (1 - naturalWidth / rect.width)
+
+    img.style.width = naturalWidth + 'px'
+    img.style.height = naturalHeight + 'px'
+    img.style.maxWidth = 'unset'
+    img.style.top = top + 'px'
+    img.style.left = left + 'px'
+  }
+  const handleRemoveZoom = () => {
+    imageRef.current?.removeAttribute('style')
+  }
+
   if (!productDetail) return null
   return (
     <Fragment>
@@ -57,12 +81,17 @@ export default function ProductDetail() {
         <div className='container'>
           <div className='grid grid-cols-1 gap-6 rounded-16 border bg-FAFAFD p-4 md:grid-cols-12 md:gap-8 lg:p-6'>
             <div className='md:col-span-5'>
-              <div className='b-sd-1 relative w-full cursor-zoom-in overflow-hidden rounded-10 pt-[100%]'>
+              <div
+                className='b-sd-1 relative w-full cursor-zoom-in overflow-hidden rounded-10 pt-[100%]'
+                onMouseMove={handleZoom}
+                onMouseLeave={handleRemoveZoom}
+              >
                 <img
                   src={activeImage}
                   alt={productDetail.name}
                   title={productDetail.name}
                   className='pointer-events-none absolute top-0 left-0 h-full w-full bg-white object-cover'
+                  ref={imageRef}
                 />
               </div>
               <div className='relative mt-4 grid grid-cols-5 gap-2 md:gap-3 lg:mt-6'>
