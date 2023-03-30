@@ -29,7 +29,8 @@ export default function ProductList() {
     queryKey: ['categories'],
     queryFn: () => {
       return categoryApi.getCategories()
-    }
+    },
+    staleTime: 3 * 60 * 1000
   })
 
   return (
