@@ -21,16 +21,14 @@ export default function ProductList() {
     queryFn: () => {
       return productApi.getProducts(queryConfig as ProductListConfig)
     },
-    keepPreviousData: true,
-    staleTime: 3 * 60 * 1000
+    keepPreviousData: true
   })
 
   const { data: categoriesData } = useQuery({
     queryKey: ['categories'],
     queryFn: () => {
       return categoryApi.getCategories()
-    },
-    staleTime: 3 * 60 * 1000
+    }
   })
 
   return (

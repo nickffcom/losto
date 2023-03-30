@@ -5,7 +5,7 @@ import productApi from 'src/apis/product.api'
 import Slider from 'src/components/Slider'
 import useQueryConfig from 'src/hooks/useQueryConfig'
 import { ProductListConfig } from 'src/types/product.type'
-import { Navigation,Pagination } from 'swiper'
+import { Navigation, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.min.css'
 
@@ -17,8 +17,7 @@ export default function HomePage() {
     queryFn: () => {
       return productApi.getProducts(queryConfig as ProductListConfig)
     },
-    keepPreviousData: true,
-    staleTime: 3 * 60 * 1000
+    keepPreviousData: true
   })
   // const { data: categoriesData } = useQuery({
   //   queryKey: ['categories'],
@@ -32,7 +31,7 @@ export default function HomePage() {
   return (
     <>
       <Slider />
-      <div className='container'>
+      <div className='container mt-10'>
         <Swiper
           slidesPerView={3}
           spaceBetween={30}
@@ -45,13 +44,11 @@ export default function HomePage() {
           loop
         >
           {productsData?.data.data.products.splice(0, 12).map((item) => (
-            <Fragment key={item._id}>
-              <SwiperSlide>
-                <div>
-                  <img src={item.image} alt={item.name} />
-                </div>
-              </SwiperSlide>
-            </Fragment>
+            <SwiperSlide key={item._id}>
+              <div>
+                <img src={item.image} alt={item.name} />
+              </div>
+            </SwiperSlide>
           ))}
         </Swiper>
       </div>
