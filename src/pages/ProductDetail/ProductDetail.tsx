@@ -6,9 +6,12 @@ import ProductRating from 'src/components/ProductRating'
 import { calculateRateSale, formatCurrency, formatNumberToSocialStyle, getIdFromNameId } from 'src/utils/utils'
 // import QuantityController from 'src/components/QuantityController'
 import DOMPurify from 'dompurify'
-import { Product } from 'src/types/product.type'
+import { Product as ProductType } from 'src/types/product.type'
+import Product from 'src/components/Product'
+import QuantityController from 'src/components/QuantityController'
 
 export default function ProductDetail() {
+  const [buyCount, setBuyCount] = useState(1)
   const { nameId } = useParams()
   const id = getIdFromNameId(nameId as string)
   const [currentIndexImages, setCurrentIndexImages] = useState([0, 5])
@@ -29,6 +32,16 @@ export default function ProductDetail() {
     [currentIndexImages, productDetail]
   )
 
+  const queryConfig = { limit: '20', page: '1', category: productDetail?.category._id }
+  const { data: productsData } = useQuery({
+    queryKey: ['products', queryConfig],
+    queryFn: () => {
+      return productApi.getProducts(queryConfig)
+    },
+    enabled: Boolean(productDetail),
+    staleTime: 3 * 60 * 1000
+  })
+
   //handle active image
   useEffect(() => {
     if (productDetail && productDetail.images.length > 0) {
@@ -37,7 +50,7 @@ export default function ProductDetail() {
   }, [productDetail])
 
   const next = () => {
-    if (currentIndexImages[1] < (productDetail as Product)?.images.length) {
+    if (currentIndexImages[1] < (productDetail as ProductType)?.images.length) {
       setCurrentIndexImages((prev) => [prev[0] + 1, prev[1] + 1])
     }
   }
@@ -74,6 +87,12 @@ export default function ProductDetail() {
   const handleRemoveZoom = () => {
     imageRef.current?.removeAttribute('style')
   }
+
+  /* Quantity handle */
+  const handleBuyCount = (value: number) => {
+    setBuyCount(value)
+  }
+  /* End quantity handle */
 
   if (!productDetail) return null
   return (
@@ -148,7 +167,7 @@ export default function ProductDetail() {
               <h1 className='fs-18 font-semibold uppercase lg:fs-20'>{productDetail.name}</h1>
               <div className='mt-2 flex items-center gap-2 lg:mt-4 lg:gap-4'>
                 <div className='flex items-center gap-1'>
-                  <span className='fs-14 mr-1 border-b border-b-primary-377DFF border-b-primary-377DFF font-semibold text-primary-377DFF'>
+                  <span className='fs-14 mr-1 border-b border-b-primary-377DFF font-semibold text-primary-377DFF'>
                     {productDetail.rating}
                   </span>
                   <ProductRating rating={productDetail.rating} />
@@ -174,13 +193,13 @@ export default function ProductDetail() {
               </div>
               <div className='xsx:flex-nowrap xsx:gap-5 mt-4 flex flex-wrap items-center gap-4 lg:mt-8'>
                 <p className='fs-14 whitespace-nowrap capitalize md:fs-16'>Quantity</p>
-                {/* <QuantityController
+                <QuantityController
                   onDecrease={handleBuyCount}
                   onIncrease={handleBuyCount}
                   onTyping={handleBuyCount}
                   value={buyCount}
                   max={productDetail.quantity}
-                /> */}
+                />
                 <p className='fs-14 whitespace-nowrap'>{productDetail.quantity} In Stock</p>
               </div>
               <div className='xsx:flex-nowrap xsx:justify-end mt-4 flex flex-wrap items-end justify-start gap-4 lg:mt-8 lg:gap-5'>
@@ -207,7 +226,15 @@ export default function ProductDetail() {
           </div>
           <div className='mt-3 rounded-16 border bg-white p-4 lg:mt-6 lg:p-6'>
             <p className='fs-18 font-semibold uppercase lg:fs-20'></p>
-            <div className='mt-3 grid grid-cols-1 gap-4 md:grid-cols-3 lg:mt-6 lg:gap-6'></div>
+            {productsData && (
+              <div className='mt-5 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:mt-6 lg:gap-6'>
+                {productsData.data.data.products.map((product) => (
+                  <Fragment key={product._id}>
+                    <Product product={product} />
+                  </Fragment>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

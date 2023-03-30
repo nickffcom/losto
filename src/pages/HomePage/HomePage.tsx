@@ -12,13 +12,13 @@ import 'swiper/swiper-bundle.min.css'
 export default function HomePage() {
   const queryConfig = useQueryConfig()
 
-  const { data: productsData } = useQuery({
-    queryKey: ['products', queryConfig],
-    queryFn: () => {
-      return productApi.getProducts(queryConfig as ProductListConfig)
-    },
-    keepPreviousData: true
-  })
+  // const { data: productsData } = useQuery({
+  //   queryKey: ['products', queryConfig],
+  //   queryFn: () => {
+  //     return productApi.getProducts(queryConfig as ProductListConfig)
+  //   },
+  //   keepPreviousData: true
+  // })
   // const { data: categoriesData } = useQuery({
   //   queryKey: ['categories'],
   //   queryFn: () => {
@@ -43,13 +43,13 @@ export default function HomePage() {
           className='mySwiper'
           loop
         >
-          {productsData?.data.data.products.splice(0, 12).map((item) => (
+          {/* {productsData?.data.data.products.splice(0, 12).map((item) => (
             <SwiperSlide key={item._id}>
               <div>
                 <img src={item.image} alt={item.name} />
               </div>
             </SwiperSlide>
-          ))}
+          ))} */}
         </Swiper>
       </div>
     </>
