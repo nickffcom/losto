@@ -11,6 +11,9 @@ const productApi = {
   },
   getProductDetail(id: string) {
     return http.get<SuccessResponse<Product>>(`${URL}/${id}`)
+  },
+  searchProduct(searchText: string) {
+    return http.get<SuccessResponse<Product[]>>(`${URL}/searchs?searchText=${searchText}`)
   }
 }
 

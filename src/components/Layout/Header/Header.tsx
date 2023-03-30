@@ -1,18 +1,21 @@
-import { useMutation } from '@tanstack/react-query'
-import { useContext, useEffect, useState } from 'react'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { Fragment, useContext, useEffect, useMemo, useState } from 'react'
 import { createSearchParams, Link, useNavigate } from 'react-router-dom'
 import authApi from 'src/apis/auth.api'
-
+import { useDetectClickOutside } from 'react-detect-click-outside'
 import logo from 'src/assets/logo.svg'
 import Popover from 'src/components/Popover'
 import path from 'src/constants/path'
 import { AppContext } from 'src/contexts/app.context'
 import SwitchThemeButton from '../../SwitchThemeButton'
 import useQueryConfig from 'src/hooks/useQueryConfig'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import { schema, Schema } from 'src/utils/rules'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { omit } from 'lodash'
+import { debounce, omit } from 'lodash'
+import productApi from 'src/apis/product.api'
+import { Product } from 'src/types/product.type'
+import { formatCurrency } from 'src/utils/utils'
 
 const HEADER_HEIGHT = 99
 
@@ -25,14 +28,48 @@ export default function Header() {
   const [isFixedHeader, setIsFixedHeader] = useState(false)
   const queryConfig = useQueryConfig()
   const navigate = useNavigate()
+  const [searchText, setSearchText] = useState('')
+  const [data, setData] = useState<Product[]>([])
+  const [isShow, setIsShow] = useState<boolean>(false)
 
-  const { register, handleSubmit } = useForm<FormData>({
+  /* Handle search realtime */
+  const { data: DataProductSearch, isLoading } = useQuery({
+    queryKey: ['product-search', searchText],
+    queryFn: () => {
+      return productApi.searchProduct(searchText)
+    }
+  })
+
+  const debounceChange = useMemo(
+    () =>
+      debounce(async (searchValue) => {
+        if (searchValue === '') {
+          setData([])
+        } else {
+          setSearchText(searchValue)
+          setIsShow(true)
+        }
+      }, 500),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  )
+  /* End handle search realtime */
+
+  /* Handle click out side */
+  const disableIsShow = () => {
+    setIsShow(false)
+  }
+  const divRef = useDetectClickOutside({ onTriggered: disableIsShow })
+  /* End handle click out side */
+
+  const { register, handleSubmit, control } = useForm<FormData>({
     defaultValues: {
       name: ''
     },
     resolver: yupResolver(nameSchema)
   })
 
+  /* Handle logout */
   const logoutMutation = useMutation({
     mutationFn: authApi.logout,
     onSuccess: () => {
@@ -44,17 +81,29 @@ export default function Header() {
     logoutMutation.mutate()
     setProfile(null)
   }
+  /* End handle logout */
 
+  /* Handle fixed menu */
   useEffect(() => {
-    window.scrollY > HEADER_HEIGHT ? setIsFixedHeader(true) : setIsFixedHeader(false)
+    function handleScroll() {
+      setIsFixedHeader(window.scrollY > HEADER_HEIGHT)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
   }, [])
-  window.onscroll = () => {
-    window.scrollY > HEADER_HEIGHT ? setIsFixedHeader(true) : setIsFixedHeader(false)
-  }
 
+  // no need for separate onscroll function
+
+  /* End handle fixed menu */
+
+  /* Show data info */
   const text = profile?.name
   const nameAvatar = text?.split(' ').map((word) => word.charAt(0))
+  /* End show data */
 
+  /* Handle submit search to productlist */
   const onSubmitSearch = handleSubmit((data) => {
     const config = queryConfig.order
       ? omit(
@@ -204,7 +253,11 @@ export default function Header() {
           </div>
         </div>
       </header>
-      <div className='border-t-2 dark:border-t-neutral-800'>
+      <div
+        className={`border-t-2 dark:border-t-neutral-800 ${
+          isFixedHeader ? 'b-sd-1 fixed top-0 z-10 w-full bg-white' : 'block'
+        }`}
+      >
         <div className='container mx-auto flex h-16 items-center justify-between'>
           <div className='fs-16 font-semibold dark:text-white'>
             <Link className='nav-link-hover-effect mr-12 hover:text-primary-377DFF' to='/' aria-current='page'>
@@ -226,12 +279,25 @@ export default function Header() {
           <div className='flex items-center gap-5'>
             <form onSubmit={onSubmitSearch}>
               <div className='relative'>
-                <input
-                  type='text'
-                  placeholder='Search by products, categories'
-                  className='h-10 rounded-8 border border-gray-900 pl-3 pr-9 text-black placeholder:text-xs focus:outline-none'
-                  {...register('name')}
+                <Controller
+                  control={control}
+                  name='name'
+                  defaultValue=''
+                  render={({ field: { onChange, value } }) => (
+                    <input
+                      type='text'
+                      placeholder='Search by products, categories'
+                      className='h-10 rounded-8 border border-gray-900 pl-3 pr-9 text-black placeholder:text-xs focus:outline-none'
+                      value={value}
+                      onChange={(event) => {
+                        onChange(event)
+                        debounceChange(event.target.value)
+                      }}
+                      autoComplete='off'
+                    />
+                  )}
                 />
+
                 <button type='submit' className='absolute top-1/2 right-0 mr-2 -translate-y-1/2' aria-label='search'>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
@@ -248,98 +314,58 @@ export default function Header() {
                     />
                   </svg>
                 </button>
-              </div>
-            </form>
-            <Popover
-              className='class=" flex h-10 cursor-pointer flex-col justify-center rounded-8 border border-gray-400 px-2 duration-200 hover:border-primary-377DFF'
-              renderPopover={
-                <div className='rounded-4 border border-gray-200 bg-white shadow-md'>
-                  <div className='fs-14 flex  w-72 flex-col items-start md:w-[400px] '>
-                    <div className='flex w-full items-center justify-between border-b border-gray-200 py-2 px-4'>
-                      <p className='font-semibold'>New Products Added</p>{' '}
-                      <Link to='' className='font-semibold text-primary-377DFF hover:text-secondary-1D6AF9'>
-                        <span>View cart</span>
-                      </Link>
+                <div
+                  className={`b-sd-1 absolute top-full z-10 max-h-[400px] min-h-[80px] w-full rounded-8 bg-white ${
+                    isShow ? 'block' : 'hidden'
+                  }`}
+                  ref={divRef}
+                >
+                  {isLoading && (
+                    <div className='flex h-16 items-center justify-center'>
+                      <svg
+                        aria-hidden='true'
+                        role='status'
+                        className='mr-3 ml-2 inline h-8 w-8 animate-spin fill-white'
+                        viewBox='0 0 100 101'
+                        fill='none'
+                        xmlns='http://www.w3.org/2000/svg'
+                      >
+                        <path
+                          d='M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z'
+                          fill='#E5E7EB'
+                        />
+                        <path
+                          d='M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z'
+                          fill='currentColor'
+                        />
+                      </svg>
                     </div>
-                    <Link to='' className='flex w-full items-center justify-between py-2 px-4'>
-                      <div className='flex items-center gap-2'>
-                        <div className='relative inline-flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-gray-200 dark:bg-gray-600'>
-                          <span className='fs-14 font-medium text-gray-600 dark:text-gray-700'>IP</span>
-                        </div>
-                        <span className='line-clamp-1'>Iphone 14 Pro Max 256GB</span>
-                      </div>
-                      <span className='text-red-500'>19.999.000 VNĐ</span>
-                    </Link>
-                  </div>
+                  )}
+                  {DataProductSearch?.data.data?.slice(0, 5).map((item) => (
+                    <Fragment key={item._id}>
+                      <Link
+                        to={`${path.home}${item._id}`}
+                        className='flex items-center justify-between py-2 px-2 duration-200 hover:bg-gray-200'
+                        onClick={() =>
+                          setIsShow((prevState) => {
+                            setSearchText('')
+                            return !prevState
+                          })
+                        }
+                      >
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          width='64'
+                          height='64'
+                          className='h-16 w-16 object-cover'
+                        />
+                        <p className='fs-12 ml-1 line-clamp-2 dark:text-black'>{item.name}</p>
+                        <div className='fs-12 dark:text-black'>{formatCurrency(item.price)}đ</div>
+                      </Link>
+                    </Fragment>
+                  ))}
                 </div>
-              }
-            >
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-                strokeWidth={1.5}
-                stroke='currentColor'
-                className='text-primary-1A162E h-5 w-5 lg:h-6 lg:w-6'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  d='M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z'
-                />
-              </svg>
-            </Popover>
-          </div>
-        </div>
-      </div>
-      <div
-        className={`fixed ${
-          isFixedHeader ? 'top-0' : 'top-[-64px]'
-        } left-0 right-0 z-50 border-t-2 bg-gray-200 transition-all dark:border-t-neutral-800 dark:bg-neutral-800`}
-      >
-        <div className='container mx-auto flex h-16 items-center justify-between'>
-          <div className='fs-16 font-semibold dark:text-white'>
-            <Link className='nav-link-hover-effect mr-12 hover:text-primary-377DFF' to='/' aria-current='page'>
-              Home
-            </Link>
-            <Link className='nav-link-hover-effect mr-12 hover:text-primary-377DFF' to='/productlist'>
-              Shop
-            </Link>
-            <Link className='nav-link-hover-effect mr-12 hover:text-primary-377DFF' to='/about'>
-              About
-            </Link>
-            <Link className='nav-link-hover-effect mr-12 hover:text-primary-377DFF' to='/contact'>
-              Contact
-            </Link>
-            <Link className='nav-link-hover-effect mr-12 hover:text-primary-377DFF' to='/faq'>
-              FAQs
-            </Link>
-          </div>
-          <div className='flex items-center gap-5'>
-            <form>
-              <div className='relative'>
-                <input
-                  type='text'
-                  placeholder='Search by products, categories'
-                  className='h-10 rounded-8 border border-gray-900 pl-3 pr-9 text-black placeholder:text-xs focus:outline-none'
-                  // {...register('name')}
-                />
-                <button type='submit' className='absolute top-1/2 right-0 mr-2 -translate-y-1/2' aria-label='search'>
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    fill='none'
-                    viewBox='0 0 24 24'
-                    strokeWidth={1.5}
-                    stroke='currentColor'
-                    className='h-6 w-6 duration-200 hover:text-secondary-1D6AF9 dark:text-black dark:hover:text-secondary-1D6AF9'
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      d='M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z'
-                    />
-                  </svg>
-                </button>
               </div>
             </form>
             <Popover
