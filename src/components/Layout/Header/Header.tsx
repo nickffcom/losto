@@ -321,7 +321,7 @@ export default function Header() {
                   ref={divRef}
                 >
                   {isLoading && (
-                    <div className='flex h-16 items-center justify-center'>
+                    <div className='flex h-20 items-center justify-center'>
                       <svg
                         aria-hidden='true'
                         role='status'
@@ -365,6 +365,11 @@ export default function Header() {
                       </Link>
                     </Fragment>
                   ))}
+                  {!isLoading && !DataProductSearch?.data.data.length && (
+                    <div className='flex h-20 items-center justify-center font-semibold'>
+                      <span>Product is not found</span>
+                    </div>
+                  )}
                 </div>
               </div>
             </form>
