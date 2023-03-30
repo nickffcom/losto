@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useMemo, useRef, useState } from 'react'
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
 import productApi from 'src/apis/product.api'
 import ProductRating from 'src/components/ProductRating'
@@ -9,8 +9,12 @@ import DOMPurify from 'dompurify'
 import { Product as ProductType } from 'src/types/product.type'
 import Product from 'src/components/Product'
 import QuantityController from 'src/components/QuantityController'
+import purchaseApi from 'src/apis/purchase.api'
+import { purchaseStatus } from 'src/constants/purchase'
+import { toast } from 'react-toastify'
 
 export default function ProductDetail() {
+  const queryClient = useQueryClient()
   const [buyCount, setBuyCount] = useState(1)
   const { nameId } = useParams()
   const id = getIdFromNameId(nameId as string)
@@ -41,6 +45,10 @@ export default function ProductDetail() {
     enabled: Boolean(productDetail),
     staleTime: 3 * 60 * 1000
   })
+
+  /* Call Api add to cart */
+  const addToCartMutation = useMutation(purchaseApi.addToCart)
+  /* End call Api add to cart */
 
   //handle active image
   useEffect(() => {
@@ -94,6 +102,18 @@ export default function ProductDetail() {
   }
   /* End quantity handle */
 
+  const addToCart = () => {
+    addToCartMutation.mutate(
+      { buy_count: buyCount, product_id: productDetail?._id as string },
+      {
+        onSuccess: (data) => {
+          toast.success(data.data.message)
+          queryClient.invalidateQueries({ queryKey: ['purchases', { status: purchaseStatus.inCart }] })
+        }
+      }
+    )
+  }
+
   if (!productDetail) return null
   return (
     <Fragment>
@@ -127,12 +147,12 @@ export default function ProductDetail() {
                     <path strokeLinecap='round' strokeLinejoin='round' d='M15.75 19.5L8.25 12l7.5-7.5' onClick={prev} />
                   </svg>
                 </button>
-                {currentImages.map((img) => {
+                {currentImages.map((img, index) => {
                   const isActive = img === activeImage
                   return (
                     <div
                       className='z-1 relative w-full overflow-hidden rounded-8 pt-[100%]'
-                      key={img}
+                      key={index}
                       onMouseEnter={() => chooseActive(img)}
                     >
                       <img
@@ -203,7 +223,10 @@ export default function ProductDetail() {
                 <p className='fs-14 whitespace-nowrap'>{productDetail.quantity} In Stock</p>
               </div>
               <div className='xsx:flex-nowrap xsx:justify-end mt-4 flex flex-wrap items-end justify-start gap-4 lg:mt-8 lg:gap-5'>
-                <button className='xsx:max-w-max button-primary h-10 whitespace-nowrap  rounded-8 px-4'>
+                <button
+                  className='xsx:max-w-max button-primary h-10 whitespace-nowrap  rounded-8 px-4'
+                  onClick={addToCart}
+                >
                   Add to cart
                 </button>
                 <button className='xsx:max-w-max button-secondary h-10 whitespace-nowrap rounded-8 px-4'>

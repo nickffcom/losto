@@ -15,13 +15,17 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { debounce, omit } from 'lodash'
 import productApi from 'src/apis/product.api'
 import { Product } from 'src/types/product.type'
-import { formatCurrency } from 'src/utils/utils'
+import { formatCurrency, generateNameId } from 'src/utils/utils'
+import purchaseApi from 'src/apis/purchase.api'
+import { purchaseStatus } from 'src/constants/purchase'
 
 const HEADER_HEIGHT = 99
 
 type FormData = Pick<Schema, 'name'>
 
 const nameSchema = schema.pick(['name'])
+
+const MAX_PRODUCT = 5
 
 export default function Header() {
   const { setIsAuthenticated, isAuthenticated, setProfile, profile } = useContext(AppContext)
@@ -122,6 +126,12 @@ export default function Header() {
       search: createSearchParams(config).toString()
     })
   })
+
+  const { data: ProductCart } = useQuery({
+    queryKey: ['purchases', { status: purchaseStatus.inCart }],
+    queryFn: () => purchaseApi.getPurchases({ status: purchaseStatus.inCart })
+  })
+  const ProductDataCart = ProductCart?.data.data
 
   return (
     <div className='bg-F8F8FB shadow-md dark:bg-transparent'>
@@ -374,43 +384,69 @@ export default function Header() {
               </div>
             </form>
             <Popover
-              className='class=" flex h-10 cursor-pointer flex-col justify-center rounded-8 border border-gray-400 px-2 duration-200 hover:border-primary-377DFF'
+              className='class="flex h-10 cursor-pointer flex-col justify-center rounded-8 border border-gray-400 px-2 duration-200 hover:border-primary-377DFF'
               renderPopover={
-                <div className='rounded-4 border border-gray-200 bg-white shadow-md'>
+                <div className='z-50 max-h-[439px] overflow-hidden rounded-4 border border-gray-200 bg-white shadow-md'>
                   <div className='fs-14 flex  w-72 flex-col items-start md:w-[400px] '>
-                    <div className='flex w-full items-center justify-between border-b border-gray-200 py-2 px-4'>
-                      <p className='font-semibold'>New Products Added</p>{' '}
-                      <Link to='' className='font-semibold text-primary-377DFF hover:text-secondary-1D6AF9'>
-                        <span>View cart</span>
-                      </Link>
-                    </div>
-                    <Link to='' className='flex w-full items-center justify-between py-2 px-4'>
-                      <div className='flex items-center gap-2'>
-                        <div className='relative inline-flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-gray-200 dark:bg-gray-600'>
-                          <span className='fs-14 font-medium text-gray-600 dark:text-gray-700'>IP</span>
+                    {ProductDataCart && ProductDataCart.length > 0 ? (
+                      <Fragment>
+                        <div className='flex w-full items-center justify-between border-b border-gray-200 py-2 px-4'>
+                          <p className='font-semibold'>New Products Added</p>
+                          <Link to='' className='font-semibold text-primary-377DFF hover:text-secondary-1D6AF9'>
+                            <span>View cart</span>
+                          </Link>
                         </div>
-                        <span className='line-clamp-1'>Iphone 14 Pro Max 256GB</span>
+                        {ProductDataCart.map((item) => (
+                          <Fragment key={item._id}>
+                            <Link
+                              to=''
+                              className='flex w-full items-center justify-between py-2 px-4 duration-200 hover:bg-gray-200'
+                            >
+                              <div className='flex items-center gap-2'>
+                                <img
+                                  src={item.product.image}
+                                  alt={item.product.name}
+                                  width='64'
+                                  height='64'
+                                  className='h-16 w-16 object-cover'
+                                />
+                                <span className='line-clamp-1'>{item.product.name}</span>
+                              </div>
+                              <span className='text-red-500'>{formatCurrency(item.price)}</span>
+                            </Link>
+                          </Fragment>
+                        ))}
+                      </Fragment>
+                    ) : (
+                      <div className='flex h-20 w-full items-center justify-center font-semibold'>
+                        <span>Cart empty</span>
                       </div>
-                      <span className='text-red-500'>19.999.000 VNĐ</span>
-                    </Link>
+                    )}
                   </div>
                 </div>
               }
             >
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-                strokeWidth={1.5}
-                stroke='currentColor'
-                className='text-primary-1A162E h-5 w-5 lg:h-6 lg:w-6'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  d='M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z'
-                />
-              </svg>
+              <div className='relative flex h-full flex-col justify-center'>
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  strokeWidth={1.5}
+                  stroke='currentColor'
+                  className='h-5 w-5 lg:h-6 lg:w-6'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    d='M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z'
+                  />
+                </svg>
+                {ProductDataCart && ProductDataCart.length > 0 && (
+                  <span className='fs-14 absolute -right-4 -top-2 flex h-6 w-6 items-center justify-center rounded-full border bg-white p-3 font-semibold text-primary-377DFF'>
+                    {ProductDataCart.length}
+                  </span>
+                )}
+              </div>
             </Popover>
           </div>
         </div>
