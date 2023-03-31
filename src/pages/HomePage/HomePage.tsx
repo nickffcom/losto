@@ -35,17 +35,13 @@ export default function HomePage() {
         <Swiper
           slidesPerView={1}
           spaceBetween={30}
-          pagination={{
-            clickable: true
-          }}
-          navigation={false}
+          navigation={true}
           modules={[Navigation, Pagination]}
           className='mySwiper'
           loop
           breakpoints={{
             768: {
-              slidesPerView: 3,
-              navigation: true
+              slidesPerView: 3
             }
           }}
         >

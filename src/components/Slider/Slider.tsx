@@ -20,7 +20,7 @@ const Slider = () => {
   }, [swiper])
 
   return (
-    <div className=''>
+    <div className='mt-4 xsm:mt-0'>
       <Swiper
         spaceBetween={0}
         slidesPerView={1}
