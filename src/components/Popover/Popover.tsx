@@ -37,7 +37,8 @@ export default function Popover({ children, className, renderPopover, as: Elemen
                 top: y ?? 0,
                 left: x ?? 0,
                 width: 'max-content',
-                transformOrigin: 'center top'
+                transformOrigin: 'center top',
+                zIndex: 100
               }}
               initial={{ opacity: 0, transform: 'scale(0)' }}
               animate={{ opacity: 1, transform: 'scale(1)' }}

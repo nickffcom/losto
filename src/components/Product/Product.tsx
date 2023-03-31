@@ -1,5 +1,9 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import purchaseApi from 'src/apis/purchase.api'
 import path from 'src/constants/path'
+import { purchaseStatus } from 'src/constants/purchase'
 import { Product as ProductType } from 'src/types/product.type'
 import { formatCurrency, formatNumberToSocialStyle, generateNameId } from 'src/utils/utils'
 import ProductRating from '../ProductRating'
@@ -9,6 +13,19 @@ interface ProductProps {
 }
 
 export default function Product({ product }: ProductProps) {
+  const queryClient = useQueryClient()
+  const addToCartMutation = useMutation(purchaseApi.addToCart)
+  const addToCart = () => {
+    addToCartMutation.mutate(
+      { buy_count: 1, product_id: product._id as string },
+      {
+        onSuccess: (data) => {
+          toast.success(data.data.message)
+          queryClient.invalidateQueries({ queryKey: ['purchases', { status: purchaseStatus.inCart }] })
+        }
+      }
+    )
+  }
   return (
     <div>
       <div className='card bg-gray-200 dark:border dark:border-gray-600 dark:bg-transparent'>
@@ -17,7 +34,7 @@ export default function Product({ product }: ProductProps) {
             <img src={product.image} width='294' height='294' alt={product.name} title={product.name} />
           </Link>
           <div className='card-content hidden bg-white opacity-90 dark:bg-gray-500 md:block'>
-            <Link to={`${path.home}${generateNameId({ name: product.name, id: product._id })}`} title={product.name}>
+            <button onClick={addToCart}>
               <p className='card-button flex items-center justify-center gap-6'>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
@@ -48,7 +65,7 @@ export default function Product({ product }: ProductProps) {
                   />
                 </svg>
               </p>
-            </Link>
+            </button>
           </div>
           <div className='absolute bottom-0 block w-full bg-white py-2 opacity-80 dark:bg-gray-500 md:hidden'>
             <div className='flex items-center justify-around'>

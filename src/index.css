@@ -25,7 +25,7 @@ body {
 
 .nav-link-hover-effect:before {
   content: '';
-  background: #377DFF;
+  background: #377dff;
   display: block;
   position: absolute;
   bottom: -2px;
@@ -36,7 +36,7 @@ body {
 }
 
 .nav-link-hover-effect--active {
-  color: #377DFF !important;
+  color: #377dff !important;
 }
 
 .nav-link-hover-effect:hover::before {
@@ -44,9 +44,8 @@ body {
 }
 
 input:focus {
-  border: 1px solid #377DFF;
+  border: 1px solid #377dff;
 }
-
 
 /* Hamburger menu */
 .nav-toggle-checkbox {
@@ -77,7 +76,7 @@ input:focus {
   top: 0;
   right: 0;
   transform: translate(-30%, 50%);
-  background-image: radial-gradient(#4E5D78, #000000);
+  background-image: radial-gradient(#4e5d78, #000000);
   opacity: 0.97;
   z-index: 1000;
   transition: transform 0.5s cubic-bezier(0.86, 0, 0.07, 1);
@@ -105,11 +104,11 @@ input:focus {
 }
 
 /* functionality */
-.nav-toggle-checkbox:checked~.background {
+.nav-toggle-checkbox:checked ~ .background {
   transform: scale(125);
 }
 
-.nav-toggle-checkbox:checked~.nav-list-mobile {
+.nav-toggle-checkbox:checked ~ .nav-list-mobile {
   opacity: 1;
   width: 100%;
   right: 0;
@@ -135,7 +134,7 @@ input:focus {
 
 .horizontal-icon::before,
 .horizontal-icon::after {
-  content: "";
+  content: '';
   position: absolute;
   left: 0;
   transition: all 0.15s;
@@ -157,22 +156,21 @@ input:focus {
   top: 1rem;
 }
 
-.nav-toggle-checkbox:checked+.nav-toggle-button .horizontal-icon {
+.nav-toggle-checkbox:checked + .nav-toggle-button .horizontal-icon {
   background-color: transparent;
 }
 
-.nav-toggle-checkbox:checked+.nav-toggle-button .horizontal-icon::before {
+.nav-toggle-checkbox:checked + .nav-toggle-button .horizontal-icon::before {
   top: 0;
   transform: rotate(135deg);
 }
 
-.nav-toggle-checkbox:checked+.nav-toggle-button .horizontal-icon::after {
+.nav-toggle-checkbox:checked + .nav-toggle-button .horizontal-icon::after {
   top: 0;
   transform: rotate(-135deg);
 }
 
 /* End hambuger menu */
-
 
 /* Button primary */
 .button-primary {
@@ -181,20 +179,20 @@ input:focus {
   line-height: 2.5em;
   position: relative;
   overflow: hidden;
-  border: 2px solid #377DFF;
-  transition: color .5s;
+  border: 2px solid #377dff;
+  transition: color 0.5s;
   z-index: 1;
   font-size: 14px;
   border-radius: 8px;
   font-weight: 600;
-  color: #377DFF;
+  color: #377dff;
 }
 
 .button-primary:before {
-  content: "";
+  content: '';
   position: absolute;
   z-index: -1;
-  background: #377DFF;
+  background: #377dff;
   height: 150px;
   width: 200px;
   border-radius: 50%;
@@ -207,7 +205,7 @@ input:focus {
 .button-primary:before {
   top: 100%;
   left: 100%;
-  transition: all .7s;
+  transition: all 0.7s;
 }
 
 .button-primary:hover:before {
@@ -229,7 +227,7 @@ input:focus {
   position: relative;
   overflow: hidden;
   border: 2px solid #26b374;
-  transition: color .5s;
+  transition: color 0.5s;
   z-index: 1;
   font-size: 14px;
   border-radius: 8px;
@@ -238,7 +236,7 @@ input:focus {
 }
 
 .button-secondary:before {
-  content: "";
+  content: '';
   position: absolute;
   z-index: -1;
   background: #26b374;
@@ -254,7 +252,7 @@ input:focus {
 .button-secondary:before {
   top: 100%;
   left: 100%;
-  transition: all .7s;
+  transition: all 0.7s;
 }
 
 .button-secondary:hover:before {
@@ -272,14 +270,14 @@ input:focus {
 .card {
   overflow: hidden;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
-  transition: all .2s linear;
+  transition: all 0.2s linear;
   border-radius: 8px;
 }
 
 img {
   width: 100%;
   height: auto;
-  transition: all .2s linear;
+  transition: all 0.2s linear;
 }
 
 .card-content {
@@ -287,7 +285,7 @@ img {
   bottom: -50%;
   width: 100%;
   text-align: center;
-  transition: all .2s linear;
+  transition: all 0.2s linear;
 }
 
 .card-button {
@@ -303,7 +301,7 @@ i {
 }
 
 .card:hover {
-  box-shadow: 0 0px 28px rgba(0, 0, 0, 0.25), 0 4px 10px rgba(0, 0, 0, 0.22)
+  box-shadow: 0 0px 28px rgba(0, 0, 0, 0.25), 0 4px 10px rgba(0, 0, 0, 0.22);
 }
 
 .card:hover .card-content {
@@ -313,9 +311,10 @@ i {
 /* End card */
 
 /* Slider home */
-.swiper-home .swiper-button-next, .swiper-home .swiper-button-prev {
+.swiper-home .swiper-button-next,
+.swiper-home .swiper-button-prev {
   background-color: transparent;
-  color: #377DFF;
+  color: #377dff;
 }
 
 /* End slider home */

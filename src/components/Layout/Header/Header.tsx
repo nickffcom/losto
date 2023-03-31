@@ -15,7 +15,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { debounce, omit } from 'lodash'
 import productApi from 'src/apis/product.api'
 import { Product } from 'src/types/product.type'
-import { formatCurrency, generateNameId } from 'src/utils/utils'
+import { formatCurrency } from 'src/utils/utils'
 import purchaseApi from 'src/apis/purchase.api'
 import { purchaseStatus } from 'src/constants/purchase'
 
@@ -384,9 +384,9 @@ export default function Header() {
               </div>
             </form>
             <Popover
-              className='class="flex h-10 cursor-pointer flex-col justify-center rounded-8 border border-gray-400 px-2 duration-200 hover:border-primary-377DFF'
+              className='flex h-10 cursor-pointer flex-col justify-center rounded-8 border border-gray-400 px-2 duration-200 hover:border-primary-377DFF'
               renderPopover={
-                <div className='z-50 max-h-[439px] overflow-hidden rounded-4 border border-gray-200 bg-white shadow-md'>
+                <div className='max-h-[439px] overflow-hidden rounded-4 border border-gray-200 bg-white shadow-md'>
                   <div className='fs-14 flex  w-72 flex-col items-start md:w-[400px] '>
                     {ProductDataCart && ProductDataCart.length > 0 ? (
                       <Fragment>
