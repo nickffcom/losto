@@ -33,7 +33,7 @@ export default function Product({ product }: ProductProps) {
           <Link to={`${path.home}${generateNameId({ name: product.name, id: product._id })}`} title={product.name}>
             <img src={product.image} width='294' height='294' alt={product.name} title={product.name} />
           </Link>
-          <div className='card-content hidden bg-white opacity-90 dark:bg-gray-500 md:block'>
+          <div className='card-content hidden bg-secondary-1D6AF9 dark:bg-gray-500 md:block'>
             <button onClick={addToCart} aria-label='add-to-cart'>
               <p className='card-button flex items-center justify-center gap-6'>
                 <svg
@@ -42,7 +42,7 @@ export default function Product({ product }: ProductProps) {
                   viewBox='0 0 24 24'
                   strokeWidth={1.5}
                   stroke='currentColor'
-                  className='h-6 w-6 text-black hover:text-primary-377DFF dark:text-white'
+                  className='h-6 w-6 text-white hover:text-primary-377DFF'
                 >
                   <path
                     strokeLinecap='round'
@@ -56,7 +56,7 @@ export default function Product({ product }: ProductProps) {
                   viewBox='0 0 24 24'
                   strokeWidth={1.5}
                   stroke='currentColor'
-                  className='h-6 w-6 text-black hover:text-primary-377DFF dark:text-white'
+                  className='h-6 w-6 text-white hover:text-primary-377DFF'
                 >
                   <path
                     strokeLinecap='round'

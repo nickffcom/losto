@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { Fragment } from 'react'
 import categoryApi from 'src/apis/category.api'
 import productApi from 'src/apis/product.api'
+import Product from 'src/components/Product'
 import Slider from 'src/components/Slider'
 import useQueryConfig from 'src/hooks/useQueryConfig'
 import { ProductListConfig } from 'src/types/product.type'
@@ -32,12 +33,13 @@ export default function HomePage() {
     <>
       <Slider />
       <div className='container mt-10'>
+        <h2 className='fs-18 mt-5 font-bold text-primary-377DFF lg:fs-30 lg:mt-10'>New Products</h2>
         <Swiper
           slidesPerView={1}
           spaceBetween={30}
           navigation={true}
           modules={[Navigation, Pagination]}
-          className='mySwiper'
+          className='new-product-slider'
           loop
           breakpoints={{
             768: {
@@ -47,8 +49,8 @@ export default function HomePage() {
         >
           {productsData?.data.data.products.splice(0, 12).map((item) => (
             <SwiperSlide key={item._id}>
-              <div>
-                <img src={item.image} alt={item.name} />
+              <div className='p-4'>
+                <Product product={item} />
               </div>
             </SwiperSlide>
           ))}
