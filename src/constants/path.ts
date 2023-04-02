@@ -5,6 +5,7 @@ const path = {
   register: '/register',
   productlist: '/productlist',
   productDetail: '/:nameId',
+  cart: '/cart',
   logout: '/logout'
 } as const
 

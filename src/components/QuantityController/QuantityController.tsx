@@ -58,7 +58,7 @@ export default function QuantityController({
   return (
     <div className={'flex items-center gap-1 ' + classNameWrapper}>
       <button
-        className='b-sd-1 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-8 border bg-transparent p-2 transition-colors lg:h-8 lg:w-8'
+        className='flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-8 border bg-transparent p-2 transition-colors lg:h-8 lg:w-8'
         onClick={decrease}
       >
         <svg
@@ -82,7 +82,7 @@ export default function QuantityController({
         {...rest}
       />
       <button
-        className='b-sd-1 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-8 border bg-transparent p-2 transition-colors lg:h-8 lg:w-8'
+        className='flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-8 border bg-transparent p-2 transition-colors lg:h-8 lg:w-8'
         onClick={increase}
       >
         <svg
