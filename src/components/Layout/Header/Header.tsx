@@ -425,8 +425,17 @@ export default function Header() {
                         ))}
                       </Fragment>
                     ) : (
-                      <div className='flex h-20 w-full items-center justify-center font-semibold'>
-                        <span>Cart empty</span>
+                      <div className='w-full'>
+                        <div className='flex w-full items-center justify-between border-b border-gray-200 py-2 px-4'>
+                          <p className='font-semibold'>New Products Added</p>
+                          <Link
+                            to={path.cart}
+                            className='font-semibold text-primary-377DFF hover:text-secondary-1D6AF9'
+                          >
+                            <span>View cart</span>
+                          </Link>
+                        </div>
+                        <p className='py-4 text-center font-semibold'>Cart empty</p>
                       </div>
                     )}
                   </div>

@@ -49,7 +49,9 @@ class Http {
       function (error) {
         if (error.response?.status !== HttpStatusCode.UnprocessableEntity) {
           const message = error.response?.data?.message || error.message
-          toast.error(message)
+          toast.error(message, {
+            autoClose: 1000
+          })
         }
         return Promise.reject(error)
       }

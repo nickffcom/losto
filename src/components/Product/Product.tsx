@@ -20,7 +20,9 @@ export default function Product({ product }: ProductProps) {
       { buy_count: 1, product_id: product._id as string },
       {
         onSuccess: (data) => {
-          toast.success(data.data.message)
+          toast.success(data.data.message, {
+            autoClose: 1000
+          })
           queryClient.invalidateQueries({ queryKey: ['purchases', { status: purchaseStatus.inCart }] })
         }
       }

@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useMemo, useRef, useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import productApi from 'src/apis/product.api'
 import ProductRating from 'src/components/ProductRating'
 import { calculateRateSale, formatCurrency, formatNumberToSocialStyle, getIdFromNameId } from 'src/utils/utils'
@@ -12,6 +12,7 @@ import QuantityController from 'src/components/QuantityController'
 import purchaseApi from 'src/apis/purchase.api'
 import { purchaseStatus } from 'src/constants/purchase'
 import { toast } from 'react-toastify'
+import path from 'src/constants/path'
 
 export default function ProductDetail() {
   const queryClient = useQueryClient()
@@ -21,6 +22,7 @@ export default function ProductDetail() {
   const [currentIndexImages, setCurrentIndexImages] = useState([0, 5])
   const [activeImage, setActiveImage] = useState('')
   const imageRef = useRef<HTMLImageElement>(null)
+  const navigate = useNavigate()
 
   const { data: ProductDetailData } = useQuery({
     queryKey: ['product', id],
@@ -107,11 +109,23 @@ export default function ProductDetail() {
       { buy_count: buyCount, product_id: productDetail?._id as string },
       {
         onSuccess: (data) => {
-          toast.success(data.data.message)
+          toast.success(data.data.message, {
+            autoClose: 1000
+          })
           queryClient.invalidateQueries({ queryKey: ['purchases', { status: purchaseStatus.inCart }] })
         }
       }
     )
+  }
+
+  const buyNow = async () => {
+    const res = await addToCartMutation.mutateAsync({ buy_count: buyCount, product_id: productDetail?._id as string })
+    const purchase = res.data.data
+    navigate(path.cart, {
+      state: {
+        purchaseId: purchase._id
+      }
+    })
   }
 
   if (!productDetail) return null
@@ -229,8 +243,11 @@ export default function ProductDetail() {
                 >
                   Add to cart
                 </button>
-                <button className='xsx:max-w-max button-secondary h-10 whitespace-nowrap rounded-8 px-4'>
-                  Purchase
+                <button
+                  className='xsx:max-w-max button-secondary h-10 whitespace-nowrap rounded-8 px-4'
+                  onClick={buyNow}
+                >
+                  Purchase Now
                 </button>
               </div>
             </div>
