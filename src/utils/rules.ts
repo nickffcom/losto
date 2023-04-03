@@ -95,4 +95,16 @@ export const schema = yup.object({
   name: yup.string().trim().required('Please enter input search')
 })
 
+export const userSchema = yup.object({
+  name: yup.string().max(160, 'Length max 160 character'),
+  phone: yup.string().max(20, 'Length max 20 character'),
+  address: yup.string().max(160, 'Length max 160 character'),
+  avatar: yup.string().max(1000, 'Length max 160 character'),
+  date_of_birth: yup.date().max(new Date(), 'Please choose date in past'),
+  password: schema.fields['password'],
+  new_password: schema.fields['password'],
+  confirm_password: schema.fields['confirm_password']
+})
+
+export type UserSchema = yup.InferType<typeof userSchema>
 export type Schema = yup.InferType<typeof schema>
