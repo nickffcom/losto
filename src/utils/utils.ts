@@ -1,7 +1,9 @@
 import axios, { AxiosError } from 'axios'
+import { config } from 'src/constants/config'
 import HttpStatusCode from 'src/constants/httpStatusCode.enum'
 import useWindowDimensions from 'src/hooks/useWindowDimensions'
 import { DeviceType } from 'src/types/utils.type'
+import userImage from 'src/assets/images/user.svg'
 
 export function isAxiosError<T>(error: unknown): error is AxiosError<T> {
   // eslint-disable-next-line import/no-named-as-default-member
@@ -57,3 +59,5 @@ export const getDeviceType = (): DeviceType => {
     return 'desktop'
   }
 }
+
+export const getAvatarUrl = (avatarName?: string) => (avatarName ? `${config.baseUrl}images/${avatarName}` : userImage)

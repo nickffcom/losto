@@ -15,7 +15,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { debounce, omit } from 'lodash'
 import productApi from 'src/apis/product.api'
 import { Product } from 'src/types/product.type'
-import { formatCurrency } from 'src/utils/utils'
+import { formatCurrency, getAvatarUrl } from 'src/utils/utils'
 import purchaseApi from 'src/apis/purchase.api'
 import { purchaseStatus } from 'src/constants/purchase'
 import userImage from 'src/assets/images/user.svg'
@@ -248,7 +248,7 @@ export default function Header() {
                     <span>{profile?.email}</span>
                   </Link>
                   <div className='relative inline-flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-gray-200 dark:bg-gray-600'>
-                    <img src={profile?.avatar ? profile?.avatar : userImage} alt='avatar' className='p-2' />
+                    <img src={getAvatarUrl(profile?.avatar)} alt='avatar' className='p-2' />
                   </div>
                 </Popover>
               )}

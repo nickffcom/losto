@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import path from 'src/constants/path'
 import { AppContext } from 'src/contexts/app.context'
 import userImage from 'src/assets/images/user.svg'
+import { getAvatarUrl } from 'src/utils/utils'
 export default function UserSideNav() {
   const { profile } = useContext(AppContext)
   return (
@@ -12,7 +13,7 @@ export default function UserSideNav() {
           className='border-secondary-D2D1D6 flex h-12 w-12 flex-shrink-0 items-center justify-center overflow-hidden rounded-8 border'
           to={path.profile}
         >
-          <img src={profile?.avatar ? profile.avatar : userImage} alt='avatar' className='p-2' />
+          <img src={getAvatarUrl(profile?.avatar)} alt='avatar' className='p-2' />
         </Link>
         <div className='ml-4 flex-grow'>
           <p className='text-primary-1A162E mb-1 truncate font-semibold'>{profile?.name}</p>

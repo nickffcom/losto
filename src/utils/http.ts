@@ -1,9 +1,10 @@
-import axios, { type AxiosInstance } from 'axios'
+import axios, { AxiosError, type AxiosInstance } from 'axios'
 import { toast } from 'react-toastify'
 import HttpStatusCode from 'src/constants/httpStatusCode.enum'
 import path from 'src/constants/path'
 import { AuthResponse } from 'src/types/auth.type'
 import { clearLS, getAccessTokenFromLS, setAccessTokenToLS, setProfileToLS } from './auth'
+import { config } from 'src/constants/config'
 
 class Http {
   instance: AxiosInstance
@@ -12,7 +13,7 @@ class Http {
     //bien accessToken goi tren ram nhanh hon khi goi trong file nen dat vao contructor
     this.accessToken = getAccessTokenFromLS()
     this.instance = axios.create({
-      baseURL: 'https://api-lotso-ecommerce.onrender.com',
+      baseURL: config.baseUrl,
       timeout: 20000,
       headers: {
         'Content-Type': 'application/json'
@@ -46,14 +47,15 @@ class Http {
         }
         return response
       },
-      function (error) {
+      function (error: AxiosError) {
         if (error.response?.status !== HttpStatusCode.UnprocessableEntity) {
-          const message = error.response?.data?.message || error.message
+          const data: any | undefined = error.response?.data
+          const message = data?.message || error.message
           toast.error(message, {
             autoClose: 1000
           })
         }
-        if (error.response.status === HttpStatusCode.Unauthorized) {
+        if (error.response?.status === HttpStatusCode.Unauthorized) {
           clearLS()
         }
         return Promise.reject(error)
