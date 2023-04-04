@@ -3,16 +3,76 @@ import userApi from 'src/apis/user.api'
 import Button from 'src/components/Button'
 import Input from 'src/components/Input'
 import { UserSchema, userSchema } from 'src/utils/rules'
-import { useForm, Controller } from 'react-hook-form'
+import { useForm, Controller, FormProvider, useFormContext } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import InputNumber from 'src/components/InputNumber'
-import { useContext, useEffect, useMemo, useRef, useState } from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
 import DateSelect from 'src/components/DateSelect'
 import { toast } from 'react-toastify'
 import { AppContext } from 'src/contexts/app.context'
 import { setProfileToLS } from 'src/utils/auth'
 import { ErrorResponse } from 'src/types/utils.type'
 import { getAvatarUrl, isAxiosUnprocessableEntityError } from 'src/utils/utils'
+import InputFile from 'src/components/InputFile'
+
+function Info() {
+  const {
+    register,
+    control,
+    formState: { errors }
+  } = useFormContext<FormData>()
+  return (
+    <>
+      <div className='mt-5 flex flex-col gap-3 md:mt-6'>
+        <p className='fs-14 font-semibold capitalize md:fs-16'>Full Name</p>
+        <Input
+          classNameInput='fs-14 h-10 w-full rounded-10 border px-3 outline-none transition-colors placeholder:fs-14 md:fs-16 md:placeholder:fs-16 md:h-12 md:px-4'
+          register={register}
+          name='name'
+          errorMessage={errors.name?.message}
+          placeholder='Full Name'
+        />
+      </div>
+      <div className='flex flex-col gap-2 md:gap-3'>
+        <p className='fs-14 font-semibold capitalize md:fs-16'>Phone Number</p>
+        <div>
+          <Controller
+            control={control}
+            name='phone'
+            render={({ field }) => (
+              <InputNumber
+                classNameInput='fs-14 h-10 w-full rounded-10 border px-3 outline-none transition-colors placeholder:fs-14 md:fs-16 md:placeholder:fs-16 md:h-12 md:px-4'
+                placeholder='Phone Number'
+                errorMessage={errors.phone?.message}
+                {...field}
+                onChange={field.onChange}
+              />
+            )}
+          />
+        </div>
+      </div>
+      <div className='flex flex-col gap-3'>
+        <p className='fs-14 font-semibold capitalize md:fs-16'>Address</p>
+        <div>
+          <Input
+            classNameInput='fs-14 h-10 w-full rounded-10 border px-3 outline-none transition-colors placeholder:fs-14 md:fs-16 md:placeholder:fs-16 md:h-12 md:px-4'
+            name='address'
+            placeholder='Address'
+            register={register}
+            errorMessage={errors.address?.message}
+          />
+        </div>
+      </div>
+      <Controller
+        control={control}
+        render={({ field }) => (
+          <DateSelect errorMessage={errors.date_of_birth?.message} value={field.value} onChange={field.onChange} />
+        )}
+        name='date_of_birth'
+      />
+    </>
+  )
+}
 
 type FormData = Pick<UserSchema, 'name' | 'address' | 'phone' | 'date_of_birth' | 'avatar'>
 type FormDataError = Omit<FormData, 'date_of_birth'> & {
@@ -21,7 +81,6 @@ type FormDataError = Omit<FormData, 'date_of_birth'> & {
 const profileSchema = userSchema.pick(['name', 'address', 'phone', 'date_of_birth', 'avatar'])
 
 export default function Profile() {
-  const fileInputRef = useRef<HTMLInputElement>(null)
   const [file, setFile] = useState<File>()
   const { setProfile } = useContext(AppContext)
 
@@ -29,15 +88,7 @@ export default function Profile() {
     return file ? URL.createObjectURL(file) : ''
   }, [file])
 
-  const {
-    register,
-    control,
-    formState: { errors },
-    handleSubmit,
-    setValue,
-    watch,
-    setError
-  } = useForm<FormData>({
+  const method = useForm<FormData>({
     defaultValues: {
       name: '',
       phone: '',
@@ -47,6 +98,15 @@ export default function Profile() {
     },
     resolver: yupResolver(profileSchema)
   })
+  const {
+    register,
+    control,
+    formState: { errors },
+    handleSubmit,
+    setValue,
+    watch,
+    setError
+  } = method
   const { data: profileData, refetch } = useQuery({
     queryKey: ['profile'],
     queryFn: userApi.getProfile
@@ -102,13 +162,8 @@ export default function Profile() {
     }
   })
 
-  const onFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const fileFromLocal = event.target.files?.[0]
-    setFile(fileFromLocal)
-  }
-
-  const handleUpload = () => {
-    fileInputRef.current?.click()
+  const handleChangeFile = (file?: File) => {
+    setFile(file)
   }
 
   return (
@@ -118,90 +173,38 @@ export default function Profile() {
         <p className='fs-14'>Manage profile information for account security</p>
       </div>
       <div className='p-3 md:py-4 md:px-6 mmd:border-l'>
-        <form className='flex flex-col-reverse gap-4 md:flex-row md:items-start md:gap-6' onSubmit={onSubmit}>
-          <div className='flex-grow'>
-            <div className='flex flex-col gap-2 md:gap-3'>
-              <p className='fs-14 truncate font-semibold capitalize md:fs-16'>Email</p>
-              <div className='bg-secondary-F8F8FB fs-14 flex h-10 w-full cursor-not-allowed items-center rounded-10 border px-3 md:fs-16 md:h-12 md:px-4'>
-                {profile?.email}
+        <FormProvider {...method}>
+          <form className='flex flex-col-reverse gap-4 md:flex-row md:items-start md:gap-6' onSubmit={onSubmit}>
+            <div className='flex-grow'>
+              <div className='flex flex-col gap-2 md:gap-3'>
+                <p className='fs-14 truncate font-semibold capitalize md:fs-16'>Email</p>
+                <div className='bg-secondary-F8F8FB fs-14 flex h-10 w-full cursor-not-allowed items-center rounded-10 border px-3 md:fs-16 md:h-12 md:px-4'>
+                  {profile?.email}
+                </div>
+              </div>
+              <Info />
+              <div className='mt-1 flex flex-col'>
+                <Button className='button-primary mt-2 items-center justify-center md:fs-16 sm:mx-auto' type='submit'>
+                  <span>Save</span>
+                </Button>
               </div>
             </div>
-            <div className='mt-5 flex flex-col gap-3 md:mt-6'>
-              <p className='fs-14 font-semibold capitalize md:fs-16'>Full Name</p>
-              <Input
-                classNameInput='fs-14 h-10 w-full rounded-10 border px-3 outline-none transition-colors placeholder:fs-14 md:fs-16 md:placeholder:fs-16 md:h-12 md:px-4'
-                register={register}
-                name='name'
-                errorMessage={errors.name?.message}
-                placeholder='Full Name'
-              />
-            </div>
-            <div className='flex flex-col gap-2 md:gap-3'>
-              <p className='fs-14 font-semibold capitalize md:fs-16'>Phone Number</p>
-              <div>
-                <Controller
-                  control={control}
-                  name='phone'
-                  render={({ field }) => (
-                    <InputNumber
-                      classNameInput='fs-14 h-10 w-full rounded-10 border px-3 outline-none transition-colors placeholder:fs-14 md:fs-16 md:placeholder:fs-16 md:h-12 md:px-4'
-                      placeholder='Phone Number'
-                      errorMessage={errors.phone?.message}
-                      {...field}
-                      onChange={field.onChange}
-                    />
-                  )}
-                />
+            <div className='flex flex-col items-center mmd:w-[250px]'>
+              <div className='my-4 h-24 w-24 md:my-5'>
+                <img src={previewImage || getAvatarUrl(avatar)} alt='avatar' />
+              </div>
+              <InputFile onChange={handleChangeFile} />
+              <div className='fs-12 mt-3 md:fs-14'>
+                <p>
+                  Maximum file usage <span className='font-semibold'>1 MB</span>
+                </p>
+                <p>
+                  Format: <span className='font-semibold'>.JPEG, .PNG</span>
+                </p>
               </div>
             </div>
-            <div className='flex flex-col gap-3'>
-              <p className='fs-14 font-semibold capitalize md:fs-16'>Address</p>
-              <div>
-                <Input
-                  classNameInput='fs-14 h-10 w-full rounded-10 border px-3 outline-none transition-colors placeholder:fs-14 md:fs-16 md:placeholder:fs-16 md:h-12 md:px-4'
-                  name='address'
-                  placeholder='Address'
-                  register={register}
-                  errorMessage={errors.address?.message}
-                />
-              </div>
-            </div>
-            <Controller
-              control={control}
-              render={({ field }) => (
-                <DateSelect
-                  errorMessage={errors.date_of_birth?.message}
-                  value={field.value}
-                  onChange={field.onChange}
-                />
-              )}
-              name='date_of_birth'
-            />
-
-            <div className='mt-1 flex flex-col'>
-              <Button className='button-primary mt-2 items-center justify-center md:fs-16 sm:mx-auto' type='submit'>
-                <span>Save</span>
-              </Button>
-            </div>
-          </div>
-          <div className='flex flex-col items-center mmd:w-[250px]'>
-            <div className='my-4 h-24 w-24 md:my-5'>
-              <img src={previewImage || getAvatarUrl(avatar)} alt='avatar' />
-            </div>
-            <input className='hidden' type='file' accept='.jpg,.jpeg,.png' ref={fileInputRef} onChange={onFileChange} />
-            <Button className='button-secondary' type='button' onClick={handleUpload}>
-              Select Picture
-            </Button>
-            <div className='fs-12 mt-3 md:fs-14'>
-              <p>
-                Maximum file usage <span className='font-semibold'>1 MB</span>
-              </p>
-              <p>
-                Format: <span className='font-semibold'>.JPEG, .PNG</span>
-              </p>
-            </div>
-          </div>
-        </form>
+          </form>
+        </FormProvider>
       </div>
     </>
   )

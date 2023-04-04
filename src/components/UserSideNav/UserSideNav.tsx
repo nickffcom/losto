@@ -1,9 +1,10 @@
 import { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import path from 'src/constants/path'
 import { AppContext } from 'src/contexts/app.context'
 import userImage from 'src/assets/images/user.svg'
 import { getAvatarUrl } from 'src/utils/utils'
+import classNames from 'classnames'
 export default function UserSideNav() {
   const { profile } = useContext(AppContext)
   return (
@@ -17,10 +18,7 @@ export default function UserSideNav() {
         </Link>
         <div className='ml-4 flex-grow'>
           <p className='text-primary-1A162E mb-1 truncate font-semibold'>{profile?.name}</p>
-          <Link
-            className='text-secondary-9E9DA8 flex items-center capitalize duration-200 hover:text-primary-377DFF'
-            to={path.profile}
-          >
+          <Link className='flex items-center capitalize duration-200 hover:text-primary-377DFF' to={path.profile}>
             <span className='fs-14'>Edit Your Profile</span>
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -41,8 +39,16 @@ export default function UserSideNav() {
         </div>
       </div>
       <div className='p-3 md:p-4'>
-        <Link
-          className='text-secondary-77DAE6 fs-14 flex items-center font-semibold capitalize transition-colors duration-200 md:fs-16 hover:text-primary-377DFF'
+        <NavLink
+          className={({ isActive }) =>
+            classNames(
+              'fs-14 flex items-center capitalize transition-colors duration-200 md:fs-16 hover:text-primary-377DFF',
+              {
+                'font-semibold text-primary-377DFF': isActive,
+                'text-gray-600': !isActive
+              }
+            )
+          }
           to={path.profile}
           aria-current='page'
         >
@@ -63,9 +69,17 @@ export default function UserSideNav() {
             </svg>
           </div>
           My Account
-        </Link>
-        <Link
-          className='text-primary-1A162E fs-14 mt-4 flex items-center capitalize transition-colors duration-200 md:fs-16 hover:text-primary-377DFF'
+        </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            classNames(
+              'fs-14 mt-4 flex items-center capitalize transition-colors duration-200 md:fs-16 hover:text-primary-377DFF',
+              {
+                'font-semibold text-primary-377DFF': isActive,
+                'text-gray-600': !isActive
+              }
+            )
+          }
           to={path.changePassword}
         >
           <div className='mr-3 h-5 w-5 md:h-6 md:w-6'>
@@ -85,9 +99,17 @@ export default function UserSideNav() {
             </svg>
           </div>
           Change Password
-        </Link>
-        <Link
-          className='text-primary-1A162E fs-14 mt-4  flex items-center capitalize transition-colors duration-200 md:fs-16 hover:text-primary-377DFF'
+        </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            classNames(
+              'fs-14 mt-4 flex items-center capitalize transition-colors duration-200 md:fs-16 hover:text-primary-377DFF',
+              {
+                'font-semibold text-primary-377DFF': isActive,
+                'text-gray-600': !isActive
+              }
+            )
+          }
           to={path.historyPurchase}
         >
           <div className='mr-3 h-5 w-5 md:h-6 md:w-6'>
@@ -107,7 +129,7 @@ export default function UserSideNav() {
             </svg>
           </div>
           Purchases History
-        </Link>
+        </NavLink>
       </div>
     </>
   )
