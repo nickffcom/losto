@@ -53,7 +53,7 @@ export default function ChangePassword() {
   return (
     <div>
       <div className='border-t-secondary-EDEDF6 border-b-secondary-EDEDF6 mmd:border-l-secondary-EDEDF6 border-b border-t p-3 md:py-4 md:px-6 mmd:border-t-0 mmd:border-l'>
-        <h1 className='text-primary-1A162E fs-16 font-bold capitalize md:fs-18'>Change Password</h1>
+        <h1 className='fs-16 font-bold capitalize text-primary-377DFF md:fs-20'>Change Password</h1>
         <p className='text-secondary-9E9DA8 fs-14'>Manage profile information for account security</p>
       </div>
       <div className='p-3 md:py-4 md:px-6 mmd:border-l'>
