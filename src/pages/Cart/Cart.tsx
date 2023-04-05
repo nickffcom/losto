@@ -51,7 +51,7 @@ export default function Cart() {
   const checkedPurchasesCountQuantity = useMemo(
     () =>
       checkedPurchases.reduce((result, current) => {
-        return result + checkedPurchases.length * current.buy_count
+        return result + current.buy_count
       }, 0),
     [checkedPurchases]
   )
