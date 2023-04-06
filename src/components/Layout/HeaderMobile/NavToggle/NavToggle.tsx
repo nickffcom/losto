@@ -18,7 +18,10 @@ export default function NavToggle() {
               </Link>
             </li>
             <li className='my-3 text-2xl'>
-              <Link to={path.productlist} className='nav-link-hover-effect duration-200'>
+              <Link
+                to={`${path.productlist}?category=641a5fc38383ec002c66151f`}
+                className='nav-link-hover-effect duration-200'
+              >
                 Shop
               </Link>
             </li>

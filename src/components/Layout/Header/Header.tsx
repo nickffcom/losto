@@ -276,7 +276,10 @@ export default function Header() {
             <Link className='nav-link-hover-effect mr-12 hover:text-primary-377DFF' to='/' aria-current='page'>
               Home
             </Link>
-            <Link className='nav-link-hover-effect mr-12 hover:text-primary-377DFF' to='/productlist'>
+            <Link
+              className='nav-link-hover-effect mr-12 hover:text-primary-377DFF'
+              to={`${path.productlist}?category=641a5fc38383ec002c66151f`}
+            >
               Shop
             </Link>
             <Link className='nav-link-hover-effect mr-12 hover:text-primary-377DFF' to='/about'>
