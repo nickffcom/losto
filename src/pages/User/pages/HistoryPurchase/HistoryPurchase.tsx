@@ -56,7 +56,7 @@ export default function HistoryPurchase() {
         }).toString()
       }}
       className={classNames(
-        'fs-14 flex flex-1 items-center justify-center whitespace-nowrap rounded-8 border bg-white p-2 text-center transition-colors md:fs-16 md:py-3 md:px-4',
+        'fs-14 flex flex-1 items-center justify-center whitespace-nowrap rounded-8 border bg-white p-2 text-center transition-colors md:fs-16 md:px-4 md:py-3',
         {
           'font-semibold text-secondary-26B374': status === tab.status
         }
@@ -70,7 +70,7 @@ export default function HistoryPurchase() {
     <>
       <div className='overflow-x-auto'>
         <div className='min-w-[700px]'>
-          <div className='sticky top-0 flex h-[73px] items-center gap-3 border-b border-t p-3 md:h-[81px] md:gap-4 md:py-4 md:px-6 mmd:border-t-0 mmd:border-l'>
+          <div className='sticky top-0 flex h-[73px] items-center gap-3 border-b border-t p-3 md:h-[81px] md:gap-4 md:px-6 md:py-4 mmd:border-l mmd:border-t-0'>
             {purchaseTabsLink}
           </div>
           <div className='scroll-bar-purchase overflow-y-auto'>

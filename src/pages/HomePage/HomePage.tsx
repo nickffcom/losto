@@ -64,7 +64,7 @@ export default function HomePage() {
           </Swiper>
           <div
             ref={navigationPrevRef}
-            className='b-sd-1 absolute top-1/2 left-0 z-10 hidden cursor-pointer rounded-full border border-secondary-26B374 bg-white fill-secondary-26B374 p-3 duration-200 hover:bg-secondary-26B374 hover:fill-white md:block'
+            className='b-sd-1 absolute left-0 top-1/2 z-10 hidden cursor-pointer rounded-full border border-secondary-26B374 bg-white fill-secondary-26B374 p-3 duration-200 hover:bg-secondary-26B374 hover:fill-white md:block'
           >
             <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'>
               <path d='M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z'></path>
@@ -72,7 +72,7 @@ export default function HomePage() {
           </div>
           <div
             ref={navigationNextRef}
-            className='b-sd-1 absolute top-1/2 right-0 z-10 hidden cursor-pointer rounded-full border border-secondary-26B374 bg-white fill-secondary-26B374 p-3 duration-200 hover:bg-secondary-26B374 hover:fill-white md:block'
+            className='b-sd-1 absolute right-0 top-1/2 z-10 hidden cursor-pointer rounded-full border border-secondary-26B374 bg-white fill-secondary-26B374 p-3 duration-200 hover:bg-secondary-26B374 hover:fill-white md:block'
           >
             <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'>
               <path d='M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z'></path>

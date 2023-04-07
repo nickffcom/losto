@@ -45,7 +45,7 @@ export default function Input({
           viewBox='0 0 24 24'
           strokeWidth={1.5}
           stroke='currentColor'
-          className='absolute top-[14px] right-3 h-5 w-5 cursor-pointer md:right-4'
+          className='absolute right-3 top-[14px] h-5 w-5 cursor-pointer md:right-4'
           onClick={toggleVisible}
         >
           <path
@@ -64,7 +64,7 @@ export default function Input({
           viewBox='0 0 24 24'
           strokeWidth={1.5}
           stroke='currentColor'
-          className='absolute top-[14px] right-3 h-5 w-5 cursor-pointer md:right-4'
+          className='absolute right-3 top-[14px] h-5 w-5 cursor-pointer md:right-4'
           onClick={toggleVisible}
         >
           <path

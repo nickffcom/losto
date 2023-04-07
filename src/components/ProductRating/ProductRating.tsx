@@ -16,7 +16,7 @@ export default function ProductRating({ rating }: { rating: number }) {
           .fill(0)
           .map((_, index) => (
             <div className='relative' key={index}>
-              <div className='absolute top-0 left-0 h-full overflow-hidden' style={{ width: handleRating(index + 1) }}>
+              <div className='absolute left-0 top-0 h-full overflow-hidden' style={{ width: handleRating(index + 1) }}>
                 <svg
                   enableBackground='new 0 0 24 24'
                   viewBox='0 0 24 24'

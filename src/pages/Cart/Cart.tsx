@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { produce } from 'immer'
-import { keyBy } from 'lodash'
+import keyBy from 'lodash/keyBy'
 
 import purchaseApi from 'src/apis/purchase.api'
 import QuantityController from 'src/components/QuantityController'

@@ -57,7 +57,7 @@ const Slider = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: activeIndex === 0 ? 1 : 0 }}
               transition={{ duration: 0.8 }}
-              className='absolute top-0 left-0 bottom-0 right-0 hidden md:block'
+              className='absolute bottom-0 left-0 right-0 top-0 hidden md:block'
             >
               <div className='flex h-full items-center justify-around'>
                 <div className='text-center'>
@@ -88,7 +88,7 @@ const Slider = () => {
               height='940'
             />
             <motion.div
-              className='absolute top-0 left-0 bottom-0 right-0 hidden md:block'
+              className='absolute bottom-0 left-0 right-0 top-0 hidden md:block'
               initial={{ opacity: 0 }}
               animate={{ opacity: activeIndex === 1 ? 1 : 0 }}
               transition={{ duration: 0.8 }}
@@ -122,7 +122,7 @@ const Slider = () => {
               height='940'
             />
             <motion.div
-              className='absolute top-0 left-0 bottom-0 right-0 hidden md:block'
+              className='absolute bottom-0 left-0 right-0 top-0 hidden md:block'
               initial={{ opacity: 0 }}
               animate={{ opacity: activeIndex === 2 ? 1 : 0 }}
               transition={{ duration: 0.8 }}

@@ -2,7 +2,7 @@ import { Controller, useForm } from 'react-hook-form'
 import { createSearchParams, Link, useNavigate } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
 import classNames from 'classnames'
-import { omit } from 'lodash'
+import omit from 'lodash/omit'
 
 import Button from 'src/components/Button'
 import InputNumber from 'src/components/InputNumber'

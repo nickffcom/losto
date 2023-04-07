@@ -145,7 +145,7 @@ export default function ProductDetail() {
                   src={activeImage}
                   alt={productDetail.name}
                   title={productDetail.name}
-                  className='pointer-events-none absolute top-0 left-0 h-full w-full bg-white object-cover'
+                  className='pointer-events-none absolute left-0 top-0 h-full w-full bg-white object-cover'
                   ref={imageRef}
                 />
               </div>
@@ -174,7 +174,7 @@ export default function ProductDetail() {
                         src={img}
                         alt={productDetail.name}
                         title=''
-                        className='absolute top-0 left-0 h-full w-full bg-white object-cover'
+                        className='absolute left-0 top-0 h-full w-full bg-white object-cover'
                       />
                       {isActive && <div className='absolute inset-0 rounded-8 border border-primary-377DFF'></div>}
                     </div>

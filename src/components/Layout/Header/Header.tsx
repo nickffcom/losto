@@ -4,7 +4,8 @@ import { Controller, useForm } from 'react-hook-form'
 import { createSearchParams, Link, useNavigate } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { debounce, omit } from 'lodash'
+import debounce from 'lodash/debounce'
+import omit from 'lodash/omit'
 
 import authApi from 'src/apis/auth.api'
 import productApi from 'src/apis/product.api'
@@ -146,9 +147,9 @@ export default function Header() {
                 className='flex h-10 cursor-pointer flex-col justify-center rounded-8 border border-gray-400 px-2 duration-200 hover:border-primary-377DFF'
                 renderPopover={
                   <div className='rounded-4 border border-gray-200 bg-white shadow-md'>
-                    <div className='fs-14 flex flex-col items-start py-2 px-3'>
-                      <button className='py-2 px-3 hover:bg-FAFAFD hover:text-secondary-1D6AF9'>Vietnamese</button>
-                      <button className='py-2 px-3 hover:bg-FAFAFD hover:text-secondary-1D6AF9'>English</button>
+                    <div className='fs-14 flex flex-col items-start px-3 py-2'>
+                      <button className='px-3 py-2 hover:bg-FAFAFD hover:text-secondary-1D6AF9'>Vietnamese</button>
+                      <button className='px-3 py-2 hover:bg-FAFAFD hover:text-secondary-1D6AF9'>English</button>
                     </div>
                   </div>
                 }
@@ -176,7 +177,7 @@ export default function Header() {
                       <div className='fs-14 flex flex-col items-start'>
                         <Link
                           to={path.profile}
-                          className='w-full py-3 px-5 text-left hover:bg-FAFAFD hover:text-secondary-1D6AF9'
+                          className='w-full px-5 py-3 text-left hover:bg-FAFAFD hover:text-secondary-1D6AF9'
                         >
                           <svg
                             xmlns='http://www.w3.org/2000/svg'
@@ -194,7 +195,10 @@ export default function Header() {
                           </svg>
                           Profile
                         </Link>
-                        <button className='w-full py-3 px-5 text-left hover:bg-FAFAFD hover:text-secondary-1D6AF9'>
+                        <Link
+                          to={path.historyPurchase}
+                          className='w-full px-5 py-3 text-left hover:bg-FAFAFD hover:text-secondary-1D6AF9'
+                        >
                           <svg
                             className='mr-2 inline-block h-5 w-5'
                             viewBox='0 0 1024 1024'
@@ -215,9 +219,9 @@ export default function Header() {
                             />
                           </svg>
                           Purchase
-                        </button>
+                        </Link>
                         <button
-                          className='w-full py-3 px-5 text-left hover:bg-FAFAFD hover:text-secondary-1D6AF9'
+                          className='w-full px-5 py-3 text-left hover:bg-FAFAFD hover:text-secondary-1D6AF9'
                           onClick={handleLogout}
                         >
                           <svg
@@ -310,7 +314,7 @@ export default function Header() {
                   )}
                 />
 
-                <button type='submit' className='absolute top-1/2 right-0 mr-2 -translate-y-1/2' aria-label='search'>
+                <button type='submit' className='absolute right-0 top-1/2 mr-2 -translate-y-1/2' aria-label='search'>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
                     fill='none'
@@ -337,7 +341,7 @@ export default function Header() {
                       <svg
                         aria-hidden='true'
                         role='status'
-                        className='mr-3 ml-2 inline h-8 w-8 animate-spin fill-white'
+                        className='ml-2 mr-3 inline h-8 w-8 animate-spin fill-white'
                         viewBox='0 0 100 101'
                         fill='none'
                         xmlns='http://www.w3.org/2000/svg'
@@ -357,7 +361,7 @@ export default function Header() {
                     <Fragment key={item._id}>
                       <Link
                         to={`${path.home}${item._id}`}
-                        className='flex items-center justify-between py-2 px-2 duration-200 hover:bg-gray-200'
+                        className='flex items-center justify-between px-2 py-2 duration-200 hover:bg-gray-200'
                         onClick={() =>
                           setIsShow((prevState) => {
                             setSearchText('')
@@ -393,7 +397,7 @@ export default function Header() {
                   <div className='fs-14 flex  w-72 flex-col items-start md:w-[400px] '>
                     {ProductDataCart && ProductDataCart.length > 0 ? (
                       <Fragment>
-                        <div className='flex w-full items-center justify-between border-b border-gray-200 py-2 px-4'>
+                        <div className='flex w-full items-center justify-between border-b border-gray-200 px-4 py-2'>
                           <p className='font-semibold'>New Products Added</p>
                           <Link
                             to={path.cart}
@@ -406,7 +410,7 @@ export default function Header() {
                           <Fragment key={item._id}>
                             <Link
                               to=''
-                              className='flex w-full items-center justify-between py-2 px-4 duration-200 hover:bg-gray-200'
+                              className='flex w-full items-center justify-between px-4 py-2 duration-200 hover:bg-gray-200'
                             >
                               <div className='flex items-center gap-2'>
                                 <img
@@ -425,7 +429,7 @@ export default function Header() {
                       </Fragment>
                     ) : (
                       <div className='w-full'>
-                        <div className='flex w-full items-center justify-between border-b border-gray-200 py-2 px-4'>
+                        <div className='flex w-full items-center justify-between border-b border-gray-200 px-4 py-2'>
                           <p className='font-semibold'>New Products Added</p>
                           <Link
                             to={path.cart}

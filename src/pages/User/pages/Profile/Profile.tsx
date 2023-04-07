@@ -161,11 +161,11 @@ export default function Profile() {
 
   return (
     <>
-      <div className='border-b border-t p-3 md:py-4 md:px-6 mmd:border-t-0 mmd:border-l'>
+      <div className='border-b border-t p-3 md:px-6 md:py-4 mmd:border-l mmd:border-t-0'>
         <h1 className='fs-16 font-bold capitalize text-primary-377DFF md:fs-20'>My Profile</h1>
         <p className='fs-14'>Manage profile information for account security</p>
       </div>
-      <div className='p-3 md:py-4 md:px-6 mmd:border-l'>
+      <div className='p-3 md:px-6 md:py-4 mmd:border-l'>
         <FormProvider {...method}>
           <form className='flex flex-col-reverse gap-4 md:flex-row md:items-start md:gap-6' onSubmit={onSubmit}>
             <div className='flex-grow'>

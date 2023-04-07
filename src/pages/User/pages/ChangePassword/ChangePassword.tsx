@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation } from '@tanstack/react-query'
-import { omit } from 'lodash'
+import omit from 'lodash/omit'
 
 import userApi from 'src/apis/user.api'
 import Button from 'src/components/Button'
@@ -53,11 +53,11 @@ export default function ChangePassword() {
 
   return (
     <div>
-      <div className='border-t-secondary-EDEDF6 border-b-secondary-EDEDF6 mmd:border-l-secondary-EDEDF6 border-b border-t p-3 md:py-4 md:px-6 mmd:border-t-0 mmd:border-l'>
+      <div className='border-t-secondary-EDEDF6 border-b-secondary-EDEDF6 mmd:border-l-secondary-EDEDF6 border-b border-t p-3 md:px-6 md:py-4 mmd:border-l mmd:border-t-0'>
         <h1 className='fs-16 font-bold capitalize text-primary-377DFF md:fs-20'>Change Password</h1>
         <p className='text-secondary-9E9DA8 fs-14'>Manage profile information for account security</p>
       </div>
-      <div className='p-3 md:py-4 md:px-6 mmd:border-l'>
+      <div className='p-3 md:px-6 md:py-4 mmd:border-l'>
         <form className='mr-auto max-w-2xl' onSubmit={onSubmit}>
           <div className='flex flex-col gap-2 md:gap-3'>
             <p className='text-primary-1A162E fs-14 truncate font-semibold capitalize md:fs-16'>Old Password</p>

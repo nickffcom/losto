@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { range } from 'lodash'
+import range from 'lodash/range'
 
 interface DateSelectProps {
   onChange?: (value: Date) => void
@@ -61,7 +61,7 @@ export default function DateSelect({ value, onChange, errorMessage }: DateSelect
             strokeWidth='1.5'
             stroke='currentColor'
             aria-hidden='true'
-            className='absolute top-1/2 right-4 h-4 w-4 -translate-y-1/2'
+            className='absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2'
           >
             <path strokeLinecap='round' strokeLinejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5' />
           </svg>
@@ -87,7 +87,7 @@ export default function DateSelect({ value, onChange, errorMessage }: DateSelect
             strokeWidth='1.5'
             stroke='currentColor'
             aria-hidden='true'
-            className='absolute top-1/2 right-4 h-4 w-4 -translate-y-1/2'
+            className='absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2'
           >
             <path strokeLinecap='round' strokeLinejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5' />
           </svg>
@@ -113,7 +113,7 @@ export default function DateSelect({ value, onChange, errorMessage }: DateSelect
             strokeWidth='1.5'
             stroke='currentColor'
             aria-hidden='true'
-            className='absolute top-1/2 right-4 h-4 w-4 -translate-y-1/2'
+            className='absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2'
           >
             <path strokeLinecap='round' strokeLinejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5' />
           </svg>

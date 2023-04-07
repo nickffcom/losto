@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { createSearchParams, Link, useNavigate } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { omit } from 'lodash'
+import omit from 'lodash/omit'
 
 import logo from 'src/assets/logo.svg'
 import SwitchThemeButton from 'src/components/SwitchThemeButton'
@@ -44,7 +44,7 @@ export default function HeaderMobile() {
   })
   return (
     <>
-      <div className='flex items-center justify-between py-4 px-4'>
+      <div className='flex items-center justify-between px-4 py-4'>
         <Link to='/'>
           <img src={logo} alt='logo' width='166' height='51' />
         </Link>
@@ -64,7 +64,7 @@ export default function HeaderMobile() {
             {...register('name')}
             autoComplete='off'
           />
-          <button type='submit' className='absolute top-1/2 right-0 mr-6 -translate-y-1/2' aria-label='search'>
+          <button type='submit' className='absolute right-0 top-1/2 mr-6 -translate-y-1/2' aria-label='search'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               fill='none'

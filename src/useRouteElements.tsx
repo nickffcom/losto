@@ -1,21 +1,22 @@
-import { useContext } from 'react'
+import { lazy, Suspense, useContext } from 'react'
 import { Navigate, Outlet, useRoutes } from 'react-router-dom'
 
 import path from './constants/path'
 import { AppContext } from './contexts/app.context'
-import AuthLayout from './layouts/AuthLayout'
-import MainLayout from './layouts/MainLayout'
-import Cart from './pages/Cart'
-import HomePage from './pages/HomePage'
-import Login from './pages/Login'
-import NotFound from './pages/NotFound'
-import ProductDetail from './pages/ProductDetail'
-import ProductList from './pages/ProductList'
-import Register from './pages/Register'
 import UserLayout from './pages/User/layouts/UserLayout'
-import ChangePassword from './pages/User/pages/ChangePassword'
-import HistoryPurchase from './pages/User/pages/HistoryPurchase'
-import Profile from './pages/User/pages/Profile'
+
+const Login = lazy(() => import('./pages/Login'))
+const Register = lazy(() => import('./pages/Register'))
+const HomePage = lazy(() => import('./pages/HomePage'))
+const ProductDetail = lazy(() => import('./pages/ProductDetail'))
+const Profile = lazy(() => import('./pages/User/pages/Profile'))
+const ChangePassword = lazy(() => import('./pages/User/pages/ChangePassword'))
+const HistoryPurchase = lazy(() => import('./pages/User/pages/HistoryPurchase'))
+const Cart = lazy(() => import('./pages/Cart'))
+const AuthLayout = lazy(() => import('./layouts/AuthLayout'))
+const MainLayout = lazy(() => import('./layouts/MainLayout'))
+const NotFound = lazy(() => import('./pages/NotFound'))
+const ProductList = lazy(() => import('./pages/ProductList'))
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -45,7 +46,9 @@ export default function useRouteElements() {
           path: path.cart,
           element: (
             <MainLayout>
-              <Cart />
+              <Suspense>
+                <Cart />
+              </Suspense>
             </MainLayout>
           )
         },
@@ -59,15 +62,27 @@ export default function useRouteElements() {
           children: [
             {
               path: path.profile,
-              element: <Profile />
+              element: (
+                <Suspense>
+                  <Profile />
+                </Suspense>
+              )
             },
             {
               path: path.changePassword,
-              element: <ChangePassword />
+              element: (
+                <Suspense>
+                  <ChangePassword />
+                </Suspense>
+              )
             },
             {
               path: path.historyPurchase,
-              element: <HistoryPurchase />
+              element: (
+                <Suspense>
+                  <HistoryPurchase />
+                </Suspense>
+              )
             }
           ]
         }
@@ -81,7 +96,9 @@ export default function useRouteElements() {
           path: path.login,
           element: (
             <AuthLayout>
-              <Login />
+              <Suspense>
+                <Login />
+              </Suspense>
             </AuthLayout>
           )
         },
@@ -89,7 +106,9 @@ export default function useRouteElements() {
           path: path.register,
           element: (
             <AuthLayout>
-              <Register />
+              <Suspense>
+                <Register />
+              </Suspense>
             </AuthLayout>
           )
         }
@@ -100,7 +119,9 @@ export default function useRouteElements() {
       index: true,
       element: (
         <MainLayout>
-          <ProductList />
+          <Suspense>
+            <ProductList />
+          </Suspense>
         </MainLayout>
       )
     },
@@ -109,7 +130,9 @@ export default function useRouteElements() {
       index: true,
       element: (
         <MainLayout>
-          <ProductDetail />
+          <Suspense>
+            <ProductDetail />
+          </Suspense>
         </MainLayout>
       )
     },
@@ -117,7 +140,9 @@ export default function useRouteElements() {
       path: '*',
       element: (
         <MainLayout>
-          <NotFound />
+          <Suspense>
+            <NotFound />
+          </Suspense>
         </MainLayout>
       )
     }

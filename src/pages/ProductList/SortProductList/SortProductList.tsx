@@ -1,6 +1,6 @@
 import { createSearchParams, Link, useNavigate } from 'react-router-dom'
 import classNames from 'classnames'
-import { omit } from 'lodash'
+import omit from 'lodash/omit'
 
 import Button from 'src/components/Button'
 import path from 'src/constants/path'
@@ -120,7 +120,7 @@ export default function SortProductList({ queryConfig, pageSize }: PaginationPro
                 viewBox='0 0 24 24'
                 strokeWidth={1.5}
                 stroke='currentColor'
-                className='absolute top-1/2 right-0 h-6 w-6 -translate-x-1/2 -translate-y-1/2'
+                className='absolute right-0 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2'
               >
                 <path strokeLinecap='round' strokeLinejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5' />
               </svg>
