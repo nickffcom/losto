@@ -3,11 +3,11 @@ import { Navigate, Outlet, useRoutes } from 'react-router-dom'
 
 import path from './constants/path'
 import { AppContext } from './contexts/app.context'
+import HomePage from './pages/HomePage'
 import UserLayout from './pages/User/layouts/UserLayout'
 
 const Login = lazy(() => import('./pages/Login'))
 const Register = lazy(() => import('./pages/Register'))
-const HomePage = lazy(() => import('./pages/HomePage'))
 const ProductDetail = lazy(() => import('./pages/ProductDetail'))
 const Profile = lazy(() => import('./pages/User/pages/Profile'))
 const ChangePassword = lazy(() => import('./pages/User/pages/ChangePassword'))
