@@ -15,7 +15,7 @@ module.exports = {
     'eslint-config-prettier',
     'prettier'
   ],
-  plugins: ['prettier'],
+  plugins: ['prettier', 'simple-import-sort'],
   settings: {
     react: {
       // eslint-plugin-react tự động biết version của React.
@@ -50,6 +50,25 @@ module.exports = {
         singleQuote: true,
         printWidth: 120,
         jsxSingleQuote: true
+      }
+    ],
+    'simple-import-sort/imports': [
+      'error',
+      {
+        groups: [
+          // Packages `react` related packages come first.
+          ['^react', '^@?\\w'],
+          // Internal packages.
+          ['^(@|src)(/.*|$)'],
+          // Side effect imports.
+          ['^\\u0000'],
+          // Parent imports. Put `..` last.
+          ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
+          // Other relative imports. Put same-folder imports and `.` last.
+          ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
+          // Style imports.
+          ['^.+\\.?(css)$']
+        ]
       }
     ]
   }

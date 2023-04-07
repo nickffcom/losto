@@ -1,5 +1,5 @@
 import { InputHTMLAttributes, useState } from 'react'
-import { FieldValues, FieldPath, useController, UseControllerProps } from 'react-hook-form'
+import { FieldPath, FieldValues, useController, UseControllerProps } from 'react-hook-form'
 
 export type InputNumberProps<
   TFieldValues extends FieldValues = FieldValues,

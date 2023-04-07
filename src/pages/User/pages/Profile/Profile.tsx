@@ -1,19 +1,20 @@
+import { useContext, useEffect, useMemo, useState } from 'react'
+import { Controller, FormProvider, useForm, useFormContext } from 'react-hook-form'
+import { toast } from 'react-toastify'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation, useQuery } from '@tanstack/react-query'
+
 import userApi from 'src/apis/user.api'
 import Button from 'src/components/Button'
-import Input from 'src/components/Input'
-import { UserSchema, userSchema } from 'src/utils/rules'
-import { useForm, Controller, FormProvider, useFormContext } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import InputNumber from 'src/components/InputNumber'
-import { useContext, useEffect, useMemo, useState } from 'react'
 import DateSelect from 'src/components/DateSelect'
-import { toast } from 'react-toastify'
-import { AppContext } from 'src/contexts/app.context'
-import { setProfileToLS } from 'src/utils/auth'
-import { ErrorResponse } from 'src/types/utils.type'
-import { getAvatarUrl, isAxiosUnprocessableEntityError } from 'src/utils/utils'
+import Input from 'src/components/Input'
 import InputFile from 'src/components/InputFile'
+import InputNumber from 'src/components/InputNumber'
+import { AppContext } from 'src/contexts/app.context'
+import { ErrorResponse } from 'src/types/utils.type'
+import { setProfileToLS } from 'src/utils/auth'
+import { UserSchema, userSchema } from 'src/utils/rules'
+import { getAvatarUrl, isAxiosUnprocessableEntityError } from 'src/utils/utils'
 
 function Info() {
   const {
@@ -98,15 +99,7 @@ export default function Profile() {
     },
     resolver: yupResolver(profileSchema)
   })
-  const {
-    register,
-    control,
-    formState: { errors },
-    handleSubmit,
-    setValue,
-    watch,
-    setError
-  } = method
+  const { handleSubmit, setValue, watch, setError } = method
   const { data: profileData, refetch } = useQuery({
     queryKey: ['profile'],
     queryFn: userApi.getProfile

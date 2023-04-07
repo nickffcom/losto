@@ -1,12 +1,14 @@
-import { yupResolver } from '@hookform/resolvers/yup'
-import { omit } from 'lodash'
 import { useForm } from 'react-hook-form'
 import { createSearchParams, Link, useNavigate } from 'react-router-dom'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { omit } from 'lodash'
+
 import logo from 'src/assets/logo.svg'
 import SwitchThemeButton from 'src/components/SwitchThemeButton'
 import path from 'src/constants/path'
 import useQueryConfig from 'src/hooks/useQueryConfig'
-import { schema, Schema } from 'src/utils/rules'
+import { Schema, schema } from 'src/utils/rules'
+
 import NavToggle from './NavToggle'
 
 type FormData = Pick<Schema, 'name'>
@@ -16,7 +18,7 @@ const nameSchema = schema.pick(['name'])
 export default function HeaderMobile() {
   const queryConfig = useQueryConfig()
   const navigate = useNavigate()
-  const { register, handleSubmit, control } = useForm<FormData>({
+  const { register, handleSubmit } = useForm<FormData>({
     defaultValues: {
       name: ''
     },

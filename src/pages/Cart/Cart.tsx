@@ -1,16 +1,17 @@
-import { useMutation, useQuery } from '@tanstack/react-query'
 import { Fragment, useContext, useEffect, useMemo } from 'react'
-import purchaseApi from 'src/apis/purchase.api'
-import QuantityController from 'src/components/QuantityController'
-import { purchaseStatus } from 'src/constants/purchase'
-import { Purchase } from 'src/types/purchase.type'
-import { formatCurrency } from 'src/utils/utils'
+import { Link, useLocation } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { produce } from 'immer'
 import { keyBy } from 'lodash'
-import { toast } from 'react-toastify'
-import { Link, useLocation } from 'react-router-dom'
-import { AppContext } from 'src/contexts/app.context'
+
+import purchaseApi from 'src/apis/purchase.api'
+import QuantityController from 'src/components/QuantityController'
 import path from 'src/constants/path'
+import { purchaseStatus } from 'src/constants/purchase'
+import { AppContext } from 'src/contexts/app.context'
+import { Purchase } from 'src/types/purchase.type'
+import { formatCurrency } from 'src/utils/utils'
 
 export default function Cart() {
   const { extendedPurchase, setExtendedPurchase } = useContext(AppContext)
@@ -98,7 +99,7 @@ export default function Cart() {
         }) || []
       )
     })
-  }, [ProductDataCart, choosenPurchaseIdFromLocation])
+  }, [ProductDataCart, choosenPurchaseIdFromLocation, setExtendedPurchase])
 
   useEffect(() => {
     return () => {

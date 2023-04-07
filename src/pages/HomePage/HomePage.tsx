@@ -1,13 +1,14 @@
+import { useRef } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { Fragment, useRef } from 'react'
-import categoryApi from 'src/apis/category.api'
+import { Navigation, Pagination } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/react'
+
 import productApi from 'src/apis/product.api'
 import Product from 'src/components/Product'
 import Slider from 'src/components/Slider'
 import useQueryConfig from 'src/hooks/useQueryConfig'
 import { ProductListConfig } from 'src/types/product.type'
-import { Navigation, Pagination } from 'swiper'
-import { Swiper, SwiperSlide } from 'swiper/react'
+
 import 'swiper/swiper-bundle.min.css'
 
 export default function HomePage() {

@@ -1,6 +1,6 @@
-import { useState, useId, ElementType } from 'react'
-import { useFloating, FloatingPortal, shift, offset } from '@floating-ui/react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { ElementType, useId, useState } from 'react'
+import { FloatingPortal, offset, shift, useFloating } from '@floating-ui/react'
+import { AnimatePresence, motion } from 'framer-motion'
 
 interface PopoverProps {
   children: React.ReactNode

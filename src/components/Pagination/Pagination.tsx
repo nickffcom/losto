@@ -1,5 +1,6 @@
+import { createSearchParams, Link } from 'react-router-dom'
 import classNames from 'classnames'
-import { Link, createSearchParams } from 'react-router-dom'
+
 import path from 'src/constants/path'
 import { QueryConfig } from 'src/pages/ProductList/ProductList'
 

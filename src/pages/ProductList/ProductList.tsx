@@ -1,13 +1,15 @@
-import { useQuery } from '@tanstack/react-query'
 import { Fragment } from 'react'
+import { useQuery } from '@tanstack/react-query'
+
+import categoryApi from 'src/apis/category.api'
 import productApi from 'src/apis/product.api'
 import Pagination from 'src/components/Pagination'
 import Product from 'src/components/Product'
+import useQueryConfig from 'src/hooks/useQueryConfig'
 import { ProductListConfig } from 'src/types/product.type'
+
 import AsideFilter from './AsideFilter'
 import SortProductList from './SortProductList'
-import useQueryConfig from 'src/hooks/useQueryConfig'
-import categoryApi from 'src/apis/category.api'
 
 export type QueryConfig = {
   [key in keyof ProductListConfig]: string

@@ -1,18 +1,19 @@
 import { Fragment, useEffect, useMemo, useRef, useState } from 'react'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useNavigate, useParams } from 'react-router-dom'
-import productApi from 'src/apis/product.api'
-import ProductRating from 'src/components/ProductRating'
-import { calculateRateSale, formatCurrency, formatNumberToSocialStyle, getIdFromNameId } from 'src/utils/utils'
+import { toast } from 'react-toastify'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 // import QuantityController from 'src/components/QuantityController'
 import DOMPurify from 'dompurify'
-import { Product as ProductType } from 'src/types/product.type'
-import Product from 'src/components/Product'
-import QuantityController from 'src/components/QuantityController'
+
+import productApi from 'src/apis/product.api'
 import purchaseApi from 'src/apis/purchase.api'
-import { purchaseStatus } from 'src/constants/purchase'
-import { toast } from 'react-toastify'
+import Product from 'src/components/Product'
+import ProductRating from 'src/components/ProductRating'
+import QuantityController from 'src/components/QuantityController'
 import path from 'src/constants/path'
+import { purchaseStatus } from 'src/constants/purchase'
+import { Product as ProductType } from 'src/types/product.type'
+import { calculateRateSale, formatCurrency, formatNumberToSocialStyle, getIdFromNameId } from 'src/utils/utils'
 
 export default function ProductDetail() {
   const queryClient = useQueryClient()

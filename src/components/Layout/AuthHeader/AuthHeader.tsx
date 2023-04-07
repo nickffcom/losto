@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
+
 import logo from 'src/assets/logo.svg'
+
 import SwitchThemeButton from '../../SwitchThemeButton'
 export default function AuthHeader() {
   return (

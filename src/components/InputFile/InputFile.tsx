@@ -1,6 +1,8 @@
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 import { toast } from 'react-toastify'
+
 import { config } from 'src/constants/config'
+
 import Button from '../Button'
 
 interface InputFileProps {

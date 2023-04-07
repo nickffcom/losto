@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom'
-import path from 'src/constants/path'
-import SwiperCore, { Navigation, Autoplay, EffectCreative, FreeMode } from 'swiper'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { motion } from 'framer-motion'
 import { useCallback, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
+import SwiperCore, { Autoplay, EffectCreative, FreeMode, Navigation } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/react'
+
+import path from 'src/constants/path'
 
 SwiperCore.use([Navigation, Autoplay, EffectCreative, FreeMode])
 

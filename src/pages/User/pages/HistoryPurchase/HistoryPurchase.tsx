@@ -1,6 +1,7 @@
+import { createSearchParams, Link } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import classNames from 'classnames'
-import { Link, createSearchParams } from 'react-router-dom'
+
 import purchaseApi from 'src/apis/purchase.api'
 import path from 'src/constants/path'
 import { purchaseStatus } from 'src/constants/purchase'
@@ -39,7 +40,7 @@ export default function HistoryPurchase() {
   const queryParams: { status?: string } = useQueryParams()
   const status: number = Number(queryParams.status) || purchaseStatus.all
 
-  const { data: purchaseData, refetch } = useQuery({
+  const { data: purchaseData } = useQuery({
     queryKey: ['purchases', { status }],
     queryFn: () => purchaseApi.getPurchases({ status: status as PurchaseListStatus })
   })

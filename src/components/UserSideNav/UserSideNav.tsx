@@ -1,10 +1,10 @@
 import { useContext } from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import classNames from 'classnames'
+
 import path from 'src/constants/path'
 import { AppContext } from 'src/contexts/app.context'
-import userImage from 'src/assets/images/user.svg'
 import { getAvatarUrl } from 'src/utils/utils'
-import classNames from 'classnames'
 export default function UserSideNav() {
   const { profile } = useContext(AppContext)
   return (

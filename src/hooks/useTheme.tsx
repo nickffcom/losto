@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function useDarkMode(): [string, React.Dispatch<React.SetStateAction<string>>] {
   const [theme, setTheme] = useState<string>(String(localStorage.theme))

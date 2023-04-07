@@ -1,5 +1,6 @@
 import Lottie from 'react-lottie'
 import { Link } from 'react-router-dom'
+
 import PageNotFound from 'src/assets/images/404-error-page.json'
 export default function NotFound() {
   return (

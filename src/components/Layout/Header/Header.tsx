@@ -1,24 +1,25 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Fragment, useContext, useEffect, useMemo, useState } from 'react'
-import { createSearchParams, Link, useNavigate } from 'react-router-dom'
-import authApi from 'src/apis/auth.api'
 import { useDetectClickOutside } from 'react-detect-click-outside'
+import { Controller, useForm } from 'react-hook-form'
+import { createSearchParams, Link, useNavigate } from 'react-router-dom'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { debounce, omit } from 'lodash'
+
+import authApi from 'src/apis/auth.api'
+import productApi from 'src/apis/product.api'
+import purchaseApi from 'src/apis/purchase.api'
 import logo from 'src/assets/logo.svg'
 import Popover from 'src/components/Popover'
 import path from 'src/constants/path'
-import { AppContext } from 'src/contexts/app.context'
-import SwitchThemeButton from '../../SwitchThemeButton'
-import useQueryConfig from 'src/hooks/useQueryConfig'
-import { Controller, useForm } from 'react-hook-form'
-import { schema, Schema } from 'src/utils/rules'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { debounce, omit } from 'lodash'
-import productApi from 'src/apis/product.api'
-import { Product } from 'src/types/product.type'
-import { formatCurrency, getAvatarUrl } from 'src/utils/utils'
-import purchaseApi from 'src/apis/purchase.api'
 import { purchaseStatus } from 'src/constants/purchase'
-import userImage from 'src/assets/images/user.svg'
+import { AppContext } from 'src/contexts/app.context'
+import useQueryConfig from 'src/hooks/useQueryConfig'
+import { Product } from 'src/types/product.type'
+import { Schema, schema } from 'src/utils/rules'
+import { formatCurrency, getAvatarUrl } from 'src/utils/utils'
+
+import SwitchThemeButton from '../../SwitchThemeButton'
 
 const HEADER_HEIGHT = 99
 
@@ -26,14 +27,13 @@ type FormData = Pick<Schema, 'name'>
 
 const nameSchema = schema.pick(['name'])
 
-const MAX_PRODUCT = 5
-
 export default function Header() {
   const { setIsAuthenticated, isAuthenticated, setProfile, profile } = useContext(AppContext)
   const [isFixedHeader, setIsFixedHeader] = useState(false)
   const queryConfig = useQueryConfig()
   const navigate = useNavigate()
   const [searchText, setSearchText] = useState('')
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [data, setData] = useState<Product[]>([])
   const [isShow, setIsShow] = useState<boolean>(false)
   const queryClient = useQueryClient()
@@ -104,10 +104,6 @@ export default function Header() {
   // no need for separate onscroll function
 
   /* End handle fixed menu */
-
-  /* Show data info */
-  const text = profile?.name
-  /* End show data */
 
   /* Handle submit search to productlist */
   const onSubmitSearch = handleSubmit((data) => {

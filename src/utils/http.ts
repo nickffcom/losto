@@ -1,10 +1,12 @@
-import axios, { AxiosError, type AxiosInstance } from 'axios'
 import { toast } from 'react-toastify'
-import HttpStatusCode from 'src/constants/httpStatusCode.enum'
+import axios, { AxiosError, type AxiosInstance } from 'axios'
+
+import { config } from 'src/constants/config'
+import { HttpStatusCode } from 'src/constants/httpStatusCode.enum'
 import path from 'src/constants/path'
 import { AuthResponse } from 'src/types/auth.type'
+
 import { clearLS, getAccessTokenFromLS, setAccessTokenToLS, setProfileToLS } from './auth'
-import { config } from 'src/constants/config'
 
 class Http {
   instance: AxiosInstance
@@ -49,6 +51,7 @@ class Http {
       },
       function (error: AxiosError) {
         if (error.response?.status !== HttpStatusCode.UnprocessableEntity) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const data: any | undefined = error.response?.data
           const message = data?.message || error.message
           toast.error(message, {

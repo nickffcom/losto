@@ -1,18 +1,18 @@
-import { Link } from 'react-router-dom'
+import { useContext } from 'react'
 import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation } from '@tanstack/react-query'
-import { useContext } from 'react'
-
-import { schema, Schema } from 'src/utils/rules'
-import Input from 'src/components/Input'
-import authApi from 'src/apis/auth.api'
 import { omit } from 'lodash'
-import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
-import { ErrorResponse } from 'src/types/utils.type'
-import { AppContext } from 'src/contexts/app.context'
+
+import authApi from 'src/apis/auth.api'
 import Button from 'src/components/Button'
+import Input from 'src/components/Input'
 import path from 'src/constants/path'
+import { AppContext } from 'src/contexts/app.context'
+import { ErrorResponse } from 'src/types/utils.type'
+import { Schema, schema } from 'src/utils/rules'
+import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
 
 type FormData = Pick<Schema, 'email' | 'password' | 'confirm_password'>
 

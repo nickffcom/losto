@@ -1,20 +1,21 @@
 import { useContext } from 'react'
 import { Navigate, Outlet, useRoutes } from 'react-router-dom'
-import Profile from './pages/User/pages/Profile'
+
 import path from './constants/path'
 import { AppContext } from './contexts/app.context'
 import AuthLayout from './layouts/AuthLayout'
 import MainLayout from './layouts/MainLayout'
+import Cart from './pages/Cart'
 import HomePage from './pages/HomePage'
 import Login from './pages/Login'
+import NotFound from './pages/NotFound'
 import ProductDetail from './pages/ProductDetail'
 import ProductList from './pages/ProductList'
 import Register from './pages/Register'
-import Cart from './pages/Cart'
 import UserLayout from './pages/User/layouts/UserLayout'
 import ChangePassword from './pages/User/pages/ChangePassword'
 import HistoryPurchase from './pages/User/pages/HistoryPurchase'
-import NotFound from './pages/NotFound'
+import Profile from './pages/User/pages/Profile'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)

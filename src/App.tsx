@@ -1,10 +1,12 @@
-import useRouteElements from './useRouteElements'
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import ScrollTop from './components/ScrollTop'
 import { useContext, useEffect } from 'react'
-import { localStorageEventTarget } from './utils/auth'
+import { ToastContainer } from 'react-toastify'
+
+import ScrollTop from './components/ScrollTop'
 import { AppContext } from './contexts/app.context'
+import { localStorageEventTarget } from './utils/auth'
+import useRouteElements from './useRouteElements'
+
+import 'react-toastify/dist/ReactToastify.css'
 
 function App() {
   const routeElements = useRouteElements()
