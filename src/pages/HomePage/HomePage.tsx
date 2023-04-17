@@ -13,7 +13,7 @@ import { ProductListConfig } from 'src/types/product.type'
 import 'swiper/swiper-bundle.min.css'
 
 export default function HomePage() {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   const queryConfig = useQueryConfig()
   const navigationPrevRef = useRef(null)
   const navigationNextRef = useRef(null)
