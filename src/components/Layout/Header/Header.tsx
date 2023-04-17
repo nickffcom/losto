@@ -1,6 +1,7 @@
 import { Fragment, useContext, useEffect, useMemo, useState } from 'react'
 import { useDetectClickOutside } from 'react-detect-click-outside'
 import { Controller, useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { createSearchParams, Link, useNavigate } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
@@ -16,6 +17,7 @@ import path from 'src/constants/path'
 import { purchaseStatus } from 'src/constants/purchase'
 import { AppContext } from 'src/contexts/app.context'
 import useQueryConfig from 'src/hooks/useQueryConfig'
+import { locales } from 'src/i18n/i18n'
 import { Product } from 'src/types/product.type'
 import { Schema, schema } from 'src/utils/rules'
 import { formatCurrency, getAvatarUrl } from 'src/utils/utils'
@@ -29,6 +31,9 @@ type FormData = Pick<Schema, 'name'>
 const nameSchema = schema.pick(['name'])
 
 export default function Header() {
+  const { t, i18n } = useTranslation()
+  //show lang current
+  // const currentLanguage = locales[i18n.language as keyof typeof locales]
   const { setIsAuthenticated, isAuthenticated, setProfile, profile } = useContext(AppContext)
   const [isFixedHeader, setIsFixedHeader] = useState(false)
   const queryConfig = useQueryConfig()
@@ -132,7 +137,9 @@ export default function Header() {
     enabled: isAuthenticated
   })
   const ProductDataCart = ProductCart?.data.data
-
+  const changeLanguage = (lng: 'en' | 'vi') => {
+    i18n.changeLanguage(lng)
+  }
   return (
     <div className='bg-F8F8FB shadow-md dark:bg-transparent'>
       <header className='py-6'>
@@ -148,8 +155,18 @@ export default function Header() {
                 renderPopover={
                   <div className='rounded-4 border border-gray-200 bg-white shadow-md'>
                     <div className='fs-14 flex flex-col items-start px-3 py-2'>
-                      <button className='px-3 py-2 hover:bg-FAFAFD hover:text-secondary-1D6AF9'>Vietnamese</button>
-                      <button className='px-3 py-2 hover:bg-FAFAFD hover:text-secondary-1D6AF9'>English</button>
+                      <button
+                        className='px-3 py-2 hover:bg-FAFAFD hover:text-secondary-1D6AF9'
+                        onClick={() => changeLanguage('vi')}
+                      >
+                        Vietnamese
+                      </button>
+                      <button
+                        className='px-3 py-2 hover:bg-FAFAFD hover:text-secondary-1D6AF9'
+                        onClick={() => changeLanguage('en')}
+                      >
+                        English
+                      </button>
                     </div>
                   </div>
                 }
@@ -274,22 +291,22 @@ export default function Header() {
         <div className='container mx-auto flex h-16 items-center justify-between'>
           <div className='fs-16 font-semibold dark:text-white'>
             <Link className='nav-link-hover-effect mr-12 hover:text-primary-377DFF' to='/' aria-current='page'>
-              Home
+              {t('header.home')}
             </Link>
             <Link
               className='nav-link-hover-effect mr-12 hover:text-primary-377DFF'
               to={`${path.productlist}?category=641a5fc38383ec002c66151f`}
             >
-              Shop
+              {t('header.shop')}
             </Link>
             <Link className='nav-link-hover-effect mr-12 hover:text-primary-377DFF' to='/about'>
-              About
+              {t('header.about')}
             </Link>
             <Link className='nav-link-hover-effect mr-12 hover:text-primary-377DFF' to='/contact'>
-              Contact
+              {t('header.contact')}
             </Link>
             <Link className='nav-link-hover-effect mr-12 hover:text-primary-377DFF' to='/faq'>
-              FAQs
+              {t('header.faqs')}
             </Link>
           </div>
           <div className='flex items-center gap-5'>
@@ -302,7 +319,7 @@ export default function Header() {
                   render={({ field: { onChange, value } }) => (
                     <input
                       type='text'
-                      placeholder='Search by products, categories'
+                      placeholder={t('header.search-placeholder') as string}
                       className='h-10 rounded-8 border border-gray-900 pl-3 pr-9 text-black placeholder:text-xs focus:outline-none'
                       value={value}
                       onChange={(event) => {
@@ -383,7 +400,7 @@ export default function Header() {
                   ))}
                   {!isLoading && !DataProductSearch?.data.data.length && (
                     <div className='flex h-20 items-center justify-center font-semibold'>
-                      <span>Product is not found</span>
+                      <span>{t('header.not-found-product')}</span>
                     </div>
                   )}
                 </div>
@@ -398,12 +415,12 @@ export default function Header() {
                     {ProductDataCart && ProductDataCart.length > 0 ? (
                       <Fragment>
                         <div className='flex w-full items-center justify-between border-b border-gray-200 px-4 py-2'>
-                          <p className='font-semibold'>New Products Added</p>
+                          <p className='font-semibold'>{t('header.cart-icon-title')}</p>
                           <Link
                             to={path.cart}
                             className='font-semibold text-primary-377DFF hover:text-secondary-1D6AF9'
                           >
-                            <span>View cart</span>
+                            <span>{t('header.view-cart')}</span>
                           </Link>
                         </div>
                         {ProductDataCart.map((item) => (
@@ -430,15 +447,15 @@ export default function Header() {
                     ) : (
                       <div className='w-full'>
                         <div className='flex w-full items-center justify-between border-b border-gray-200 px-4 py-2'>
-                          <p className='font-semibold'>New Products Added</p>
+                          <p className='font-semibold'>{t('header.cart-icon-title')}</p>
                           <Link
                             to={path.cart}
                             className='font-semibold text-primary-377DFF hover:text-secondary-1D6AF9'
                           >
-                            <span>View cart</span>
+                            <span>{t('header.view-cart')}</span>
                           </Link>
                         </div>
-                        <p className='py-4 text-center font-semibold'>Cart empty</p>
+                        <p className='py-4 text-center font-semibold'>{t('header.empty-cart')}</p>
                       </div>
                     )}
                   </div>

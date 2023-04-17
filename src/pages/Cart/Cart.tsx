@@ -187,7 +187,7 @@ export default function Cart() {
                     />
                     <div className='sm:ml-2 sm:flex sm:w-full sm:justify-between'>
                       <div className='mt-5 sm:mt-0'>
-                        <h2 className='text-lg font-bold text-gray-900 line-clamp-3'>{item.product.name}</h2>
+                        <h2 className='line-clamp-3 text-lg font-bold text-gray-900'>{item.product.name}</h2>
                         <p className='fs-12 mt-1 text-gray-700'>{item.product.category.name}</p>
                         <div className='mt-2 flex gap-2 md:flex-col'>
                           <p className='fs-14 text-red-600 line-through'>

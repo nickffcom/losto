@@ -1,0 +1,16 @@
+{
+  "header": {
+    "home": "Trang chủ",
+    "shop": "Cửa hàng",
+    "about": "Về chúng tôi",
+    "contact": "Liên hệ",
+    "faqs": "FAQs",
+    "search-placeholder": "Tìm kiếm theo sản phẩm, danh mục",
+    "cart-icon-title": "Sản phẩm mới đã thêm",
+    "view-cart": "Giỏ hàng",
+    "empty-cart": "Giỏ hàng trống",
+    "not-found-product": "Không tìm thấy sản phẩm",
+    "lng-en": "English",
+    "lng-vi": "Vietnamese"
+  }
+}

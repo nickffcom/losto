@@ -1,0 +1,14 @@
+{
+  "error": {
+    "home": "Home",
+    "shop": "Shop",
+    "about": "About",
+    "contact": "Contact",
+    "faqs": "FAQs",
+    "search-placeholder": "Search by products, categories",
+    "cart-icon-title": "New Products Added",
+    "view-cart": "View Cart",
+    "lng-en": "English",
+    "lng-vi": "Vietnamese"
+  }
+}

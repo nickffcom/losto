@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import SwiperCore, { Autoplay, EffectCreative, FreeMode, Navigation } from 'swiper'
@@ -9,6 +10,7 @@ import path from 'src/constants/path'
 SwiperCore.use([Navigation, Autoplay, EffectCreative, FreeMode])
 
 const Slider = () => {
+  const { t } = useTranslation()
   const [activeIndex, setActiveIndex] = useState(0)
   const [swiper, setSwiper] = useState<SwiperCore | null>(null)
 
@@ -70,7 +72,7 @@ const Slider = () => {
                       transition={{ duration: 0.5, delay: 0.6 }}
                       className='button-primary mt-5 inline-block'
                     >
-                      Shop Now
+                      {t('common.shop-now')}
                     </motion.div>
                   </Link>
                 </div>

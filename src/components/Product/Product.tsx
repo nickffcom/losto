@@ -112,7 +112,7 @@ export default function Product({ product }: ProductProps) {
           title='Samsung S23 Ultra 256GB'
         >
           <div className='bg-white p-2 dark:bg-transparent xsm:p-4'>
-            <h3 className='fs-14 min-h-[44px] font-semibold line-clamp-2 xsm:fs-16 hover:text-secondary-1D6AF9 xsm:min-h-[48px]'>
+            <h3 className='fs-14 line-clamp-2 min-h-[44px] font-semibold xsm:fs-16 hover:text-secondary-1D6AF9 xsm:min-h-[48px]'>
               {product.name}
             </h3>
             <div className='mt-1 flex items-center mlg:mt-2'>

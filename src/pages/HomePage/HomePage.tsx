@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useQuery } from '@tanstack/react-query'
 import { Navigation, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -12,6 +13,7 @@ import { ProductListConfig } from 'src/types/product.type'
 import 'swiper/swiper-bundle.min.css'
 
 export default function HomePage() {
+  const {t} = useTranslation()
   const queryConfig = useQueryConfig()
   const navigationPrevRef = useRef(null)
   const navigationNextRef = useRef(null)
@@ -36,7 +38,7 @@ export default function HomePage() {
     <>
       <Slider />
       <div className='container mt-10'>
-        <h2 className='fs-18 mt-5 font-bold text-primary-377DFF lg:fs-30 lg:mt-10'>New Products</h2>
+        <h2 className='fs-18 mt-5 font-bold text-primary-377DFF lg:fs-30 lg:mt-10'>{t('product.new-products')}</h2>
         <div className='relative'>
           <Swiper
             slidesPerView={1}

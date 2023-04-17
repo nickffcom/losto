@@ -1,0 +1,16 @@
+{
+  "header": {
+    "home": "Home",
+    "shop": "Shop",
+    "about": "About",
+    "contact": "Contact",
+    "faqs": "FAQs",
+    "search-placeholder": "Search by products, categories",
+    "cart-icon-title": "New Products Added",
+    "view-cart": "View Cart",
+    "empty-cart": "Cart Empty",
+    "not-found-product": "Product is not found",
+    "lng-en": "English",
+    "lng-vi": "Vietnamese"
+  }
+}
