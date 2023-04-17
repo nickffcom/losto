@@ -1,11 +1,10 @@
 import { toast } from 'react-toastify'
 import axios, { AxiosError, type AxiosInstance, InternalAxiosRequestConfig } from 'axios'
-import { error } from 'console'
 
 import { URL_LOGIN, URL_LOGOUT, URL_REFRESH_TOKEN, URL_REGISTER } from 'src/apis/auth.api'
 import { config } from 'src/constants/config'
 import { HttpStatusCode } from 'src/constants/httpStatusCode.enum'
-import { AuthResponse, RefreshTokenResponse } from 'src/types/auth.type'
+import { AuthResponse, RefreshTokenReponse } from 'src/types/auth.type'
 import { ErrorResponse } from 'src/types/utils.type'
 
 import {
@@ -30,7 +29,7 @@ class Http {
     this.refreshTokenRequest = null
     this.instance = axios.create({
       baseURL: config.baseUrl,
-      timeout: 20000,
+      timeout: 10000,
       headers: {
         'Content-Type': 'application/json',
         'expire-access-token': 60 * 60 * 24, // 1 day
@@ -106,7 +105,7 @@ class Http {
   }
   private handleRefreshToken() {
     return this.instance
-      .post<RefreshTokenResponse>(URL_REFRESH_TOKEN, {
+      .post<RefreshTokenReponse>(URL_REFRESH_TOKEN, {
         refresh_token: this.refreshToken
       })
       .then((res) => {
