@@ -36,8 +36,8 @@ export default function HomePage() {
 
   return (
     <>
-      <Slider />
       <div className='container mt-10'>
+        <Slider />
         <h2 className='fs-18 mt-5 font-bold text-primary-377DFF lg:fs-30 lg:mt-10'>{t('product.new-products')}</h2>
         <div className='relative'>
           <Swiper
@@ -51,14 +51,20 @@ export default function HomePage() {
             className='new-product-slider'
             loop
             breakpoints={{
+              1200: {
+                slidesPerView: 4
+              },
               768: {
                 slidesPerView: 3
+              },
+              0: {
+                slidesPerView: 2
               }
             }}
           >
             {productsData?.data.data.products.splice(0, 12).map((item) => (
               <SwiperSlide key={item._id}>
-                <div className='p-6'>
+                <div className='p-2 lg:p-6'>
                   <Product product={item} />
                 </div>
               </SwiperSlide>
