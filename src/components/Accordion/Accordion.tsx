@@ -14,7 +14,7 @@ export default function Accordion({ title, content }: AccordionProps) {
     <>
       <div className={`group duration-200 ${isActive ? 'is-active' : ''}`}>
         <button className='flex w-full items-center justify-between' onClick={handleToggle}>
-          <p>{title}</p>
+          <p className='text-xl'>{title}</p>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             fill='none'
@@ -26,7 +26,9 @@ export default function Accordion({ title, content }: AccordionProps) {
             <path strokeLinecap='round' strokeLinejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5' />
           </svg>
         </button>
-        <div className='max-h-0 overflow-hidden duration-200 group-[.is-active]:max-h-[100px]'>{content}</div>
+        <div className='h-0 max-h-0 overflow-hidden duration-200 group-[.is-active]:h-full group-[.is-active]:max-h-full'>
+          {content}
+        </div>
       </div>
     </>
   )
