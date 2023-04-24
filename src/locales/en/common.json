@@ -1,5 +1,5 @@
 {
-  "common": {
-    "shop-now": "Shop Now"
-  }
+  "shopnow": "Shop Now",
+  "login": "Login",
+  "register": "Register"
 }

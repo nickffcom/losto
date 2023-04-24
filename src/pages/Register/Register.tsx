@@ -13,6 +13,7 @@ import { AppContext } from 'src/contexts/app.context'
 import { ErrorResponse } from 'src/types/utils.type'
 import { Schema, schema } from 'src/utils/rules'
 import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
+import { Helmet } from 'react-helmet-async'
 
 type FormData = Pick<Schema, 'email' | 'password' | 'confirm_password'>
 
@@ -74,6 +75,13 @@ export default function Register() {
 
   return (
     <div className='b-sd rounded-8 dark:bg-dark-secondary'>
+      <Helmet>
+        <title>Register | Lotso Shop</title>
+        <meta
+          name='description'
+          content='Create an account with Lotso Shop today and start shopping with ease. Our simple registration process takes just a few minutes and opens up a world of exclusive deals and discounts. Plus, with features like saved shipping and billing information, you can breeze through the checkout process every time. Sign up now and experience the convenience of online shopping with Lotso Shop.'
+        />
+      </Helmet>
       <h1 className='mt-8 text-center text-5xl font-bold text-primary-377DFF dark:text-white'>Getting Started</h1>
       <p className='mt-2 text-center text-sm font-medium text-gray-500'>Create an account to continue shopping.</p>
       <div className='p-6 md:p-10'>

@@ -1,6 +1,7 @@
 import { createSearchParams, Link } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import classNames from 'classnames'
+import { Helmet } from 'react-helmet-async'
 
 import purchaseApi from 'src/apis/purchase.api'
 import path from 'src/constants/path'
@@ -69,6 +70,13 @@ export default function HistoryPurchase() {
   return (
     <>
       <div className='overflow-x-auto'>
+        <Helmet>
+          <title>History Purchase | Lotso Shop</title>
+          <meta
+            name='description'
+            content="At Lotso Shop, we believe in transparency and making it easy for you to track your purchase history. Our purchase history page provides a detailed overview of all your past orders, including order dates, product details, and shipping information. Plus, with our easy-to-use search and filter options, you can quickly find the specific order you're looking for. Log in to your account now and easily access your purchase history page to track your orders and stay informed about your shopping history with Lotso Shop."
+          />
+        </Helmet>
         <div className='min-w-[700px]'>
           <div className='sticky top-0 flex h-[73px] items-center gap-3 border-b border-t p-3 md:h-[81px] md:gap-4 md:px-6 md:py-4 mmd:border-l mmd:border-t-0'>
             {purchaseTabsLink}

@@ -3,6 +3,7 @@ import { Controller, FormProvider, useForm, useFormContext } from 'react-hook-fo
 import { toast } from 'react-toastify'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation, useQuery } from '@tanstack/react-query'
+import { Helmet } from 'react-helmet-async'
 
 import userApi from 'src/apis/user.api'
 import Button from 'src/components/Button'
@@ -161,6 +162,13 @@ export default function Profile() {
 
   return (
     <>
+      <Helmet>
+        <title>Profile | Lotso Shop</title>
+        <meta
+          name='description'
+          content='Your Lotso Shop profile page is your personalized hub for managing your account and tracking your orders. From your profile, you can easily view your order history, update your shipping and billing information, and manage your saved addresses and payment methods. Plus, with our loyalty program, you can earn rewards and discounts just for shopping with us. Log in to your profile now and experience the convenience and benefits of shopping with Lotso Shop.'
+        />
+      </Helmet>
       <div className='border-b border-t p-3 md:px-6 md:py-4 mmd:border-l mmd:border-t-0'>
         <h1 className='fs-16 font-bold capitalize text-primary-377DFF md:fs-20'>My Profile</h1>
         <p className='fs-14'>Manage profile information for account security</p>

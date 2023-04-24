@@ -12,6 +12,7 @@ import { AppContext } from 'src/contexts/app.context'
 import { ErrorResponse } from 'src/types/utils.type'
 import { Schema, schema } from 'src/utils/rules'
 import { isAxiosUnprocessableEntityError } from 'src/utils/utils'
+import { Helmet } from 'react-helmet-async'
 
 type FormData = Pick<Schema, 'email' | 'password'>
 
@@ -56,6 +57,13 @@ export default function Login() {
 
   return (
     <div className='b-sd rounded-8 dark:bg-dark-secondary'>
+      <Helmet>
+        <title>Login | Lotso Shop</title>
+        <meta
+          name='description'
+          content='Login to Lotso Shop and access a world of online shopping at your fingertips. Our secure login process ensures your personal information is protected, while our easy-to-use platform makes shopping a breeze. Sign in now to browse our wide range of products and enjoy exclusive deals and discounts.'
+        />
+      </Helmet>
       <h1 className='mt-8 text-center text-5xl font-bold text-primary-377DFF dark:text-white'>Sign In</h1>
       <p className='mt-2 text-center text-sm font-medium text-gray-500'>Welcome back, you&apos;ve been missed!</p>
       <div className='p-6 md:p-10'>

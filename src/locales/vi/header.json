@@ -10,6 +10,9 @@
     "view-cart": "Giỏ hàng",
     "empty-cart": "Giỏ hàng trống",
     "not-found-product": "Không tìm thấy sản phẩm",
+    "profile": "Tài khoản",
+    "purchase": "Đơn hàng",
+    "logout": "Đăng xuất",
     "lng-en": "English",
     "lng-vi": "Vietnamese"
   }

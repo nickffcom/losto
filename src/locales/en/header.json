@@ -10,6 +10,9 @@
     "view-cart": "View Cart",
     "empty-cart": "Cart Empty",
     "not-found-product": "Product is not found",
+    "profile": "Profile",
+    "purchase": "Purchase",
+    "logout": "Logout",
     "lng-en": "English",
     "lng-vi": "Vietnamese"
   }

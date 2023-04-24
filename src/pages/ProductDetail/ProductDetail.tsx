@@ -14,6 +14,8 @@ import path from 'src/constants/path'
 import { purchaseStatus } from 'src/constants/purchase'
 import { Product as ProductType } from 'src/types/product.type'
 import { calculateRateSale, formatCurrency, formatNumberToSocialStyle, getIdFromNameId } from 'src/utils/utils'
+import { Helmet } from 'react-helmet-async'
+import { convert } from 'html-to-text'
 
 export default function ProductDetail() {
   const queryClient = useQueryClient()
@@ -132,6 +134,10 @@ export default function ProductDetail() {
   if (!productDetail) return null
   return (
     <Fragment>
+      <Helmet>
+        <title>{productDetail.name}</title>
+        <meta name='description' content={convert(productDetail.description)} />
+      </Helmet>
       <div className='py-4 lg:py-6'>
         <div className='container'>
           <div className='grid grid-cols-1 gap-6 rounded-16 border bg-FAFAFD p-4 md:grid-cols-12 md:gap-8 lg:p-6'>

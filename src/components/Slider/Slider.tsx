@@ -72,7 +72,7 @@ const Slider = () => {
                       transition={{ duration: 0.5, delay: 0.6 }}
                       className='button-primary mt-5 inline-block'
                     >
-                      {t('common.shop-now')}
+                      {t('general:shopnow')}
                     </motion.div>
                   </Link>
                 </div>

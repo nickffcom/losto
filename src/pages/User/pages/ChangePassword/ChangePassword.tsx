@@ -3,6 +3,7 @@ import { toast } from 'react-toastify'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation } from '@tanstack/react-query'
 import omit from 'lodash/omit'
+import { Helmet } from 'react-helmet-async'
 
 import userApi from 'src/apis/user.api'
 import Button from 'src/components/Button'
@@ -53,6 +54,13 @@ export default function ChangePassword() {
 
   return (
     <div>
+      <Helmet>
+        <title>Change Password | Lotso Shop</title>
+        <meta
+          name='description'
+          content="At Lotso Shop, we take the security of your account seriously. That's why we offer a simple and secure way to change your password whenever you need to. Our change password page allows you to update your password quickly and easily, ensuring that your account stays secure and protected. Simply log in to your account and navigate to the change password page to create a new, strong password that meets our security requirements. Shop with confidence at Lotso Shop, knowing that your account is always secure."
+        />
+      </Helmet>
       <div className='border-t-secondary-EDEDF6 border-b-secondary-EDEDF6 mmd:border-l-secondary-EDEDF6 border-b border-t p-3 md:px-6 md:py-4 mmd:border-l mmd:border-t-0'>
         <h1 className='fs-16 font-bold capitalize text-primary-377DFF md:fs-20'>Change Password</h1>
         <p className='text-secondary-9E9DA8 fs-14'>Manage profile information for account security</p>

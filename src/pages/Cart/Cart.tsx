@@ -12,6 +12,7 @@ import { purchaseStatus } from 'src/constants/purchase'
 import { AppContext } from 'src/contexts/app.context'
 import { Purchase } from 'src/types/purchase.type'
 import { formatCurrency } from 'src/utils/utils'
+import { Helmet } from 'react-helmet-async'
 
 export default function Cart() {
   const { extendedPurchase, setExtendedPurchase } = useContext(AppContext)
@@ -158,6 +159,13 @@ export default function Cart() {
   return (
     <>
       <div className='mt-10'>
+        <Helmet>
+          <title>Cart | Lotso Shop</title>
+          <meta
+            name='description'
+            content="Shop with ease at Lotso Shop with our convenient shopping cart feature. Simply add your desired items to your cart and easily review your order before checkout. Plus, with the ability to save items for later, you can take your time browsing and come back to your cart whenever you're ready. Experience the convenience of online shopping with Lotso Shop and start adding items to your cart today!"
+          />
+        </Helmet>
         <h1 className='mb-10 text-center text-2xl font-bold text-primary-377DFF'>Cart Items</h1>
         <div className='xl:px-0 mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6'>
           <div className='rounded-lg md:w-2/3'>
