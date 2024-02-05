@@ -1,15 +1,15 @@
+import { useQuery } from '@tanstack/react-query'
 import { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useQuery } from '@tanstack/react-query'
 import { Navigation, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
+import { Helmet } from 'react-helmet-async'
 import productApi from 'src/apis/product.api'
 import Product from 'src/components/Product'
 import Slider from 'src/components/Slider'
 import useQueryConfig from 'src/hooks/useQueryConfig'
 import { ProductListConfig } from 'src/types/product.type'
-import { Helmet } from 'react-helmet-async'
 
 import 'swiper/swiper-bundle.min.css'
 
@@ -46,7 +46,7 @@ export default function HomePage() {
           />
         </Helmet>
         <Slider />
-        <h2 className='fs-18 mt-5 font-bold text-primary-377DFF lg:fs-30 lg:mt-10'>{t('product.new-products')}</h2>
+        <h2 className='fs-18 mt-5 font-bold text-primary-377DFF lg:fs-30 lg:mt-10'>{t('header.new-products')}</h2>
         <div className='relative'>
           <Swiper
             slidesPerView={1}

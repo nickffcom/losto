@@ -29,6 +29,7 @@ export default function InputFile({ onChange }: InputFileProps) {
         className='hidden'
         type='file'
         accept='.jpg,.jpeg,.png'
+        multiple
         ref={fileInputRef}
         onChange={onFileChange}
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
